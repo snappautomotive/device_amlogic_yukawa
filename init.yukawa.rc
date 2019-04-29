@@ -1,0 +1,23 @@
+import init.yukawa.usb.rc
+
+on early-init
+    # mount debugfs
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+
+on init
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+    # Loading kernel modules in background
+    insmod /vendor/lib/modules/mali_kbase.ko
+
+on fs
+    mount_all /vendor/etc/fstab.yukawa
+
+on post-fs
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
+    setprop ro.hardware.hwcomposer drm_meson
