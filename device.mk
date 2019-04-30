@@ -28,7 +28,10 @@ DEVICE_PACKAGE_OVERLAYS += device/amlogic/yukawa/overlay
 PRODUCT_SYSTEM_SERVER_JARS := \
     services \
     ethernet-service \
-    wifi-service \
+    wifi-service 
+
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.0-service.yukawa
 
 # disable setupwizard
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -58,6 +61,10 @@ PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=260
 PRODUCT_PACKAGES +=  libGLES_mali
 PRODUCT_PACKAGES +=  libGLES_android
 
+#To keep healthd in the build
+PRODUCT_PACKAGES += android.hardware.health@2.0-service 
+
+# Wifi
 PRODUCT_PACKAGES += \
     wificond \
     wifilogd \
