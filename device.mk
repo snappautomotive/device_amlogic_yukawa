@@ -37,6 +37,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
+    $(LOCAL_PATH)/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/bt-wifi-firmware/BCM.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM.hcd \
+    $(LOCAL_PATH)/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
+    $(LOCAL_PATH)/bt-wifi-firmware/nvram.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
 
 # TV Specific Packages
 PRODUCT_PACKAGES += \
@@ -61,9 +67,10 @@ PRODUCT_PACKAGES += android.hardware.health@2.0-service
 PRODUCT_PACKAGES += android.hardware.bluetooth@1.0-service.btlinux
 
 # Wifi
+PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wifilogd
+PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
+                              wifi.supplicant_scan_interval=15
 PRODUCT_PACKAGES += \
-    wificond \
-    wifilogd \
     android.hardware.wifi@1.0-service \
     android.hardware.wifi@1.0 \
 
