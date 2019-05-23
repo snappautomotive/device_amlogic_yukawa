@@ -8,8 +8,6 @@ on init
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
-    # Loading kernel modules in background
-    insmod /vendor/lib/modules/mali_kbase.ko
 
 on fs
     mount_all /vendor/etc/fstab.yukawa
