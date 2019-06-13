@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
-#include <cutils/log.h>
+#include <log/log.h>
 #include <hardware/hdmi_cec.h>
 
 extern struct hw_module_t HAL_MODULE_INFO_SYM;
