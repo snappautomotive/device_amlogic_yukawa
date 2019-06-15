@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dc78838_5d59a80d",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2019-06-15T03:43:27Z",
+      "side": 1,
+      "message": "but we have a recovery?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "f6d6d439e0c6c3aee6ea43d65f09fbfe59e91335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d66bc294_cfaa1ede",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2019-06-15T03:43:27Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 58,
+        "startChar": 74,
+        "endLine": 58,
+        "endChar": 75
+      },
+      "revId": "f6d6d439e0c6c3aee6ea43d65f09fbfe59e91335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
