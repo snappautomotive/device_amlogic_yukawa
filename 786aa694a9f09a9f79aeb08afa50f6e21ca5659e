@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "810c0d1b_50336bce",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2019-06-15T03:52:01Z",
+      "side": 1,
+      "message": "Isn\u0027t the standard ATV DPI 320 @ 1080P?",
+      "range": {
+        "startLine": 47,
+        "startChar": 30,
+        "endLine": 47,
+        "endChar": 51
+      },
+      "revId": "786aa694a9f09a9f79aeb08afa50f6e21ca5659e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
