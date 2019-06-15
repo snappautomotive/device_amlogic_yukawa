@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9582f7c9_5e9aff0a",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2019-06-15T03:53:06Z",
+      "side": 0,
+      "message": "why though? verity can be enabled and used on prebuilt...",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "a1fe3783334f9e6d413b0ade96ac19e53d5342e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
