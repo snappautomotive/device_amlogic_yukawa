@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3c9438ef_51649e67",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-06-17T16:01:34Z",
+      "side": 1,
+      "message": "We don\u0027t need rild but do we need other stuff rathen than atv_base.mk ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 51,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "1118f8a0daedddf9586bff7ae493febb57729b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f245f319_80a6d579",
         "filename": "device.mk",
         "patchSetId": 1
