@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e3d577c0_7425f261",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-20T06:54:53Z",
+      "side": 1,
+      "message": "atv_generic include atv_base plus a config.ini file to disable touchscreen and other functionality, some language support . BTW i don\u0027t really know which .mk file is better to use.",
+      "parentUuid": "3c9438ef_51649e67",
+      "range": {
+        "startLine": 9,
+        "startChar": 51,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "1118f8a0daedddf9586bff7ae493febb57729b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f245f319_80a6d579",
         "filename": "device.mk",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "1118f8a0daedddf9586bff7ae493febb57729b49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d863a512_171280cc",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-20T06:54:53Z",
+      "side": 1,
+      "message": "AVB is not supported by bootloader for the moment, i will be enabled later",
+      "parentUuid": "f245f319_80a6d579",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 25
+      },
+      "revId": "1118f8a0daedddf9586bff7ae493febb57729b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
