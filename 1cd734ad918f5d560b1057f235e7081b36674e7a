@@ -22,6 +22,30 @@
       "revId": "1cd734ad918f5d560b1057f235e7081b36674e7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ac07858_ae4ef1e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-20T06:56:40Z",
+      "side": 1,
+      "message": "thanks i will fix typo",
+      "parentUuid": "25ce3b7f_c5dff600",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "1cd734ad918f5d560b1057f235e7081b36674e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
