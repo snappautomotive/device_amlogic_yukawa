@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24e97223_b88f5c2b",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-20T06:55:19Z",
+      "side": 1,
+      "message": "we don\u0027t activate it because actually partition table don\u0027t support it and it\u0027s not tested\nit\u0027s planned to do this later",
+      "parentUuid": "8dc78838_5d59a80d",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "f6d6d439e0c6c3aee6ea43d65f09fbfe59e91335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d66bc294_cfaa1ede",
         "filename": "BoardConfig.mk",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-06-15T03:43:27Z",
       "side": 1,
       "message": "whitespace",
+      "range": {
+        "startLine": 58,
+        "startChar": 74,
+        "endLine": 58,
+        "endChar": 75
+      },
+      "revId": "f6d6d439e0c6c3aee6ea43d65f09fbfe59e91335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5fdbfb2_13f7832a",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-20T06:55:19Z",
+      "side": 1,
+      "message": "thanks i will fix",
+      "parentUuid": "d66bc294_cfaa1ede",
       "range": {
         "startLine": 58,
         "startChar": 74,
