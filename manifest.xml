@@ -99,7 +99,7 @@
         <version>1.0</version>
         <interface>
             <name>IGatekeeper</name>
-            <instance>yukawa</instance>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
