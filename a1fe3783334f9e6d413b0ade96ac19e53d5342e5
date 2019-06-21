@@ -22,6 +22,30 @@
       "revId": "a1fe3783334f9e6d413b0ade96ac19e53d5342e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5f8d71b_ad99f58a",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2019-06-21T09:51:40Z",
+      "side": 0,
+      "message": "no more reason now i disable it at beginning and i forgot to enable it, i will do a commit to activate it",
+      "parentUuid": "9582f7c9_5e9aff0a",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "a1fe3783334f9e6d413b0ade96ac19e53d5342e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
