@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d72ee080_bc7ccd73",
+        "filename": "yukawa.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-06-21T21:54:43Z",
+      "side": 0,
+      "message": "Is it a good idea? We will miss network utils.\nHow this is prohibiting to use atv package?",
+      "range": {
+        "startLine": 4,
+        "startChar": 50,
+        "endLine": 4,
+        "endChar": 59
+      },
+      "revId": "e4b873bdacf999d5667544c54154277ab772f409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
