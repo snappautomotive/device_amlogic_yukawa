@@ -5,7 +5,7 @@ $(call inherit-product, device/amlogic/yukawa/device.mk)
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ffe07000.emmc/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/ffe07000.emmc/by-name/vendor
 $(call inherit-product, build/target/product/verity.mk)
-PRODUCT_SUPPORTS_BOOT_SIGNER := false
+PRODUCT_SUPPORTS_BOOT_SIGNER := true
 
 PRODUCT_NAME := yukawa
 PRODUCT_DEVICE := yukawa
