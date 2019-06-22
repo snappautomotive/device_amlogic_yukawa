@@ -1,0 +1,10 @@
+Presubmit-Ready+1: Dmitry Shmidt <dimitrysh@google.com>
+Verified+1: Dmitry Shmidt <dimitrysh@google.com>
+Code-Review+2: Dmitry Shmidt <dimitrysh@google.com>
+Code-Review+1: Guillaume La Roque <glaroque@baylibre.com>
+Autosubmit+1: Dmitry Shmidt <dimitrysh@google.com>
+Submitted-by: Dmitry Shmidt <dimitrysh@google.com>
+Submitted-at: Sat, 22 Jun 2019 18:59:40 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/980369
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
