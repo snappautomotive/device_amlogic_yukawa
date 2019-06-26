@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8a4a318_ca871a59",
+        "filename": "hdmicec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-06-26T00:07:24Z",
+      "side": 1,
+      "message": "Use this instead, which will provide you with the missing headers:\n\n header_libs: [\"libhardware_headers\"],",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "910963025715874dd0af3eec3126243f51354918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
