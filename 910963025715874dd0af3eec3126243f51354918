@@ -22,6 +22,30 @@
       "revId": "910963025715874dd0af3eec3126243f51354918",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4a0cb9_189290b9",
+        "filename": "hdmicec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-06-27T17:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8a4a318_ca871a59",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "910963025715874dd0af3eec3126243f51354918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
