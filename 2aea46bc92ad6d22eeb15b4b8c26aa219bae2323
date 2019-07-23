@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16db05f3_8047083d",
+        "filename": "device.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-07-23T17:10:42Z",
+      "side": 1,
+      "message": "Done. Removed from patch set 3.",
+      "parentUuid": "d672de33_92c42498",
+      "range": {
+        "startLine": 198,
+        "startChar": 33,
+        "endLine": 198,
+        "endChar": 39
+      },
+      "revId": "2aea46bc92ad6d22eeb15b4b8c26aa219bae2323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4650a1e_e08d7ce2",
         "filename": "fstab.yukawa",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "2aea46bc92ad6d22eeb15b4b8c26aa219bae2323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee85ce2_7a44e85a",
+        "filename": "fstab.yukawa",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-07-23T17:10:42Z",
+      "side": 1,
+      "message": "Done.\nset to 256MB.",
+      "parentUuid": "b4650a1e_e08d7ce2",
+      "range": {
+        "startLine": 6,
+        "startChar": 46,
+        "endLine": 6,
+        "endChar": 56
+      },
+      "revId": "2aea46bc92ad6d22eeb15b4b8c26aa219bae2323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
