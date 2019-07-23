@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d672de33_92c42498",
+        "filename": "device.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-07-23T16:36:06Z",
+      "side": 1,
+      "message": "This is different feature.",
+      "range": {
+        "startLine": 198,
+        "startChar": 33,
+        "endLine": 198,
+        "endChar": 39
+      },
+      "revId": "2aea46bc92ad6d22eeb15b4b8c26aa219bae2323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4650a1e_e08d7ce2",
+        "filename": "fstab.yukawa",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-07-23T16:36:06Z",
+      "side": 1,
+      "message": "I think this is too big. I would suggest to try first 256MB for 2G DRAM",
+      "range": {
+        "startLine": 6,
+        "startChar": 46,
+        "endLine": 6,
+        "endChar": 56
+      },
+      "revId": "2aea46bc92ad6d22eeb15b4b8c26aa219bae2323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
