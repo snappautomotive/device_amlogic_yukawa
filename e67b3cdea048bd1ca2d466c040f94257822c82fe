@@ -22,6 +22,30 @@
       "revId": "e67b3cdea048bd1ca2d466c040f94257822c82fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9f5990c_1baf61b6",
+        "filename": "fstab.yukawa",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-07-23T05:43:29Z",
+      "side": 1,
+      "message": "Done.\nChanged from \"75%\" to \"1073741824\" (1GB). zramsize should be number of \u003csize in bytes\u003e.",
+      "parentUuid": "baf12052_188550ae",
+      "range": {
+        "startLine": 6,
+        "startChar": 46,
+        "endLine": 6,
+        "endChar": 48
+      },
+      "revId": "e67b3cdea048bd1ca2d466c040f94257822c82fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
