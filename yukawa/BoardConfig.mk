@@ -16,7 +16,7 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
-TARGET_SUPPORTS_64_BIT_APPS := true
+# TARGET_SUPPORTS_64_BIT_APPS := true
 
 TARGET_BOARD_PLATFORM := yukawa
 
@@ -80,4 +80,3 @@ BOARD_SEPOLICY_DIRS += \
 
 DEVICE_MANIFEST_FILE := device/amlogic/yukawa/manifest.xml
 DEVICE_MATRIX_FILE := device/amlogic/yukawa/compatibility_matrix.xml
-
