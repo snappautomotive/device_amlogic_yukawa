@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baf12052_188550ae",
+        "filename": "fstab.yukawa",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-07-23T04:56:49Z",
+      "side": 1,
+      "message": "I was under impression it should be in bytes",
+      "range": {
+        "startLine": 6,
+        "startChar": 46,
+        "endLine": 6,
+        "endChar": 48
+      },
+      "revId": "e67b3cdea048bd1ca2d466c040f94257822c82fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
