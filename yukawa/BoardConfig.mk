@@ -24,6 +24,7 @@ TARGET_BOARD_PLATFORM := yukawa
 BOARD_INSTALL_VULKAN := true
 # BT configs
 BOARD_HAVE_BLUETOOTH := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/yukawa/bluetooth
 
 # generic wifi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
