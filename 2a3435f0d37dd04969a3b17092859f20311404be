@@ -1,0 +1,6 @@
+Code-Review+2: android-build-prod (mdb) <android-build-team-robot@google.com>
+Submitted-by: android-build-prod (mdb) <android-build-team-robot@google.com>
+Submitted-at: Tue, 20 Aug 2019 21:41:25 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1105451
+Project: device/amlogic/yukawa
+Branch: refs/heads/simpleperf-release
