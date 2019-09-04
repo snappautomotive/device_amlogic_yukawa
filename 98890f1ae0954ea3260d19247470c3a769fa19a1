@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e56ff26_35e794a4",
+        "filename": "AndroidProducts.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "Obsolete \\",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 22
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b61699a2_46e321e7",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "AFAIK sei610 has 16GB eMMC. Maybe it should be defined in sie610 and sei510 boardconfig.mk\nAlso probably bootloader should be aware of this.",
+      "range": {
+        "startLine": 48,
+        "startChar": 38,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd324f1a_e38b76dd",
+        "filename": "yukawa32.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "Too many calls?",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 2
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896e0ab5_4df17974",
+        "filename": "yukawa32_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "Is it necessary? You have it int device-yukawa_sei510.mk",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1bd86fe_dca6e81e",
+        "filename": "yukawa32_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "Is it necessary?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 18
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "032ed00d_65b2a475",
+        "filename": "yukawa_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-04T17:28:01Z",
+      "side": 1,
+      "message": "Is it necessary?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
