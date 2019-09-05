@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21b6e06e_67908eff",
+        "filename": "yukawa_sei510/BoardConfig.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:29:05Z",
+      "side": 1,
+      "message": "You wrote in email, it should be more than 5GB",
+      "range": {
+        "startLine": 3,
+        "startChar": 38,
+        "endLine": 3,
+        "endChar": 48
+      },
+      "revId": "d8b9916ad50ec89b79b2e92f96d7a07e652ccb44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
