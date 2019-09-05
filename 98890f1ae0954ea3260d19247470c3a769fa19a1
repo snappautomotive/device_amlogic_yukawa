@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9655ff27_16906cb0",
+        "filename": "AndroidProducts.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e56ff26_35e794a4",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 22
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b61699a2_46e321e7",
         "filename": "BoardConfigCommon.mk",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e658d80_1db87f9b",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b61699a2_46e321e7",
+      "range": {
+        "startLine": 48,
+        "startChar": 38,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8ebd50cb_81d364e7",
+        "filename": "yukawa32.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd324f1a_e38b76dd",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 2
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "896e0ab5_4df17974",
         "filename": "yukawa32_sei510.mk",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30958c9e_17b0d219",
+        "filename": "yukawa32_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896e0ab5_4df17974",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "688776b8_f5c13db8",
+        "filename": "yukawa32_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1bd86fe_dca6e81e",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 18
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "032ed00d_65b2a475",
         "filename": "yukawa_sei510.mk",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0bb98c8_cc4e42f6",
+        "filename": "yukawa_sei510.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-05T15:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "032ed00d_65b2a475",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "98890f1ae0954ea3260d19247470c3a769fa19a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
