@@ -22,6 +22,30 @@
       "revId": "d8b9916ad50ec89b79b2e92f96d7a07e652ccb44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e8a8acc_d6e23925",
+        "filename": "yukawa_sei510/BoardConfig.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-08T20:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21b6e06e_67908eff",
+      "range": {
+        "startLine": 3,
+        "startChar": 38,
+        "endLine": 3,
+        "endChar": 48
+      },
+      "revId": "d8b9916ad50ec89b79b2e92f96d7a07e652ccb44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
