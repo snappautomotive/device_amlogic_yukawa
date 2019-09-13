@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2d7a6de8_3586b5f0",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-13T22:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d467f732_ad8d921d",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 2
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e66a3b75_ffec5f41",
         "filename": "audio/audio_hw.c",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2019-09-13T22:33:15Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "e66a3b75_ffec5f41",
+      "range": {
+        "startLine": 374,
+        "startChar": 5,
+        "endLine": 374,
+        "endChar": 6
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0119bb9a_3d4709d1",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-13T22:35:57Z",
+      "side": 1,
+      "message": "These are not required, the defaults for these values are appropriate.",
       "parentUuid": "e66a3b75_ffec5f41",
       "range": {
         "startLine": 374,
@@ -143,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "463229c4_c440d4a5",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-13T22:35:57Z",
+      "side": 1,
+      "message": "As we discussed, this is fine for now.",
+      "parentUuid": "e8ddc209_172e2cc2",
+      "range": {
+        "startLine": 388,
+        "startChar": 4,
+        "endLine": 388,
+        "endChar": 8
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07af36b1_9a385e37",
         "filename": "audio/audio_hw.c",
         "patchSetId": 1
@@ -190,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "b7b2aa1f_18d76ae1",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-13T22:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07af36b1_9a385e37",
+      "range": {
+        "startLine": 452,
+        "startChar": 4,
+        "endLine": 452,
+        "endChar": 22
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bcecaaf_14fd671a",
         "filename": "audio/audio_hw.c",
         "patchSetId": 1
@@ -222,6 +318,30 @@
         "id": 1000414
       },
       "writtenOn": "2019-09-13T22:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bcecaaf_14fd671a",
+      "range": {
+        "startLine": 496,
+        "startChar": 4,
+        "endLine": 496,
+        "endChar": 22
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96b25c40_36f1b9d9",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-13T22:35:57Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "9bcecaaf_14fd671a",
