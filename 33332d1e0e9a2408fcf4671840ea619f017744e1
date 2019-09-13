@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d467f732_ad8d921d",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-13T21:27:01Z",
+      "side": 1,
+      "message": "Obsolete empty line above",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 2
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e66a3b75_ffec5f41",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-13T21:27:01Z",
+      "side": 1,
+      "message": "Do we need these comments?",
+      "range": {
+        "startLine": 374,
+        "startChar": 5,
+        "endLine": 374,
+        "endChar": 6
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8ddc209_172e2cc2",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-13T21:27:01Z",
+      "side": 1,
+      "message": "Do we need to close/free previous active_input?",
+      "range": {
+        "startLine": 388,
+        "startChar": 4,
+        "endLine": 388,
+        "endChar": 8
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07af36b1_9a385e37",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-13T21:27:01Z",
+      "side": 1,
+      "message": "Should it be the opposite order?",
+      "range": {
+        "startLine": 452,
+        "startChar": 4,
+        "endLine": 452,
+        "endChar": 22
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bcecaaf_14fd671a",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-13T21:27:01Z",
+      "side": 1,
+      "message": "It is not big deal, but for symmetry maybe it makes sense to switch #496 and #495",
+      "range": {
+        "startLine": 496,
+        "startChar": 4,
+        "endLine": 496,
+        "endChar": 22
+      },
+      "revId": "33332d1e0e9a2408fcf4671840ea619f017744e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
