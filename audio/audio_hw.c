@@ -44,80 +44,8 @@
 
 #include <sys/ioctl.h>
 
-#define CARD_OUT 0
-#define PORT_HDMI 0
-#define CARD_IN 0
-#define PORT_BUILTIN_MIC 3
-
-#define MIXER_XML_PATH "/vendor/etc/mixer_paths.xml"
-/* Minimum granularity - Arbitrary but small value */
-#define CODEC_BASE_FRAME_COUNT 32
-
-#define CHANNEL_STEREO 2
-
-#define PCM_OPEN_RETRIES 100
-#define PCM_OPEN_WAIT_TIME_MS 20
-
-/* Capture codec parameters */
-/* Set up a capture period of 20 ms:
- * CAPTURE_PERIOD = PERIOD_SIZE / SAMPLE_RATE, so (20e-3) = PERIOD_SIZE / (16e3)
- * => PERIOD_SIZE = 320 frames, where each "frame" consists of 1 sample of every channel (here, 2ch) */
-#define CAPTURE_PERIOD_MULTIPLIER 10
-#define CAPTURE_PERIOD_SIZE (CODEC_BASE_FRAME_COUNT * CAPTURE_PERIOD_MULTIPLIER)
-#define CAPTURE_PERIOD_COUNT 4
-#define CAPTURE_PERIOD_START_THRESHOLD 0
-#define CAPTURE_CODEC_SAMPLING_RATE 16000
-
-/* Playback codec parameters */
-/* number of base blocks in a short period (low latency) */
-#define PLAYBACK_PERIOD_MULTIPLIER 32  /* 21 ms */
-/* number of frames per short period (low latency) */
-#define PLAYBACK_PERIOD_SIZE (CODEC_BASE_FRAME_COUNT * PLAYBACK_PERIOD_MULTIPLIER)
-/* number of pseudo periods for low latency playback */
-#define PLAYBACK_PERIOD_COUNT 4
-#define PLAYBACK_PERIOD_START_THRESHOLD 2
-#define PLAYBACK_CODEC_SAMPLING_RATE 48000
-#define MIN_WRITE_SLEEP_US      5000
-
-
-struct alsa_audio_device {
-    struct audio_hw_device hw_device;
-
-    pthread_mutex_t lock;   /* see note below on mutex acquisition order */
-    int devices;
-    struct alsa_stream_in *active_input;
-    struct alsa_stream_out *active_output;
-    struct audio_route *audio_route;
-    struct mixer *mixer;
-
-    bool mic_mute;
-};
-
-struct alsa_stream_in {
-    struct audio_stream_in stream;
-
-    pthread_mutex_t lock;   /* see note below on mutex acquisition order */
-    struct pcm_config config;
-    struct pcm *pcm;
-    bool unavailable;
-    bool standby;
-    struct alsa_audio_device *dev;
-    int read_threshold;
-    unsigned int read;
-};
-
-struct alsa_stream_out {
-    struct audio_stream_out stream;
-
-    pthread_mutex_t lock;   /* see note below on mutex acquisition order */
-    struct pcm_config config;
-    struct pcm *pcm;
-    bool unavailable;
-    int standby;
-    struct alsa_audio_device *dev;
-    int write_threshold;
-    unsigned int written;
-};
+#include "audio_hw.h"
+#include "audio_aec.h"
 
 /* must be called with hw device and output stream mutexes locked */
 static int start_output_stream(struct alsa_stream_out *out)
@@ -208,6 +136,7 @@ static int do_output_standby(struct alsa_stream_out *out)
         adev->active_output = NULL;
         out->standby = 1;
     }
+    aec_set_spk_running(out, false);
     return 0;
 }
 
@@ -301,6 +230,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
             goto exit;
         }
         out->standby = 0;
+        aec_set_spk_running(out, true);
     }
 
     pthread_mutex_unlock(&adev->lock);
@@ -309,6 +239,11 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
     ret = pcm_write(out->pcm, buffer, out_frames * frame_size);
     if (ret == 0) {
         out->written += out_frames;
+
+        int aec_ret = write_to_spk_fifo(out, (void *)buffer, out_frames * frame_size);
+        if (aec_ret) {
+            ALOGE("AEC: Write to speaker loopback FIFO failed!");
+        }
     }
 
 exit:
@@ -449,8 +384,6 @@ static int in_set_format(struct audio_stream *stream, audio_format_t format)
 
 static size_t in_get_buffer_size(const struct audio_stream *stream)
 {
-    struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
-
     size_t buffer_size = get_input_buffer_size(stream->get_format(stream),
                             stream->get_channels(stream));
     ALOGV("in_get_buffer_size: %zu", buffer_size);
@@ -516,7 +449,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     size_t in_frames = bytes / frame_size;
 
     /* acquiring hw device mutex systematically is useful if a low priority thread is waiting
-     * on the output stream mutex - e.g. executing select_mode() while holding the hw device
+     * on the input stream mutex - e.g. executing select_mode() while holding the hw device
      * mutex
      */
     pthread_mutex_lock(&in->lock);
@@ -532,7 +465,6 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     }
 
     pthread_mutex_unlock(&adev->lock);
-
 
     ret = pcm_read(in->pcm, buffer, in_frames * frame_size);
     if (ret == 0) {
@@ -552,6 +484,15 @@ exit:
     if (ret != 0) {
         usleep((int64_t)bytes * 1000000 / audio_stream_in_frame_size(stream) /
                 in_get_sample_rate(&stream->common));
+    } else {
+        /* Process AEC if available */
+        /* TODO move to a separate thread */
+        if (!adev->mic_mute) {
+            int aec_ret = process_aec(in, buffer, bytes);
+            if (aec_ret) {
+                ALOGE("process_aec returned error code %d", aec_ret);
+            }
+        }
     }
 
     return bytes;
@@ -640,6 +581,12 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     config->channel_mask = out_get_channels(&out->stream.common);
     config->sample_rate = out_get_sample_rate(&out->stream.common);
 
+    int aec_ret = init_aec_spk_config(out);
+    if (aec_ret) {
+        ALOGE("AEC: Speaker config init failed!");
+        return -EINVAL;
+    }
+
     *stream_out = &out->stream;
 
     /* TODO The retry mechanism isn't implemented in AudioPolicyManager/AudioFlinger. */
@@ -652,6 +599,7 @@ static void adev_close_output_stream(struct audio_hw_device *dev,
         struct audio_stream_out *stream)
 {
     ALOGV("adev_close_output_stream...");
+    destroy_aec_spk_config((struct alsa_stream_out *)stream);
     free(stream);
 }
 
@@ -798,6 +746,12 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
     config->channel_mask = in_get_channels(&in->stream.common);
     config->sample_rate = in_get_sample_rate(&in->stream.common);
 
+    int aec_ret = init_aec_mic_config(in);
+    if (aec_ret) {
+        ALOGE("AEC: Mic config init failed!");
+        return -EINVAL;
+    }
+
     if (ret) {
         free(in);
     } else {
@@ -808,10 +762,11 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
 }
 
 static void adev_close_input_stream(struct audio_hw_device *dev,
-        struct audio_stream_in *in)
+        struct audio_stream_in *stream)
 {
     ALOGV("adev_close_input_stream...");
-    free(in);
+    destroy_aec_mic_config((struct alsa_stream_in *)stream);
+    free(stream);
     return;
 }
 
@@ -825,6 +780,8 @@ static int adev_close(hw_device_t *device)
 {
     ALOGV("adev_close");
 
+    struct alsa_audio_device *adev = (struct alsa_audio_device *)device;
+    release_aec(adev);
     free(device);
     return 0;
 }
@@ -879,6 +836,10 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->audio_route = audio_route_init(CARD_OUT, MIXER_XML_PATH);
     if (!adev->audio_route) {
         ALOGE("%s: Failed to init audio route controls, aborting.", __func__);
+        return -EINVAL;
+    }
+
+    if (init_aec(adev, CAPTURE_CODEC_SAMPLING_RATE, NUM_LOUDSPEAKER_FEEDS, CHANNEL_STEREO)) {
         return -EINVAL;
     }
 
