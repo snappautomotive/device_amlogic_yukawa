@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38b7a08b_d083ef04",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "should explain the relation between the multiplier and a duration in ms: depends on codec frame count and sampling rate",
+      "range": {
+        "startLine": 60,
+        "startChar": 39,
+        "endLine": 60,
+        "endChar": 48
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4f2d89_ff548a62",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "bool",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 7
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18808444_ad8c50a4",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "so there is no retry and the capture is not possible until the stream is closed?\nI see we do the same thing for playback which is problematic given outputs are only opened once and write errors are basically ignored by the framework.",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 31
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "371ed26a_7e4a77e0",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "apparently (see line 742) the ALSA device only supports 32 bit so we should return audio_format_from_pcm_format(PCM_FORMAT_S32_LE)\nor better get it from in-\u003econfig.format like other getters",
+      "range": {
+        "startLine": 420,
+        "startChar": 11,
+        "endLine": 420,
+        "endChar": 34
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f8b2a3_fde64714",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "true",
+      "range": {
+        "startLine": 436,
+        "startChar": 22,
+        "endLine": 436,
+        "endChar": 23
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10b246bf_83281a6e",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "false",
+      "range": {
+        "startLine": 499,
+        "startChar": 22,
+        "endLine": 499,
+        "endChar": 23
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0656b280_4698f372",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "can be easily implementing by zeroing buffer after calling pcm_read  in_read if adev-\u003emic_mute is true",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 41
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2bbdfa_71653627",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "must be the same value as returned by in_get_buffer_size().\nin_get_buffer_size() should call adev_get_input_buffer_size() and the rounding to a multiple of 16 frames done here",
+      "range": {
+        "startLine": 692,
+        "startChar": 25,
+        "endLine": 692,
+        "endChar": 57
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7544bc79_d14fe0c4",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "not needed as this is overridden at line 762",
+      "range": {
+        "startLine": 749,
+        "startChar": 8,
+        "endLine": 751,
+        "endChar": 80
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d3730a_dd432036",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "in should be freed if an error is returned as the framework will not close the stream",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 29
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ebfb684_46db2680",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-16T22:52:01Z",
+      "side": 1,
+      "message": "this overrides ret value set at line 752",
+      "range": {
+        "startLine": 767,
+        "startChar": 11,
+        "endLine": 767,
+        "endChar": 12
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
