@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3f8e047e_c7af16a6",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-17T22:01:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "109e376c_c6e24996",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 2
+      },
+      "revId": "5188728915151e5091927ed58aba7da26a6555e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bde5a4d_538466b6",
         "filename": "audio/audio_hw.c",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "5188728915151e5091927ed58aba7da26a6555e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f67bbe3_32ff98f1",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-17T22:01:18Z",
+      "side": 1,
+      "message": "You\u0027re right we don\u0027t, moved before pcm_read().",
+      "parentUuid": "6bde5a4d_538466b6",
+      "range": {
+        "startLine": 530,
+        "startChar": 8,
+        "endLine": 530,
+        "endChar": 12
+      },
+      "revId": "5188728915151e5091927ed58aba7da26a6555e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
