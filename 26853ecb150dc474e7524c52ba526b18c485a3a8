@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "83fa56cf_7d9d8221",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-09-18T23:28:24Z",
+      "side": 1,
+      "message": "Update: added retries for in/out PCM.",
+      "parentUuid": "f0174fa8_dfb101df",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 31
+      },
+      "revId": "26853ecb150dc474e7524c52ba526b18c485a3a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "371ed26a_7e4a77e0",
         "filename": "audio/audio_hw.c",
         "patchSetId": 2
