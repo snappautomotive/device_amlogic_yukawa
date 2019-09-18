@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3881753b_2b175b41",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "out-\u003epcm \u003d NULL in case we exit at line 149",
+      "range": {
+        "startLine": 143,
+        "startChar": 26,
+        "endLine": 143,
+        "endChar": 34
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20e06901_b0a0137c",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "we should not reset this here as another output may be active and if we fail to open this one we should not reset current active input",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 39
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "282ec5df_450ceb78",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "same remarks as for output here and below",
+      "range": {
+        "startLine": 391,
+        "startChar": 16,
+        "endLine": 391,
+        "endChar": 25
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "359bda44_95591f1f",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "audio_format_from_pcm_format(in-\u003econfig.format)",
+      "range": {
+        "startLine": 443,
+        "startChar": 11,
+        "endLine": 443,
+        "endChar": 28
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da344bc_a45e6fea",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "not needed: firectly use \"stream\" when calling in_get_format and in_get_channels below",
+      "range": {
+        "startLine": 453,
+        "startChar": 0,
+        "endLine": 453,
+        "endChar": 64
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e8c30b8_e8323ad6",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "we should read from the PCM driver even when muted and zero the buffer after reading from driver.\nfaking the timing is prone to drifting and also it is better to keep the hardware actively reading to avoid glitches when muting/unmuting.",
+      "range": {
+        "startLine": 523,
+        "startChar": 12,
+        "endLine": 523,
+        "endChar": 30
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7af9fec3_1a26ca9a",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "yes it is for input streams",
+      "range": {
+        "startLine": 807,
+        "startChar": 7,
+        "endLine": 807,
+        "endChar": 86
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2241dfac_107249f9",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T00:18:36Z",
+      "side": 1,
+      "message": "ret",
+      "range": {
+        "startLine": 808,
+        "startChar": 11,
+        "endLine": 808,
+        "endChar": 12
+      },
+      "revId": "5cbd1bdf26a456fbb818c43cf3342a4fdafa257f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
