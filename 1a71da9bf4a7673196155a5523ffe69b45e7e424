@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33a10bf3_223fb79c",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-09-18T23:37:08Z",
+      "side": 1,
+      "message": "must not return here in case ret !\u003d 0 and we must sleep below",
+      "range": {
+        "startLine": 550,
+        "startChar": 15,
+        "endLine": 550,
+        "endChar": 20
+      },
+      "revId": "1a71da9bf4a7673196155a5523ffe69b45e7e424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
