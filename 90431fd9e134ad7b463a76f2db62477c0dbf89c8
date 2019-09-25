@@ -1,0 +1,9 @@
+Code-Review+2: Dmitry Shmidt <dimitrysh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Dmitry Shmidt <dimitrysh@google.com>
+Autosubmit+1: Dmitry Shmidt <dimitrysh@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 25 Sep 2019 20:00:10 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1126506
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
