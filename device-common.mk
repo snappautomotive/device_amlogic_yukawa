@@ -187,3 +187,6 @@ PRODUCT_COPY_FILES += \
 BOARD_AVB_ENABLE := false
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_ROLLBACK_INDEX := 0
+
+# Enable BT Pairing with button BTN_0 (key 256)
+PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
