@@ -1,0 +1,314 @@
+From cc7c5325293d6494809fa73613f690b686c10b9a Mon Sep 17 00:00:00 2001
+From: Dmitry Shmidt <dimitrysh@google.com>
+Date: Wed, 25 Sep 2019 16:39:13 -0700
+Subject: [PATCH] yukawa: Add YukawaService and YukawaAndroidOverlay for BT
+ Pairing
+
+Bug: 141488645
+Test: Manual
+
+Change-Id: Ia526864112cd1b79d7ce215acc8810e9e8463090
+Signed-off-by: Dmitry Shmidt <dimitrysh@google.com>
+---
+ Generic.kl                                    |  2 +-
+ apps/Android.mk                               |  2 +
+ apps/overlay/Android.mk                       |  1 +
+ apps/overlay/YukawaAndroidOverlay/Android.mk  | 20 ++++++
+ .../YukawaAndroidOverlay/AndroidManifest.xml  | 21 ++++++
+ .../res/xml/global_keys.xml                   | 33 +++++++++
+ device-common.mk                              |  3 +
+ services/Android.mk                           | 24 +++++++
+ services/AndroidManifest.xml                  | 16 +++++
+ services/proguard.cfg                         | 12 ++++
+ .../yukawaservice/RemoteSyncReceiver.java     | 70 +++++++++++++++++++
+ 11 files changed, 203 insertions(+), 1 deletion(-)
+ create mode 100644 apps/Android.mk
+ create mode 100644 apps/overlay/Android.mk
+ create mode 100644 apps/overlay/YukawaAndroidOverlay/Android.mk
+ create mode 100644 apps/overlay/YukawaAndroidOverlay/AndroidManifest.xml
+ create mode 100644 apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml
+ create mode 100644 services/Android.mk
+ create mode 100644 services/AndroidManifest.xml
+ create mode 100644 services/proguard.cfg
+ create mode 100644 services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java
+
+diff --git a/Generic.kl b/Generic.kl
+index 1fb4290..c84c979 100644
+--- a/Generic.kl
++++ b/Generic.kl
+@@ -247,7 +247,7 @@ key 224   BRIGHTNESS_DOWN
+ key 225   BRIGHTNESS_UP
+ key 226   HEADSETHOOK
+ 
+-key 256   BUTTON_1
++key 256   PAIRING
+ key 257   BUTTON_2
+ key 258   BUTTON_3
+ key 259   BUTTON_4
+diff --git a/apps/Android.mk b/apps/Android.mk
+new file mode 100644
+index 0000000..cfd03be
+--- /dev/null
++++ b/apps/Android.mk
+@@ -0,0 +1,2 @@
++LOCAL_PATH:= $(call my-dir)
++include $(call all-makefiles-under,$(LOCAL_PATH))
+diff --git a/apps/overlay/Android.mk b/apps/overlay/Android.mk
+new file mode 100644
+index 0000000..5053e7d
+--- /dev/null
++++ b/apps/overlay/Android.mk
+@@ -0,0 +1 @@
++include $(call all-subdir-makefiles)
+diff --git a/apps/overlay/YukawaAndroidOverlay/Android.mk b/apps/overlay/YukawaAndroidOverlay/Android.mk
+new file mode 100644
+index 0000000..63b671c
+--- /dev/null
++++ b/apps/overlay/YukawaAndroidOverlay/Android.mk
+@@ -0,0 +1,20 @@
++LOCAL_PATH := $(call my-dir)
++include $(CLEAR_VARS)
++
++LOCAL_MODULE_TAGS := optional
++
++LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/overlay
++
++LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
++LOCAL_SDK_VERSION := current
++LOCAL_EXPORT_PACKAGE_RESOURCES := true
++LOCAL_PROGUARD_ENABLED := disabled
++LOCAL_USE_AAPT2 := true
++LOCAL_AAPT2_ONLY := true
++
++LOCAL_PACKAGE_NAME := YukawaAndroidOverlay
++LOCAL_CERTIFICATE := platform
++LOCAL_POST_INSTALL_CMD := \
++  cp $(TARGET_OUT_VENDOR)/overlay/$(LOCAL_PACKAGE_NAME)/$(LOCAL_PACKAGE_NAME).apk $(TARGET_OUT_VENDOR)/overlay/$(LOCAL_PACKAGE_NAME).apk; \
++  rm -rf $(TARGET_OUT_VENDOR)/overlay/$(LOCAL_PACKAGE_NAME)
++include $(BUILD_PACKAGE)
+diff --git a/apps/overlay/YukawaAndroidOverlay/AndroidManifest.xml b/apps/overlay/YukawaAndroidOverlay/AndroidManifest.xml
+new file mode 100644
+index 0000000..03f730f
+--- /dev/null
++++ b/apps/overlay/YukawaAndroidOverlay/AndroidManifest.xml
+@@ -0,0 +1,21 @@
++<!--
++  ~ Copyright (C) 2019 The Android Open Source Project
++  ~
++  ~ Licensed under the Apache License, Version 2.0 (the "License");
++  ~ you may not use this file except in compliance with the License.
++  ~ You may obtain a copy of the License at
++  ~
++  ~      http://www.apache.org/licenses/LICENSE-2.0
++  ~
++  ~ Unless required by applicable law or agreed to in writing, software
++  ~ distributed under the License is distributed on an "AS IS" BASIS,
++  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++  ~ See the License for the specific language governing permissions and
++  ~ limitations under the License.
++  -->
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++        package="android.deadpool"
++        android:versionCode="1"
++        android:versionName="1.0">
++        <overlay android:targetPackage="android" android:priority="0" android:isStatic="true"/>
++</manifest>
+diff --git a/apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml b/apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml
+new file mode 100644
+index 0000000..7d5f9a7
+--- /dev/null
++++ b/apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml
+@@ -0,0 +1,33 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++/*
++** Copyright 2019, The Android Open Source Project
++**
++** Licensed under the Apache License, Version 2.0 (the "License");
++** you may not use this file except in compliance with the License.
++** You may obtain a copy of the License at
++**
++**     http://www.apache.org/licenses/LICENSE-2.0
++**
++** Unless required by applicable law or agreed to in writing, software
++** distributed under the License is distributed on an "AS IS" BASIS,
++** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++** See the License for the specific language governing permissions and
++** limitations under the License.
++*/
++-->
++
++<!-- Mapping of keycodes to components which will be handled globally.
++     Modify this file to add global keys.
++     The key will NOT go to the foreground application and instead only ever be sent via targeted
++     broadcast to the specified component. The action of the intent will be
++     android.intent.action.GLOBAL_BUTTON and the KeyEvent will be included in the intent as
++     android.intent.extra.KEY_EVENT.
++-->
++
++<global_keys version="1">
++    <!-- Example format: id = keycode to handle globally. component = component which will handle this key. -->
++    <key keyCode="KEYCODE_PAIRING" component="com.google.android.yukawaservice/.RemoteSyncReceiver" />
++    <key keyCode="KEYCODE_BUTTON_2" component="com.google.android.yukawaservice/.RemoteSyncReceiver" />
++    <key keyCode="KEYCODE_BUTTON_3" component="com.google.android.yukawaservice/.RemoteSyncReceiver" />
++</global_keys>
+diff --git a/device-common.mk b/device-common.mk
+index bb1d854..dae942f 100644
+--- a/device-common.mk
++++ b/device-common.mk
+@@ -187,3 +187,6 @@ PRODUCT_COPY_FILES += \
+ BOARD_AVB_ENABLE := false
+ BOARD_AVB_ALGORITHM := SHA256_RSA2048
+ BOARD_AVB_ROLLBACK_INDEX := 0
++
++# Enable BT Pairing with button BTN_0 (key 256)
++PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
+diff --git a/services/Android.mk b/services/Android.mk
+new file mode 100644
+index 0000000..1e0fc25
+--- /dev/null
++++ b/services/Android.mk
+@@ -0,0 +1,24 @@
++# Copyright 2019 Google Inc. All Rights Reserved.
++
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++
++LOCAL_PACKAGE_NAME := YukawaService
++LOCAL_PRIVATE_PLATFORM_APIS := true
++LOCAL_MODULE_TAGS := optional
++LOCAL_CERTIFICATE := platform
++LOCAL_PRIVILEGED_MODULE := true
++LOCAL_USE_AAPT2 := true
++
++LOCAL_STATIC_JAVA_LIBRARIES := android-support-annotations
++LOCAL_SRC_FILES = $(call all-java-files-under, src)
++
++LOCAL_MANIFEST_FILE := AndroidManifest.xml
++
++LOCAL_PROGUARD_FLAG_FILES := proguard.cfg
++LOCAL_PROGUARD_ENABLED := disabled
++
++include $(BUILD_PACKAGE)
++
++include $(call all-makefiles-under,$(LOCAL_PATH))
+diff --git a/services/AndroidManifest.xml b/services/AndroidManifest.xml
+new file mode 100644
+index 0000000..fc41695
+--- /dev/null
++++ b/services/AndroidManifest.xml
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++          package="com.google.android.yukawaservice"
++          android:persistent="true"
++          android:sharedUserId="android.uid.system">
++
++    <application
++            android:allowBackup="true"
++            android:label="ATV Customization">
++        <receiver android:name=".RemoteSyncReceiver">
++            <intent-filter>
++                <action android:name="android.intent.action.GLOBAL_BUTTON"/>
++            </intent-filter>
++        </receiver>
++    </application>
++</manifest>
+diff --git a/services/proguard.cfg b/services/proguard.cfg
+new file mode 100644
+index 0000000..2a255ab
+--- /dev/null
++++ b/services/proguard.cfg
+@@ -0,0 +1,12 @@
++-optimizationpasses 5
++-dontusemixedcaseclassnames
++-dontskipnonpubliclibraryclasses
++-dontpreverify
++-verbose
++-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
++
++-keepclasseswithmembernames class * {
++    native <methods>;
++}
++-keep public class * extends android.app.Service
++-keep public class * extends android.content.BroadcastReceiver
+diff --git a/services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java b/services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java
+new file mode 100644
+index 0000000..8d2c4e8
+--- /dev/null
++++ b/services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java
+@@ -0,0 +1,70 @@
++// Copyright 2019 Google Inc. All Rights Reserved.
++
++package com.google.android.yukawaservice;
++
++import android.app.ActivityManager;
++import android.bluetooth.BluetoothAdapter;
++import android.content.BroadcastReceiver;
++import android.content.ComponentName;
++import android.content.Context;
++import android.content.Intent;
++import android.content.pm.PackageManager;
++import android.net.Uri;
++import android.os.PowerManager;
++import android.os.SystemClock;
++import android.provider.Settings;
++import android.util.Log;
++import android.view.KeyEvent;
++
++import java.util.List;
++
++/**
++ * Handles global keys.
++ */
++public class RemoteSyncReceiver extends BroadcastReceiver {
++    private static final String TAG = "YukawaGlobalKey";
++    private static final String ACTION_CONNECT_INPUT_NORMAL =
++            "com.google.android.intent.action.CONNECT_INPUT";
++    private static final String INTENT_EXTRA_NO_INPUT_MODE = "no_input_mode";
++
++    private static void sendPairingIntent(Context context, KeyEvent event) {
++        Intent intent = new Intent(ACTION_CONNECT_INPUT_NORMAL)
++                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++
++        if (event != null) {
++            intent.putExtra(INTENT_EXTRA_NO_INPUT_MODE, true)
++                    .putExtra(Intent.EXTRA_KEY_EVENT, event);
++        }
++        context.startActivity(intent);
++    }
++
++    @Override
++    public void onReceive(Context context, Intent intent) {
++        if (Intent.ACTION_GLOBAL_BUTTON.equals(intent.getAction())) {
++            KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
++            int keyCode = event.getKeyCode();
++            int keyAction = event.getAction();
++            switch (keyCode) {
++                case KeyEvent.KEYCODE_PAIRING:
++                    if (keyAction == KeyEvent.ACTION_UP) {
++                        sendPairingIntent(context, event);
++                    }
++                    break;
++
++                case KeyEvent.KEYCODE_BUTTON_2:
++                    break;
++
++                case KeyEvent.KEYCODE_BUTTON_3:
++                    break;
++
++                default:
++                    Log.e(TAG, "Unhandled KeyEvent: " + keyCode);
++            }
++        }
++    }
++
++    private static void launchAppByPackageName(Context context, String packageName) {
++        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
++        context.startActivity(launchIntent);
++    }
++}
+-- 
+2.23.0.351.gc4317032e6-goog
+

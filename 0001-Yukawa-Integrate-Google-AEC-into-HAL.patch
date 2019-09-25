@@ -1,0 +1,456 @@
+From e827fd61a7c880ec74df175270c13227895ba4bf Mon Sep 17 00:00:00 2001
+From: Alden DSouza <aldend@google.com>
+Date: Fri, 13 Sep 2019 18:55:13 -0700
+Subject: [PATCH] [Yukawa]: Integrate Google AEC into HAL
+
+Use google_aec library on mic capture path in HAL.
+
+Bug: 139423645
+Test: Manual
+Change-Id: If72c201bc30ce88dea6cb50a4ef436644bcf289c
+---
+ audio/Android.mk       |  12 ++-
+ audio/audio_hw.c       | 184 ++++++++++++++++++++++++++++++++++++++---
+ audio/fifo_wrapper.cpp |  69 ++++++++++++++++
+ audio/fifo_wrapper.h   |  35 ++++++++
+ 4 files changed, 287 insertions(+), 13 deletions(-)
+ create mode 100644 audio/fifo_wrapper.cpp
+ create mode 100644 audio/fifo_wrapper.h
+
+diff --git a/audio/Android.mk b/audio/Android.mk
+index 929fb9e..d9530ad 100644
+--- a/audio/Android.mk
++++ b/audio/Android.mk
+@@ -27,8 +27,10 @@ LOCAL_MODULE := audio.primary.$(TARGET_BOARD_PLATFORM)
+ LOCAL_MODULE_RELATIVE_PATH := hw
+ LOCAL_VENDOR_MODULE := true
+ 
+-LOCAL_SRC_FILES := audio_hw.c
+-LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioroute
++LOCAL_SRC_FILES := \
++		audio_hw.c \
++		fifo_wrapper.cpp
++LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioroute libaudioutils
+ LOCAL_CFLAGS := -Wno-unused-parameter
+ LOCAL_C_INCLUDES += \
+         external/tinyalsa/include \
+@@ -37,5 +39,9 @@ LOCAL_C_INCLUDES += \
+         system/media/audio_utils/include \
+         system/media/audio_effects/include
+ 
+-include $(BUILD_SHARED_LIBRARY)
++ifneq ($(findstring google_aec, $(call all-makefiles-under,$(TOPDIR)vendor/amlogic/yukawa)),)
++	LOCAL_SHARED_LIBRARIES += google_aec
++	LOCAL_CFLAGS += -DAEC_HAL
++endif
+ 
++include $(BUILD_SHARED_LIBRARY)
+diff --git a/audio/audio_hw.c b/audio/audio_hw.c
+index 9db0cff..db4bfb8 100644
+--- a/audio/audio_hw.c
++++ b/audio/audio_hw.c
+@@ -42,6 +42,13 @@
+ #include <audio_effects/effect_aec.h>
+ #include <audio_route/audio_route.h>
+ 
++#ifdef AEC_HAL
++#include "audio_aec_process.h"
++#include "fifo_wrapper.h"
++#define DEBUG_AEC 1
++#define NUM_LOUDSPEAKER_FEEDS 1
++#endif /* #ifdef AEC_HAL */
++
+ #include <sys/ioctl.h>
+ 
+ #define CARD_OUT 0
+@@ -59,10 +66,10 @@
+ #define PCM_OPEN_WAIT_TIME_MS 20
+ 
+ /* Capture codec parameters */
+-/* Set up a capture period of 20 ms:
+- * CAPTURE_PERIOD = PERIOD_SIZE / SAMPLE_RATE, so (20e-3) = PERIOD_SIZE / (16e3)
+- * => PERIOD_SIZE = 320 frames, where each "frame" consists of 1 sample of every channel (here, 2ch) */
+-#define CAPTURE_PERIOD_MULTIPLIER 10
++/* Set up a capture period of 32 ms:
++ * CAPTURE_PERIOD = PERIOD_SIZE / SAMPLE_RATE, so (32e-3) = PERIOD_SIZE / (16e3)
++ * => PERIOD_SIZE = 512 frames, where each "frame" consists of 1 sample of every channel (here, 2ch) */
++#define CAPTURE_PERIOD_MULTIPLIER 16
+ #define CAPTURE_PERIOD_SIZE (CODEC_BASE_FRAME_COUNT * CAPTURE_PERIOD_MULTIPLIER)
+ #define CAPTURE_PERIOD_COUNT 4
+ #define CAPTURE_PERIOD_START_THRESHOLD 0
+@@ -89,8 +96,9 @@ struct alsa_audio_device {
+     struct alsa_stream_out *active_output;
+     struct audio_route *audio_route;
+     struct mixer *mixer;
+-
+     bool mic_mute;
++    bool spk_running;
++    bool spk_fifo_initialized;
+ };
+ 
+ struct alsa_stream_in {
+@@ -104,6 +112,10 @@ struct alsa_stream_in {
+     struct alsa_audio_device *dev;
+     int read_threshold;
+     unsigned int read;
++    int32_t *aec_mic_buf;
++    ssize_t aec_mic_buf_size_bytes;
++    int32_t *aec_spk_buf;
++    ssize_t aec_spk_buf_size_bytes;
+ };
+ 
+ struct alsa_stream_out {
+@@ -208,6 +220,7 @@ static int do_output_standby(struct alsa_stream_out *out)
+         adev->active_output = NULL;
+         out->standby = 1;
+     }
++    adev->spk_running = false;
+     return 0;
+ }
+ 
+@@ -301,6 +314,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
+             goto exit;
+         }
+         out->standby = 0;
++        adev->spk_running = true;
+     }
+ 
+     pthread_mutex_unlock(&adev->lock);
+@@ -311,6 +325,10 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
+         out->written += out_frames;
+     }
+ 
++#ifdef AEC_HAL
++    fifo_write((void *)buffer, out_frames * frame_size);
++#endif /* #ifdef AEC_HAL */
++
+ exit:
+     pthread_mutex_unlock(&out->lock);
+ 
+@@ -449,8 +467,6 @@ static int in_set_format(struct audio_stream *stream, audio_format_t format)
+ 
+ static size_t in_get_buffer_size(const struct audio_stream *stream)
+ {
+-    struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
+-
+     size_t buffer_size = get_input_buffer_size(stream->get_format(stream),
+                             stream->get_channels(stream));
+     ALOGV("in_get_buffer_size: %zu", buffer_size);
+@@ -533,8 +549,13 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
+ 
+     pthread_mutex_unlock(&adev->lock);
+ 
++    void *pcm_dest_buffer = buffer;
+ 
+-    ret = pcm_read(in->pcm, buffer, in_frames * frame_size);
++#ifdef AEC_HAL
++    pcm_dest_buffer = in->aec_mic_buf;
++#endif /* #ifdef AEC_HAL */
++
++    ret = pcm_read(in->pcm, pcm_dest_buffer, in_frames * frame_size);
+     if (ret == 0) {
+         in->read += in_frames;
+     }
+@@ -542,6 +563,82 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
+         ALOGE("pcm_read failed with code %d", ret);
+     }
+ 
++#ifdef AEC_HAL
++    struct timespec mic_ts = {0, 0};
++    clock_gettime(CLOCK_REALTIME, &mic_ts);
++    uint64_t mic_time = mic_ts.tv_sec * 1e6L + mic_ts.tv_nsec/1000;
++    /* TODO update timestamp grab */
++    uint64_t spk_time = mic_time;
++
++    if (adev->spk_running) {
++        /* Output codec uses different rate and data width.
++         * To account for this, read a frame at a time and convert to AEC format here.
++         * Note: This only works when downsampling, and when the ratio of sample rates,
++         * is an integer. For other cases, consider using audio_utils/resampler. */
++        struct audio_stream_out *out = (struct audio_stream_out *)adev->active_output;
++        ssize_t out_frame_size = audio_stream_out_frame_size(out);
++        unsigned int sample_rate_ratio = PLAYBACK_CODEC_SAMPLING_RATE / CAPTURE_CODEC_SAMPLING_RATE;
++        int16_t *out_frame = (int16_t *)malloc(sample_rate_ratio*out_frame_size);
++        int32_t *spk_buffer = in->aec_spk_buf;
++        int frame, ch;
++        for (frame = 0; frame < in_frames; frame++) {
++            if (!fifo_available_to_read()) {
++                ALOGV("Echo reference buffer empty, zeroing reference....");
++                memset(out_frame, 0, sample_rate_ratio*out_frame_size);
++            } else {
++                fifo_read(out_frame, sample_rate_ratio*out_frame_size);
++            }
++            for (ch = 0; ch < NUM_LOUDSPEAKER_FEEDS; ch++) {
++               *spk_buffer++ = ((int32_t)out_frame[ch]) << 16;
++            }
++        }
++        free(out_frame);
++    } else {
++        /* No new playback samples, zero out reference */
++        ALOGV("Speaker not running, zeroing reference..");
++        memset(in->aec_spk_buf, 0, in->aec_spk_buf_size_bytes);
++    }
++
++    /* AEC processing call - output stored at 'buffer' */
++    int32_t aec_status = aec_spk_mic_process(
++        in->aec_spk_buf, spk_time,
++        in->aec_mic_buf, mic_time,
++        in_frames,
++        buffer);
++
++    if (!aec_status) {
++        ALOGE("AEC processing failed!");
++        /* Best we can do is copy over the raw mic signal */
++        memcpy(buffer, in->aec_mic_buf, bytes);
++    }
++
++#if DEBUG_AEC
++    ssize_t ref_bytes = in_frames*NUM_LOUDSPEAKER_FEEDS*4; /* ref data is 32-bit at this point */
++
++    FILE *fp_in = fopen("/data/local/traces/aec_in.pcm", "a+");
++    if (fp_in) {
++        fwrite((char *)in->aec_mic_buf, 1, bytes, fp_in);
++        fclose(fp_in);
++    } else {
++        ALOGE("AEC debug: Could not open file aec_in.pcm!");
++    }
++    FILE *fp_out = fopen("/data/local/traces/aec_out.pcm", "a+");
++    if (fp_out) {
++        fwrite((char *)buffer, 1, bytes, fp_out);
++        fclose(fp_out);
++    } else {
++        ALOGE("AEC debug: Could not open file aec_out.pcm!");
++    }
++    FILE *fp_ref = fopen("/data/local/traces/aec_ref.pcm", "a+");
++    if (fp_ref) {
++        fwrite((char *)in->aec_spk_buf, 1, ref_bytes, fp_ref);
++        fclose(fp_ref);
++    } else {
++        ALOGE("AEC debug: Could not open file aec_ref.pcm!");
++    }
++#endif /* #if DEBUG_AEC */
++#endif /* #ifdef AEC_HAL */
++
+ exit:
+     pthread_mutex_unlock(&in->lock);
+ 
+@@ -640,6 +737,21 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
+     config->channel_mask = out_get_channels(&out->stream.common);
+     config->sample_rate = out_get_sample_rate(&out->stream.common);
+ 
++#ifdef AEC_HAL
++    if (!ladev->spk_fifo_initialized) {
++        int aec_ret = fifo_init(
++            PLAYBACK_PERIOD_COUNT*out_get_buffer_size(&out->stream.common)*
++                audio_stream_out_frame_size(&out->stream),
++            true /* reader_throttles_writer */);
++        if (aec_ret) {
++            ALOGE("Speaker loopback FIFO init failed!");
++            return -EINVAL;
++        } else {
++            ladev->spk_fifo_initialized = true;
++        }
++    }
++#endif /* #ifdef AEC_HAL */
++
+     *stream_out = &out->stream;
+ 
+     /* TODO The retry mechanism isn't implemented in AudioPolicyManager/AudioFlinger. */
+@@ -652,6 +764,12 @@ static void adev_close_output_stream(struct audio_hw_device *dev,
+         struct audio_stream_out *stream)
+ {
+     ALOGV("adev_close_output_stream...");
++    struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
++    ladev->spk_running = false;
++#ifdef AEC_HAL
++    fifo_release();
++    ladev->spk_fifo_initialized = false;
++#endif /* #ifdef AEC_HAL */
+     free(stream);
+ }
+ 
+@@ -798,6 +916,46 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
+     config->channel_mask = in_get_channels(&in->stream.common);
+     config->sample_rate = in_get_sample_rate(&in->stream.common);
+ 
++#ifdef AEC_HAL
++#if DEBUG_AEC
++    remove("/data/local/traces/aec_in.pcm");
++    remove("/data/local/traces/aec_out.pcm");
++    remove("/data/local/traces/aec_ref.pcm");
++#endif /* #if DEBUG_AEC */
++
++    int aec_ret = aec_spk_mic_init(
++            in_get_sample_rate(&in->stream.common),
++            NUM_LOUDSPEAKER_FEEDS, /* num_loudspeaker_feeds */
++            in->config.channels);
++
++    if (aec_ret) {
++        ALOGE("AEC failed to initialize!");
++        return aec_ret;
++    }
++
++    ssize_t aec_mic_buf_size_bytes = in_get_buffer_size(&in->stream.common);
++    in->aec_mic_buf = malloc(aec_mic_buf_size_bytes);
++    if (!in->aec_mic_buf) {
++        return -ENOMEM;
++    }
++
++    /* For echo reference, use similar #frames as input, but for as many channels as outputs */
++    ssize_t aec_spk_buf_size_bytes = aec_mic_buf_size_bytes * NUM_LOUDSPEAKER_FEEDS / (float)(in->config.channels);
++    in->aec_spk_buf = malloc(aec_spk_buf_size_bytes);
++    if (!in->aec_spk_buf) {
++        return -ENOMEM;
++    }
++
++    memset(in->aec_mic_buf, 0, aec_mic_buf_size_bytes);
++    memset(in->aec_spk_buf, 0, aec_spk_buf_size_bytes);
++    in->aec_mic_buf_size_bytes = aec_mic_buf_size_bytes;
++    in->aec_spk_buf_size_bytes = aec_spk_buf_size_bytes;
++
++    if (ladev->spk_fifo_initialized) {
++        fifo_flush();
++    }
++#endif
++
+     if (ret) {
+         free(in);
+     } else {
+@@ -808,10 +966,16 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
+ }
+ 
+ static void adev_close_input_stream(struct audio_hw_device *dev,
+-        struct audio_stream_in *in)
++        struct audio_stream_in *stream)
+ {
+     ALOGV("adev_close_input_stream...");
+-    free(in);
++#ifdef AEC_HAL
++    aec_spk_mic_release();
++    struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
++    free(in->aec_mic_buf);
++    free(in->aec_spk_buf);
++#endif /* #ifdef AEC_HAL */
++    free(stream);
+     return;
+ }
+ 
+diff --git a/audio/fifo_wrapper.cpp b/audio/fifo_wrapper.cpp
+new file mode 100644
+index 0000000..23ea8c9
+--- /dev/null
++++ b/audio/fifo_wrapper.cpp
+@@ -0,0 +1,69 @@
++/*
++ * Copyright (C) 2016 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#define LOG_TAG "audio_utils_fifo_wrapper"
++// #define LOG_NDEBUG 0
++
++#include <stdint.h>
++#include <errno.h>
++#include <log/log.h>
++#include <audio_utils/fifo.h>
++#include "fifo_wrapper.h"
++
++static audio_utils_fifo *p_fifo;
++static audio_utils_fifo_writer *p_fifo_writer;
++static audio_utils_fifo_reader *p_fifo_reader;
++static int8_t *p_buffer;
++
++int fifo_init(uint32_t bytes, bool reader_throttles_writer) {
++	p_buffer = new int8_t[bytes];
++	if (p_buffer == NULL) {
++		ALOGE("Failed to allocate fifo buffer!");
++		return -ENOMEM;
++	}
++	p_fifo = new audio_utils_fifo(bytes, 1, p_buffer, reader_throttles_writer);
++	p_fifo_writer = new audio_utils_fifo_writer(*p_fifo);
++	p_fifo_reader = new audio_utils_fifo_reader(*p_fifo);
++
++	return 0;
++}
++
++void fifo_release() {
++	delete p_fifo_writer;
++	delete p_fifo_reader;
++	delete p_fifo;
++	delete[] p_buffer;
++}
++
++ssize_t fifo_read(void *buffer, size_t bytes) {
++	return p_fifo_reader->read(buffer, bytes);
++}
++
++ssize_t fifo_write(void *buffer, size_t bytes) {
++	return p_fifo_writer->write(buffer, bytes);
++}
++
++ssize_t fifo_available_to_read() {
++	return p_fifo_reader->available();
++}
++
++ssize_t fifo_available_to_write() {
++	return p_fifo_writer->available();
++}
++
++ssize_t fifo_flush() {
++	return p_fifo_reader->flush();
++}
+diff --git a/audio/fifo_wrapper.h b/audio/fifo_wrapper.h
+new file mode 100644
+index 0000000..c9ca36f
+--- /dev/null
++++ b/audio/fifo_wrapper.h
+@@ -0,0 +1,35 @@
++/*
++ * Copyright (C) 2016 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#ifndef _AUDIO_FIFO_WRAPPER_H_
++#define _AUDIO_FIFO_WRAPPER_H_
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++int fifo_init(uint32_t bytes, bool reader_throttles_writer);
++void fifo_release();
++ssize_t fifo_read(void *buffer, size_t bytes);
++ssize_t fifo_write(void *buffer, size_t bytes);
++ssize_t fifo_available_to_read();
++ssize_t fifo_available_to_write();
++ssize_t fifo_flush();
++
++#ifdef __cplusplus
++}
++#endif
++#endif /* #ifndef _AUDIO_FIFO_WRAPPER_H_ */
+-- 
+2.23.0.444.g18eeb5a265-goog
+
