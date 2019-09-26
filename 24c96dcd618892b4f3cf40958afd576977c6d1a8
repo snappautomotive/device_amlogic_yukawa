@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e98ee42_148f2b92",
+        "filename": "0001-Yukawa-Integrate-Google-AEC-into-HAL.patch",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b5b467c_8a10a07f",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "24c96dcd618892b4f3cf40958afd576977c6d1a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86910a16_78afb888",
         "filename": "0001-yukawa-Add-YukawaService-and-YukawaAndroidOverlay-fo.patch",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "24c96dcd618892b4f3cf40958afd576977c6d1a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "082d092d_7081e0b8",
+        "filename": "0001-yukawa-Add-YukawaService-and-YukawaAndroidOverlay-fo.patch",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86910a16_78afb888",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "24c96dcd618892b4f3cf40958afd576977c6d1a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
