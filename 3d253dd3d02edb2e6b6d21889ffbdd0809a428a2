@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a9be5af_68f6f3cc",
+        "filename": "Generic.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27dd540f_42cfb4a4",
+      "range": {
+        "startLine": 250,
+        "startChar": 10,
+        "endLine": 250,
+        "endChar": 17
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b887629_44942277",
         "filename": "apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89024fda_e471175f",
+        "filename": "apps/overlay/YukawaAndroidOverlay/res/xml/global_keys.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b887629_44942277",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 103
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bed32842_7f622e4c",
+        "filename": "services/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb6369c_5ac71594",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97b9555a_40ab597e",
         "filename": "services/Android.mk",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e965247_a9553f38",
+        "filename": "services/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done - was needed",
+      "parentUuid": "97b9555a_40ab597e",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 8,
+        "endChar": 35
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5d177bbb_290fc79e",
+        "filename": "services/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4aebf238_265b3083",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7880217b_d37b5ad5",
         "filename": "services/Android.mk",
         "patchSetId": 1
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "b3e2219b_c8f3e331",
+        "filename": "services/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7880217b_d37b5ad5",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 41
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62e8fd48_47ed4e70",
         "filename": "services/proguard.cfg",
         "patchSetId": 1
@@ -154,6 +298,24 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197b625c_ff661199",
+        "filename": "services/proguard.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62e8fd48_47ed4e70",
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "c6addcfd_b88b4d05",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9fa7de_da281b2f",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4725d62_e77da1f4",
         "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
         "patchSetId": 1
@@ -200,6 +386,30 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ec7ea10_8cc84bc1",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4725d62_e77da1f4",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 42
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +436,30 @@
     },
     {
       "key": {
+        "uuid": "ff9335f9_d4482637",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f78c467_78d83a73",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 8,
+        "endChar": 37
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "425d1c84_8520b209",
         "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
         "patchSetId": 1
@@ -246,6 +480,30 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48ef75e9_65e22085",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "425d1c84_8520b209",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -272,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "fef6f5c1_8e7de614",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4453984c_c047f045",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7da3885b_435b39f6",
         "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
         "patchSetId": 1
@@ -292,6 +574,30 @@
       "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "755757a8_b9611abf",
+        "filename": "services/src/com/google/android/yukawaservice/RemoteSyncReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-09-26T19:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da3885b_435b39f6",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "3d253dd3d02edb2e6b6d21889ffbdd0809a428a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
