@@ -9,8 +9,8 @@ Download the toolchain : gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf
 Download U-Boot Source Code From :
         https://gitlab.com/baylibre/amlogic/atv/u-boot.git
 
-actual tag : u-boot/v2019.10/sei610-20190905-fix
-dev branch :  u-boot/v2019.10/sei610 (NOT COMPATIBLE with Actual AOSP, this branch have changes for A/B support + android10 bootflow)
+actual tag :  u-boot/v2019.10/seiX10-20191015
+dev branch :  u-boot/v2019.10/sei610 (NOT COMPATIBLE with Actual AOSP, this branch have changes for A/B support )
 
 link to U-Boot aosp release wiki page :
 https://gitlab.com/baylibre/amlogic/atv/u-boot/wikis/U-Boot-for-Yukawa-Release
