@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85ee314a_1b38c9d7",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-10-03T18:13:44Z",
+      "side": 0,
+      "message": "Is it on purpose?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "a4cf56b201f1e38156e4e32835c0d7a77719dbd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

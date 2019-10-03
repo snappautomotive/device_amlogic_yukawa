@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4637ab4d_7f363f42",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-10-03T18:13:44Z",
+      "side": 1,
+      "message": "Double //",
+      "range": {
+        "startLine": 15,
+        "startChar": 37,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "f19c308d2dfe484bb100d2e7adbf2fe48d1afd24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba8f68a_e25f8b3a",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-10-03T18:13:44Z",
+      "side": 1,
+      "message": "Double //",
+      "range": {
+        "startLine": 16,
+        "startChar": 37,
+        "endLine": 16,
+        "endChar": 38
+      },
+      "revId": "f19c308d2dfe484bb100d2e7adbf2fe48d1afd24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
