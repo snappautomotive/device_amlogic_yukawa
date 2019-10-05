@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0922be5_53c43353",
+        "filename": "audio/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88cc4746_60d94504",
+      "range": {
+        "startLine": 31,
+        "startChar": 69,
+        "endLine": 31,
+        "endChar": 82
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7adeab59_c292be04",
         "filename": "audio/audio_aec.c",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "456f26ba_ad6ec833",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7adeab59_c292be04",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b5bc3c7b_6d5c1a72",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e34961_43583dd5",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ed993cf_168582c1",
         "filename": "audio/audio_aec.h",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba14e3f0_f3226153",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ed993cf_168582c1",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "e3fc33cc_32b9e8cb",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Changed AEC APIs to return error codes.\nWe\u0027re handling mute by setting the buffer to zero, I moved the call to process_aec() after it. Added a todo to use a separate thread.",
+      "parentUuid": "acb02fcb_abe081dd",
+      "range": {
+        "startLine": 480,
+        "startChar": 4,
+        "endLine": 480,
+        "endChar": 15
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0c38f3f_9c799e12",
         "filename": "audio/audio_hw.c",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b48d3e30_b4d92a2a",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-05T00:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c38f3f_9c799e12",
+      "range": {
+        "startLine": 583,
+        "startChar": 8,
+        "endLine": 583,
+        "endChar": 13
+      },
+      "revId": "bfb9f2f41ce84e1e61083823d9fa5c22f385126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
