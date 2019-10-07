@@ -1,0 +1,550 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d827aec_0c16f2f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "I would like to see AEC spelled out fully at least once :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a76f3af7_88e89dcb",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Same comment about yukawa reference here.",
+      "range": {
+        "startLine": 17,
+        "startChar": 26,
+        "endLine": 17,
+        "endChar": 32
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4aaeeb64_52dfa793",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "if (!aec) return;  ?\nOr assert() here?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 14
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "569bb4fb_12452f46",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Not a fan of the double goto labels to be honest. And since exit_1 is only used once, and is not a fall-through label, maybe just pull the code in here?",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8e4c658_54918dd5",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Again, spelling out \"interface\" might be more readable here.",
+      "range": {
+        "startLine": 142,
+        "startChar": 14,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fec8e95_8c941671",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "NIT: Formatting?",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 61
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f34b5383_eafc1fc5",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "void?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 3
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58cddaf3_fab43765",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Return bool state, since return is not used?",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 3
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41db1bee_af868651",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "if (!arc) return; ?\nOr: assert(aec); ?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 22
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0538c0b1_4b07ab0f",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 22
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51aef106_e3355c48",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "I would move this check after \"fifo_write\" above.\nUnless the timing is critical of course.",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 5
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc1a9555_2538105d",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "049820cc_b8539601",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Redundant comment?",
+      "range": {
+        "startLine": 357,
+        "startChar": 4,
+        "endLine": 357,
+        "endChar": 44
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fd3df1c_2d90bec5",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "When? Why?",
+      "range": {
+        "startLine": 360,
+        "startChar": 26,
+        "endLine": 360,
+        "endChar": 47
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30ba38da_f30304a8",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Are we ever worried about div/zero ? (Here and elsewhere?)",
+      "range": {
+        "startLine": 365,
+        "startChar": 58,
+        "endLine": 365,
+        "endChar": 84
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4706b3_c73e732f",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Is this really Yukawa specific?\nIf we expect vendors to copy this into their directory, the Yukawa part may be misleading?",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f26f722d_995940c7",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "[NO ACTION NEEDED]\nThe imports aren\u0027t sorted. Which I guess means we\u0027re not using clang-format. Is this something we should investigate and check in a style file that would match this style?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53d37dad_0524b3e6",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "I\u0027m a fan of spelling things out.\n\"timestamp\", \"available\"?",
+      "range": {
+        "startLine": 29,
+        "startChar": 20,
+        "endLine": 29,
+        "endChar": 26
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c44dca58_e73a1950",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Possibly inconsistent: mic_buf_size_bytes has a unit attached, mic_frame_size does not.",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e90dac_8ab15b58",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "What does process mean in this context?\nAlso, should we have API documentation for these functions?",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7be8a307_c3551921",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 6
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb80857_c149ec76",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Aside from 2 minor variable name differences, this seems exactly equal to the fields in alsa_stream_out.\nMake it a common struct member maybe?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 22
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7458fbf0_c7ebfce7",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "Below where?",
+      "range": {
+        "startLine": 88,
+        "startChar": 30,
+        "endLine": 88,
+        "endChar": 73
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46c7223b_b2a557d5",
+        "filename": "audio/fifo_wrapper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-07T22:36:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this file is compiled in C++.\nBut if the intent here is to hide the implementation details from the API user, why not make \"audio_fifo_itfe\" a void*. That way the struct can have properly typed fields and instead of casting everywhere, every function only needs one cast.\n\nAlso, is this an \"Interface\"? Not sure.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
