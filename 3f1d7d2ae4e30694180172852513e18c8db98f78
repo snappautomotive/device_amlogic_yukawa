@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e56b2c62_6619018f",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-08T18:29:52Z",
+      "side": 1,
+      "message": "Yukawa specific?",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "3f1d7d2ae4e30694180172852513e18c8db98f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bf12e2b_8fcfa390",
+        "filename": "audio/fifo_wrapper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-08T18:29:52Z",
+      "side": 1,
+      "message": "I like the API much better now, but I think there\u0027s still one more tweak that would make the usage even cleaner. Instead of returning an int in this function, why not return the void* instead? The only error handled here is a potential ENOMEM. But this could be easily handled with returning NULL in the failure case.\n\nThis would make API usage super clear.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 13
+      },
+      "revId": "3f1d7d2ae4e30694180172852513e18c8db98f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
