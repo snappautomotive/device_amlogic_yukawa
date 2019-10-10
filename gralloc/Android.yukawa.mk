@@ -45,7 +45,7 @@ GRALLOC_FB_SWAP_RED_BLUE=0
 # Disables the framebuffer HAL device. When a hwc impl is available.
 GRALLOC_DISABLE_FRAMEBUFFER_HAL=1
 # When enabled, buffers will never be allocated with AFBC
-GRALLOC_ARM_NO_EXTERNAL_AFBC=1
+GRALLOC_ARM_NO_EXTERNAL_AFBC=0
 # Minimum buffer dimensions in pixels when buffer will use AFBC
 GRALLOC_DISP_W=0
 GRALLOC_DISP_H=0
