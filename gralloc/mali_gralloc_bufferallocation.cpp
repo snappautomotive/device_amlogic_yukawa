@@ -902,7 +902,7 @@ int mali_gralloc_buffer_allocate(mali_gralloc_module *m, const gralloc_buffer_de
 		usage = bufDescriptor->producer_usage | bufDescriptor->consumer_usage;
 
 		bufDescriptor->internal_format = mali_gralloc_select_format(
-		    bufDescriptor->hal_format, bufDescriptor->format_type, usage, bufDescriptor->width * bufDescriptor->height);
+		    bufDescriptor->hal_format, bufDescriptor->format_type, usage, bufDescriptor->width, bufDescriptor->height);
 
 		if (bufDescriptor->internal_format == 0)
 		{

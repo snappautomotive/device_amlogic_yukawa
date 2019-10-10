@@ -51,4 +51,7 @@ GRALLOC_DISP_W=0
 GRALLOC_DISP_H=0
 # Vsync backend(not used)
 GRALLOC_VSYNC_BACKEND=default
+# AFBC doesn't work on more than 1080p
+GRALLOC_MAX_DISP_W=1920
+GRALLOC_MAX_DISP_H=1080
 

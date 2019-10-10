@@ -20,6 +20,7 @@
 #include <dlfcn.h>
 #include <inttypes.h>
 #include <log/log.h>
+#include <cutils/properties.h>
 
 #if GRALLOC_USE_GRALLOC1_API == 1
 #include <hardware/gralloc1.h>
@@ -147,15 +148,16 @@ static bool is_android_yuv_format(int req_format)
 	return rval;
 }
 
-static bool is_afbc_allowed(int buffer_size)
+static bool is_afbc_allowed(int width, int height)
 {
 	bool afbc_allowed = false;
 
-	(void)buffer_size;
+	(void)width;
+	(void)height;
 
 #if MALI_DISPLAY_VERSION == 550 || MALI_DISPLAY_VERSION == 650
 #if GRALLOC_DISP_W != 0 && GRALLOC_DISP_H != 0
-	afbc_allowed = ((buffer_size * 100) / (GRALLOC_DISP_W * GRALLOC_DISP_H)) >= GRALLOC_AFBC_MIN_SIZE;
+	afbc_allowed = (((width * height) * 100) / (GRALLOC_DISP_W * GRALLOC_DISP_H)) >= GRALLOC_AFBC_MIN_SIZE;
 
 #else
 	/* If display size is not valid then always allow AFBC */
@@ -165,6 +167,13 @@ static bool is_afbc_allowed(int buffer_size)
 #else
 	/* For cetus, always allow AFBC */
 	afbc_allowed = true;
+#endif
+#if GRALLOC_MAX_DISP_W != 0 && GRALLOC_MAX_DISP_H != 0
+	afbc_allowed = (width <= GRALLOC_MAX_DISP_W) && (height <= GRALLOC_MAX_DISP_H);
+#else
+	/* If max display size is not valid then always allow AFBC */
+	afbc_allowed = true;
+
 #endif
 	return afbc_allowed;
 }
@@ -608,7 +617,7 @@ already_init:
 	ALOGV("CAM format capabilities 0x%" PRIx64, cam_runtime_caps.caps_mask);
 }
 
-uint64_t mali_gralloc_select_format(uint64_t req_format, mali_gralloc_format_type type, uint64_t usage, int buffer_size)
+uint64_t mali_gralloc_select_format(uint64_t req_format, mali_gralloc_format_type type, uint64_t usage, int width, int height)
 {
 	uint64_t internal_format = 0;
 	mali_gralloc_consumer_type consumer;
@@ -666,7 +675,7 @@ uint64_t mali_gralloc_select_format(uint64_t req_format, mali_gralloc_format_typ
 		producer_runtime_mask &= ~MALI_GRALLOC_FORMAT_CAPABILITY_AFBCENABLE_MASK;
 	}
 	/* Disable AFBC based on buffer dimensions */
-	else if (!is_afbc_allowed(buffer_size))
+	else if (!is_afbc_allowed(width, height))
 	{
 		producer_runtime_mask &= ~MALI_GRALLOC_FORMAT_CAPABILITY_AFBCENABLE_MASK;
 	}

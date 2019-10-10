@@ -250,7 +250,7 @@ typedef enum
 /* Internal prototypes */
 #if defined(GRALLOC_LIBRARY_BUILD)
 uint64_t mali_gralloc_select_format(uint64_t req_format, mali_gralloc_format_type type, uint64_t usage,
-                                    int buffer_size);
+                                    int width, int height);
 #endif
 
 #ifdef __cplusplus
