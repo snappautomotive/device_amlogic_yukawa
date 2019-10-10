@@ -540,6 +540,21 @@ static void determine_format_capabilities()
 #endif
 	}
 
+	/* Determine DPU format capabilities from properties */
+	if (property_get_bool("ro.gralloc.afbc.enable", 0))
+	{
+		dpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_OPTIONS_PRESENT;
+		dpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_AFBC_BASIC;
+		dpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_AFBC_SPLITBLK;
+
+		ALOGV("AFBC enabled");
+
+		if (property_get_bool("ro.gralloc.afbc.wideblk", 0)) {
+			dpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_AFBC_WIDEBLK;
+			ALOGV("AFBC_WIDEBLK enabled");
+		}
+	}
+
 	/* Determine GPU format capabilities */
 	if (access(MALI_GRALLOC_GPU_LIBRARY_PATH1 MALI_GRALLOC_GPU_LIB_NAME, R_OK) == 0)
 	{
