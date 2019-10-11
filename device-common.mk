@@ -141,6 +141,8 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.mapper@2.0-impl
 
+PRODUCT_PROPERTY_OVERRIDES += ro.gralloc.afbc.enable=1
+
 # Software Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software
