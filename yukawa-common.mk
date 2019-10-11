@@ -1,5 +1,3 @@
-# Inherit the full_base and device configurations
-$(call inherit-product, device/amlogic/yukawa/device.mk)
 
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ffe07000.emmc/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/ffe07000.emmc/by-name/vendor

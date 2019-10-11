@@ -6,14 +6,7 @@ else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-ifeq ($(TARGET_PREBUILT_DTB),)
-LOCAL_DTB := device/amlogic/yukawa-kernel/meson-g12a-sei510.dtb
-else
-LOCAL_DTB := $(TARGET_PREBUILT_DTB)
-endif
-
-PRODUCT_COPY_FILES +=  $(LOCAL_KERNEL):kernel \
-                       $(LOCAL_DTB):meson-g12a-sei510.dtb \
+PRODUCT_COPY_FILES +=  $(LOCAL_KERNEL):kernel
 
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
@@ -60,7 +53,7 @@ PRODUCT_PACKAGES += \
     com.android.media.tv.remoteprovider \
     InputDevices
 
-ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms))
+ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa_sei510_gms))
 PRODUCT_PACKAGES += \
     TVLauncherNoGms \
     TVRecommendationsNoGms
@@ -83,9 +76,6 @@ PRODUCT_PACKAGES +=  vulkan.yukawa.so
 PRODUCT_PACKAGES += android.hardware.bluetooth@1.0-service.btlinux
 
 # Wifi
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
-    android.hardware.wifi@1.0
 PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wifilogd wpa_cli
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
                               wifi.supplicant_scan_interval=15
@@ -197,3 +187,8 @@ PRODUCT_COPY_FILES += \
 BOARD_AVB_ENABLE := false
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_ROLLBACK_INDEX := 0
+
+# Enable BT Pairing with button BTN_0 (key 256)
+PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
+PRODUCT_COPY_FILES += \
+    device/amlogic/yukawa/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl

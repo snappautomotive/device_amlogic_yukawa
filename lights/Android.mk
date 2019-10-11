@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2017 The Android Open-Source Project
+# Copyright (C) 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/yukawa_sei510.mk \
-    $(LOCAL_DIR)/yukawa32_sei510.mk \
-    $(LOCAL_DIR)/yukawa.mk \
-    $(LOCAL_DIR)/yukawa32.mk
+LOCAL_PATH:= $(call my-dir)
 
-COMMON_LUNCH_CHOICES := \
-    yukawa_sei510-userdebug \
-    yukawa-userdebug
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := lights.c
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_MULTILIB := first
+LOCAL_HEADER_LIBRARIES := libhardware_headers
+LOCAL_SHARED_LIBRARIES := libc libcutils liblog
+LOCAL_CFLAGS += -Wall -Werror
+LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
