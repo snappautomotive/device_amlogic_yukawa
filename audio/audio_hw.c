@@ -240,8 +240,10 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
     if (ret == 0) {
         out->written += out_frames;
 
-        int aec_ret = write_to_reference_fifo(adev->aec, out, (void *)buffer,
-                                                out_frames * frame_size);
+        struct aec_ts_fifo_payload ts;
+        get_pcm_timestamp(out->pcm, out->config.rate, &ts);
+        ts.bytes = out_frames * frame_size;
+        int aec_ret = write_to_reference_fifo(adev->aec, (void *)buffer, &ts);
         if (aec_ret) {
             ALOGE("AEC: Write to speaker loopback FIFO failed!");
         }
@@ -489,7 +491,10 @@ exit:
         /* Process AEC if available */
         /* TODO move to a separate thread */
         if (!adev->mic_mute) {
-            int aec_ret = process_aec(adev->aec, in, buffer, bytes);
+            struct aec_ts_fifo_payload ts;
+            get_pcm_timestamp(in->pcm, in->config.rate, &ts);
+            ts.bytes = bytes;
+            int aec_ret = process_aec(adev->aec, buffer, &ts);
             if (aec_ret) {
                 ALOGE("process_aec returned error code %d", aec_ret);
             }

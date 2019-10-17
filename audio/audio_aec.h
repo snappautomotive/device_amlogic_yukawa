@@ -38,35 +38,46 @@
  * (for output) frames in the PCM buffer.
  * timestamp and available are updated by pcm_get_htimestamp(), so they use the same
  * datatypes as the corresponding arguments to that function. */
-struct ts_fifo_payload {
+struct aec_ts_fifo_payload {
     struct timespec timestamp;
     unsigned int available;
     size_t bytes;
+    uint64_t time_usec;
+};
+
+struct aec_io {
+    size_t num_channels;
+    int32_t *buf;
+    size_t buf_size_bytes;
+    size_t frame_size_bytes;
+    uint32_t sampling_rate;
+    struct aec_ts_fifo_payload last_timestamp;
+    void *audio_fifo;
+    void *ts_fifo;
+    ssize_t fifo_read_write_diff_bytes;
+    bool running;
+    bool prev_running;
+};
+
+struct aec_thread_args {
+    struct aec_t *aec;
+    size_t bytes;
+    int ret;
 };
 
 struct aec_t {
     pthread_mutex_t lock;
+    pthread_cond_t ready_to_run;
+    bool running;
+    pthread_t run_thread_id;
+    struct aec_thread_args args;
     size_t num_reference_channels;
-    int32_t *mic_buf;
-    size_t mic_num_channels;
-    size_t mic_buf_size_bytes;
-    size_t mic_frame_size_bytes;
-    uint32_t mic_sampling_rate;
-    struct ts_fifo_payload last_mic_ts;
-    int32_t *spk_buf;
-    size_t spk_num_channels;
-    size_t spk_buf_size_bytes;
-    size_t spk_frame_size_bytes;
-    uint32_t spk_sampling_rate;
-    struct ts_fifo_payload last_spk_ts;
-    int16_t *spk_buf_playback_format;
-    int16_t *spk_buf_resampler_out;
-    void *spk_fifo;
-    void *ts_fifo;
-    ssize_t read_write_diff_bytes;
-    struct resampler_itfe *spk_resampler;
-    bool spk_running;
-    bool prev_spk_running;
+    struct aec_io mic;
+    struct aec_io reference;
+    struct aec_io out;
+    int16_t *reference_playback_format;
+    int16_t *reference_resampler_out;
+    struct resampler_itfe *reference_resampler;
 };
 
 #ifdef AEC_HAL
@@ -74,14 +85,13 @@ struct aec_t {
 /* Write audio samples to AEC reference FIFO for use in AEC.
  * Both audio samples and timestamps are added in FIFO fashion.
  * Must be called after every write to PCM. */
-int write_to_reference_fifo (struct aec_t *aec, struct alsa_stream_out *out,
-                                void *buffer, size_t bytes);
+int write_to_reference_fifo (struct aec_t *aec, void *buffer, struct aec_ts_fifo_payload *ts);
 
 /* Processing function call for AEC.
  * AEC output is updated at location pointed to by 'buffer'.
  * This function does not run AEC when there is no playback -
  * as communicated to this AEC interface using aec_set_spk_running().*/
-int process_aec (struct aec_t *aec, struct alsa_stream_in *in, void* buffer, size_t bytes);
+int process_aec (struct aec_t *aec, void* buffer, struct aec_ts_fifo_payload *ts);
 
 /* Initialize AEC object.
  * This must be called when the audio device is opened.
@@ -113,6 +123,10 @@ void destroy_aec_mic_config (struct aec_t *aec);
  * This is used by process_aec() to determine if AEC processing is to be run. */
 void aec_set_spk_running (struct aec_t *aec, bool state);
 
+/* Helper function to get PCM hardware timestamp.
+ * Only the field 'timestamp' of argument 'ts' is updated. */
+int get_pcm_timestamp(struct pcm *pcm, uint32_t sample_rate, struct aec_ts_fifo_payload *ts);
+
 #else /* #ifdef AEC_HAL */
 
 #define write_to_reference_fifo(...) ((int)0)
@@ -124,6 +138,7 @@ void aec_set_spk_running (struct aec_t *aec, bool state);
 #define destroy_aec_reference_config(...) ((void)0)
 #define destroy_aec_mic_config(...) ((void)0)
 #define aec_set_spk_running(...) ((void)0)
+#define get_pcm_timestamp(...) ((int)0)
 
 #endif /* #ifdef AEC_HAL */
 
