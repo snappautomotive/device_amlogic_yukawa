@@ -39,29 +39,40 @@ struct ts_fifo_payload {
     ssize_t bytes;
 };
 
+struct aec_thread_args {
+    struct alsa_stream_in *in;
+    size_t bytes;
+    int ret;
+};
+
+struct aec_io {
+    ssize_t num_channels;
+    int32_t *buf;
+    ssize_t buf_size_bytes;
+    ssize_t frame_size_bytes;
+    uint32_t sampling_rate;
+    struct ts_fifo_payload last_timestamp;
+    void *audio_fifo;
+    void *ts_fifo;
+    struct pcm *pcm;
+    ssize_t fifo_read_write_diff_bytes;
+    bool running;
+    bool prev_running;
+};
+
 struct aec_itfe {
     pthread_mutex_t lock;
+    pthread_cond_t ready_to_run;
+    bool running;
+    pthread_t run_thread_id;
+    struct aec_thread_args args;
     ssize_t num_reference_channels;
-    int32_t *mic_buf;
-    ssize_t mic_num_channels;
-    ssize_t mic_buf_size_bytes;
-    ssize_t mic_frame_size_bytes;
-    uint32_t mic_sampling_rate;
-    struct ts_fifo_payload last_mic_ts;
-    int32_t *spk_buf;
-    ssize_t spk_num_channels;
-    ssize_t spk_buf_size_bytes;
-    ssize_t spk_frame_size_bytes;
-    uint32_t spk_sampling_rate;
-    struct ts_fifo_payload last_spk_ts;
+    struct aec_io mic;
+    struct aec_io spk;
+    struct aec_io out;
     int16_t *spk_buf_playback_format;
     int16_t *spk_buf_resampler_out;
-    void *spk_fifo;
-    void *ts_fifo;
-    ssize_t read_write_diff_bytes;
     struct resampler_itfe *spk_resampler;
-    bool spk_running;
-    bool prev_spk_running;
 };
 
 /* Write speaker audio samples to FIFO for use in AEC.
