@@ -1,0 +1,694 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3d77988_1242715d",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "those should be frames not bytes according to the calculation made",
+      "range": {
+        "startLine": 84,
+        "startChar": 50,
+        "endLine": 84,
+        "endChar": 55
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b4086ce_ea135154",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "we should clamp to 16 bits instead of shifting right:\nsee audio_primitives.h clamp16(): https://cs.corp.google.com/android/system/media/audio_utils/include/audio_utils/primitives.h?q\u003daudio_primitives.h\u0026dr\u003dCSs\u0026l\u003d749\nyou can also use spcialized channel mapping functions in audio_utils/channels.h: adjust_channels()\nhttps://cs.corp.google.com/android/system/media/audio_utils/include/audio_utils/channels.h?dr\u003dCSs\u0026g\u003d0",
+      "range": {
+        "startLine": 112,
+        "startChar": 33,
+        "endLine": 112,
+        "endChar": 84
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "980aeb0f_6d618f6f",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "the only difference in log seems to be (POST-WRITE) or (PRE-READ). We can factor in with \n\n        ALOGV(\"Queue available %s: Spk %zd (count %zd) TS %zd (count %zd)\", write_side ? (POST-WRITE) : (PRE-READ), ...)",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 85
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fa21041_77db4b75",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "line length here and below",
+      "range": {
+        "startLine": 125,
+        "startChar": 101,
+        "endLine": 125,
+        "endChar": 102
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f0bc5a1_66d76915",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "I would prefer this lock is taken before calling aec_init() from audio HAL call with a comment on aec_init() API stating that adev mutex should be held.",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 36
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a70e05c6_c1ee7bd8",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "better call destroy_aec_mic_config() and destroy_aec_spk_config()  preventively to free buffers and resources in case this is called without closing inputs and outputs first.",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 8
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4b3df29_ae118837",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "as stated in comments in header file, the following protoype would make the API more readable:\nint init_aec_spk_config(struct aec_itfe *aec, struct alsa_stream_out *out) \n\nand avoid reading back from adev",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 54
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "face4a6e_74397d6f",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d8d8bdd_f2db5e2c",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "this assumes that mic_buf_size_bytes (and further more in frames) is a entire multiplier of (num_reference_channels / config.channels).\nWe should add a comment at least and better add some provision to round up to next entire frame",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 56
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "892cdd36_98fd6dd4",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "This constant should come from the aec init. using it directly here leaks tough the aec API definition",
+      "range": {
+        "startLine": 279,
+        "startChar": 41,
+        "endLine": 279,
+        "endChar": 69
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "413dff62_b70b44c8",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "line length",
+      "range": {
+        "startLine": 286,
+        "startChar": 101,
+        "endLine": 286,
+        "endChar": 102
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eb8b0ec_1bc2c8e3",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 56
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291c4715_79530e06",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "aec_set_spk_running(struct aec_itfe *aec, bool state) avoids dereferencing out-\u003edev and adev-\u003eaec and makes the API more symmetric with aec_get_spk_running",
+      "range": {
+        "startLine": 326,
+        "startChar": 5,
+        "endLine": 326,
+        "endChar": 24
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfa41c95_22c80210",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "would prefer to pass the time stamp at the API",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 71
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a336ff7_e8da493b",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "line length here and below",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 419,
+        "endChar": 107
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f02b783_cb261355",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "what is the difference with aec-\u003emic_frame_size_bytes ?",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 96
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed3d6427_8be018e4",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "the framesize is not changing and could be stored when init_aec_spk_config() is called.\n\nthen we can remove the need to pass the stream as input (see below)",
+      "range": {
+        "startLine": 457,
+        "startChar": 11,
+        "endLine": 457,
+        "endChar": 21
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de1b48d8_889a69af",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "would prefer that the time stamp is passed at the API to avoid leaking of access to pcm driver though AEC API boundary",
+      "range": {
+        "startLine": 468,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 90
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5cab43c_f97f8bbc",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "what do available and bytes mean in this context? \nI would expect both using the same type (size_t)",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94b22ded_e535a4a8",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "can you comment on why this is signed as well as other ssize_t members of aec_itfe struct below?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3a05e15_a8e8e235",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "the suffix \"itfe\" evokes an interface for me. This structs looks more like the whole aec context.Do I understand correctly and if yes can we change the struct name?",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16de3eb_24f7ffeb",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "speaker seems too restrictive in this context. Can we use \"reference or something similar instead?\nif this is confusing with internal AWC reference channel then we need to find a way to differentiate then maybe with \"int\" and \"ext\" prefix?",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 16
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acc3e5c1_ba370625",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "it would be more clear if all those interface functions took a struct aec_itfe * pointer instead of either a alsa_stream_in or alsa_stream_in or alsa_audio_device pointers (except for init who needs the parent adev probably).\nYou can store the aec pointer in each output or input stream when the stream is opened because there is no risk it is removed during the stream life cycle.\nEven for APIs like init_aec_spk_config() we could pass both the aec and stream pointer which wold be clearer even it means more argument. I think the cost of adding more argument is out-weighted by the readability of the API.",
+      "range": {
+        "startLine": 70,
+        "startChar": 23,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03da4654_8657c9f3",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "same remark here and below on function names with \"spk\". Can we use \"reference\" instead?",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 23
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d7cf989_35459f3b",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "maybe more clear to use #ifdef AEC_HAL ... #else ... #endif for API function declaration",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e27f757c_157a1381",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "do not init aec refe config if ret !\u003d 0 as adev_close_output_stream() will not be called in this case",
+      "range": {
+        "startLine": 584,
+        "startChar": 0,
+        "endLine": 584,
+        "endChar": 43
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78b85f6_9c21c5eb",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "do not init aec mic config if ret !\u003d 0 as adev_close_input_stream() will not be called in this case",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 749,
+        "endChar": 42
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb920f8c_9d43a5ef",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "e.g NUM_REFERENCE_CHANNELS",
+      "range": {
+        "startLine": 842,
+        "startChar": 52,
+        "endLine": 842,
+        "endChar": 73
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4207451b_7e5de1da",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "NUM_REFERENCE_CHANNELS?",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4065839_973e66eb",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-22T01:25:50Z",
+      "side": 1,
+      "message": "can we just use CAPTURE_SAMPLING_RATE ? \nI don\u0027t understand the information added by CODEC here ?\n\nsame for PLAYBACK_CODEC_SAMPLING_RATE and CODEC_BASE_FRAME_COUNT",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
