@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "18b3e090_2a7bebe2",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3d77988_1242715d",
+      "range": {
+        "startLine": 84,
+        "startChar": 50,
+        "endLine": 84,
+        "endChar": 55
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b4086ce_ea135154",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-22T01:25:50Z",
       "side": 1,
       "message": "we should clamp to 16 bits instead of shifting right:\nsee audio_primitives.h clamp16(): https://cs.corp.google.com/android/system/media/audio_utils/include/audio_utils/primitives.h?q\u003daudio_primitives.h\u0026dr\u003dCSs\u0026l\u003d749\nyou can also use spcialized channel mapping functions in audio_utils/channels.h: adjust_channels()\nhttps://cs.corp.google.com/android/system/media/audio_utils/include/audio_utils/channels.h?dr\u003dCSs\u0026g\u003d0",
+      "range": {
+        "startLine": 112,
+        "startChar": 33,
+        "endLine": 112,
+        "endChar": 84
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41531a49_b6bda4c2",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b4086ce_ea135154",
       "range": {
         "startLine": 112,
         "startChar": 33,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9b0b91fd_9b25adb9",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "I\u0027ll be refactoring this in the upcoming CL, will clean it up then.",
+      "parentUuid": "980aeb0f_6d618f6f",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 85
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fa21041_77db4b75",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2019-10-22T01:25:50Z",
       "side": 1,
       "message": "line length here and below",
+      "range": {
+        "startLine": 125,
+        "startChar": 101,
+        "endLine": 125,
+        "endChar": 102
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "093e77bb_96d3824f",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Will clean this up in the upcoming refactor.",
+      "parentUuid": "9fa21041_77db4b75",
       "range": {
         "startLine": 125,
         "startChar": 101,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "778d3926_e90cc4a8",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f0bc5a1_66d76915",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 36
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a70e05c6_c1ee7bd8",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -137,6 +257,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66d98e5a_9ed712b2",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a70e05c6_c1ee7bd8",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 8
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "db9c6569_fdc15c67",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4b3df29_ae118837",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 54
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "face4a6e_74397d6f",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -183,6 +351,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9969a132_20229f6e",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "face4a6e_74397d6f",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "e06e51b9_405c345e",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d8d8bdd_f2db5e2c",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 56
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "892cdd36_98fd6dd4",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -229,6 +445,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75365ad1_5e5ecc53",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "892cdd36_98fd6dd4",
+      "range": {
+        "startLine": 279,
+        "startChar": 41,
+        "endLine": 279,
+        "endChar": 69
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "051bf8b5_86f31ae5",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "413dff62_b70b44c8",
+      "range": {
+        "startLine": 286,
+        "startChar": 101,
+        "endLine": 286,
+        "endChar": 102
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3eb8b0ec_1bc2c8e3",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -275,6 +539,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bec748ad_cf127091",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb8b0ec_1bc2c8e3",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 56
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "de8ed8e4_a6ae36c2",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c4715_79530e06",
+      "range": {
+        "startLine": 326,
+        "startChar": 5,
+        "endLine": 326,
+        "endChar": 24
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfa41c95_22c80210",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -324,6 +636,30 @@
     },
     {
       "key": {
+        "uuid": "6f61f76e_dd443342",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfa41c95_22c80210",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 71
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a336ff7_e8da493b",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -344,6 +680,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a943361_535754b3",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a336ff7_e8da493b",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 419,
+        "endChar": 107
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -393,6 +753,54 @@
     },
     {
       "key": {
+        "uuid": "e029f742_b4539bd5",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "I\u0027ve left the stream for now, will be fixing it in my next CL:\nhttps://android-review.googlesource.com/c/device/amlogic/yukawa/+/1147844",
+      "parentUuid": "ed3d6427_8be018e4",
+      "range": {
+        "startLine": 457,
+        "startChar": 11,
+        "endLine": 457,
+        "endChar": 21
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "362a35bf_704326f2",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "No difference, cleaned this up.",
+      "parentUuid": "4f02b783_cb261355",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 96
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1b48d8_889a69af",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -416,6 +824,30 @@
     },
     {
       "key": {
+        "uuid": "2fcf25c4_9e7eadfd",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Will address this in the upcoming CL, where PCM info is stored within the AEC struct, since it doesn\u0027t change during its lifetime:\nhttps://android-review.googlesource.com/c/device/amlogic/yukawa/+/1147844",
+      "parentUuid": "de1b48d8_889a69af",
+      "range": {
+        "startLine": 468,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 90
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5cab43c_f97f8bbc",
         "filename": "audio/audio_aec.h",
         "patchSetId": 7
@@ -427,6 +859,30 @@
       "writtenOn": "2019-10-22T01:25:50Z",
       "side": 1,
       "message": "what do available and bytes mean in this context? \nI would expect both using the same type (size_t)",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "347e677f_9b4cf1a6",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "\u0027available\u0027 refers to the frames available to read (or write) in the PCM buffer at the instant. \u0027bytes\u0027 is AEC-internal housekeeping for the number of bytes for which this timestamp is valid.\n\npcm.c uses unsigned int for available so I\u0027ve used that here.",
+      "parentUuid": "b5cab43c_f97f8bbc",
       "range": {
         "startLine": 38,
         "startChar": 17,
@@ -462,6 +918,30 @@
     },
     {
       "key": {
+        "uuid": "a754890c_7be2ebfc",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "With the exception of read_write_diff_bytes (which can be negative when there\u0027s available data to read from FIFO), these parameters were made signed just so that invalid values would be apparent while debugging. However, I haven\u0027t added any run time checks, so I\u0027ve made them all unsigned now.",
+      "parentUuid": "94b22ded_e535a4a8",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3a05e15_a8e8e235",
         "filename": "audio/audio_aec.h",
         "patchSetId": 7
@@ -482,6 +962,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0008d76f_4e73de3c",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Yes, this is the whole AEC context. Changed to aec_t.",
+      "parentUuid": "d3a05e15_a8e8e235",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -508,6 +1012,30 @@
     },
     {
       "key": {
+        "uuid": "6fdb7795_2ec86505",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b16de3eb_24f7ffeb",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 16
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acc3e5c1_ba370625",
         "filename": "audio/audio_aec.h",
         "patchSetId": 7
@@ -528,6 +1056,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2063853_3c1a2e46",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Agreed. For now, I have kept the in/out streams temporarily to get PCM info, I will be moving them these as part of the aec struct in the next CL: \nhttps://android-review.googlesource.com/c/device/amlogic/yukawa/+/1147844",
+      "parentUuid": "acc3e5c1_ba370625",
+      "range": {
+        "startLine": 70,
+        "startChar": 23,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -554,6 +1106,30 @@
     },
     {
       "key": {
+        "uuid": "2997e796_4055155f",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03da4654_8657c9f3",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 23
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d7cf989_35459f3b",
         "filename": "audio/audio_aec.h",
         "patchSetId": 7
@@ -574,6 +1150,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8545f367_5458c4fc",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d7cf989_35459f3b",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -669,6 +1269,30 @@
     },
     {
       "key": {
+        "uuid": "ab228966_bb10a1ad",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "I\u0027ve made it NUM_AEC_REFERENCE_CHANNELS to be a bit more specific.",
+      "parentUuid": "4207451b_7e5de1da",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4065839_973e66eb",
         "filename": "audio/audio_hw.h",
         "patchSetId": 7
@@ -680,6 +1304,30 @@
       "writtenOn": "2019-10-22T01:25:50Z",
       "side": 1,
       "message": "can we just use CAPTURE_SAMPLING_RATE ? \nI don\u0027t understand the information added by CODEC here ?\n\nsame for PLAYBACK_CODEC_SAMPLING_RATE and CODEC_BASE_FRAME_COUNT",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "933e85d3_e9464410",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-22T21:36:01Z",
+      "side": 1,
+      "message": "This predates my change and is possibly carryover from Amlogic. I\u0027ll check with the team and update these.",
+      "parentUuid": "c4065839_973e66eb",
       "range": {
         "startLine": 46,
         "startChar": 15,
