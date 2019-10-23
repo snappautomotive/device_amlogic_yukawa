@@ -1200,6 +1200,30 @@
     },
     {
       "key": {
+        "uuid": "3a1bee85_944ac0b6",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-23T00:10:46Z",
+      "side": 1,
+      "message": "Done, but had to move it below the TODO below (looks like there\u0027s no retry for output streams, only for input streams).",
+      "parentUuid": "e27f757c_157a1381",
+      "range": {
+        "startLine": 584,
+        "startChar": 0,
+        "endLine": 584,
+        "endChar": 43
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d78b85f6_9c21c5eb",
         "filename": "audio/audio_hw.c",
         "patchSetId": 7
@@ -1223,6 +1247,30 @@
     },
     {
       "key": {
+        "uuid": "9141ea75_007468dd",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-23T00:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d78b85f6_9c21c5eb",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 749,
+        "endChar": 42
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb920f8c_9d43a5ef",
         "filename": "audio/audio_hw.c",
         "patchSetId": 7
@@ -1243,6 +1291,30 @@
       "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa47e14a_9f4bea41",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-23T00:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb920f8c_9d43a5ef",
+      "range": {
+        "startLine": 842,
+        "startChar": 52,
+        "endLine": 842,
+        "endChar": 73
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
