@@ -660,6 +660,30 @@
     },
     {
       "key": {
+        "uuid": "74a9d84b_1ff209ba",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-23T19:18:49Z",
+      "side": 1,
+      "message": "not done?",
+      "parentUuid": "6f61f76e_dd443342",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 71
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a336ff7_e8da493b",
         "filename": "audio/audio_aec.c",
         "patchSetId": 7
@@ -883,6 +907,30 @@
       "side": 1,
       "message": "\u0027available\u0027 refers to the frames available to read (or write) in the PCM buffer at the instant. \u0027bytes\u0027 is AEC-internal housekeeping for the number of bytes for which this timestamp is valid.\n\npcm.c uses unsigned int for available so I\u0027ve used that here.",
       "parentUuid": "b5cab43c_f97f8bbc",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "d360228dbd10bdc6f9c640a1546eb36ec9d736fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35ffd72d_6500d1af",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-23T19:18:49Z",
+      "side": 1,
+      "message": "can you add a comment explaining this in the code?",
+      "parentUuid": "347e677f_9b4cf1a6",
       "range": {
         "startLine": 38,
         "startChar": 17,
