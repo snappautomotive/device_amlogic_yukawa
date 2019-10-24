@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "c74d55b9_d2e9f432",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-24T16:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c26194c_2e866079",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8e4c658_54918dd5",
         "filename": "audio/audio_aec.c",
         "patchSetId": 2
@@ -648,6 +672,30 @@
     },
     {
       "key": {
+        "uuid": "f5fbfefc_ae2fae49",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-24T16:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79bd5225_4093eaa2",
+      "range": {
+        "startLine": 360,
+        "startChar": 26,
+        "endLine": 360,
+        "endChar": 47
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30ba38da_f30304a8",
         "filename": "audio/audio_aec.c",
         "patchSetId": 2
@@ -1093,6 +1141,30 @@
       "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38cbdad9_ebeb0579",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-10-24T16:55:40Z",
+      "side": 1,
+      "message": "Will address this in a future CL.",
+      "parentUuid": "46ff7dea_f9b010e4",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 22
+      },
+      "revId": "49b0f4cae7c333083d6d0111c890a0f74f1bb0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
