@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab8565e7_24e7d251",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-26T01:36:12Z",
+      "side": 1,
+      "message": "we need a memory barrier here. either use atomic primitives for \"running\" or lock the mutex before setting to false and unlock after",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 25
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c60dfae_1434fe18",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-26T01:36:12Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 486,
+        "startChar": 6,
+        "endLine": 486,
+        "endChar": 7
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d628f9_4ec8d5ff",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-26T01:36:12Z",
+      "side": 1,
+      "message": "I am not sure the aec threads needs to process the same number of byte passed to process_aec().\nWe just need to write and read the same number of frames from the fifo.\nin process thread loop, the process function should just process audio as it comes in from the fifo and write it to the output fifo.",
+      "range": {
+        "startLine": 496,
+        "startChar": 22,
+        "endLine": 496,
+        "endChar": 27
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e497381d_0097cb21",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-26T01:36:12Z",
+      "side": 1,
+      "message": "usually this is done with a condition in the fifo implementation: the reads from the fifo are blocking on a condition signaled by the writes().\nSame thing for reading from aec thread: first poll for available data in the fifo and if not enough read from fifo with a timeout compatible with buffer duration.",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 44
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352e1b61_de9f8b5d",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2019-10-26T01:36:12Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 697,
+        "startChar": 9,
+        "endLine": 697,
+        "endChar": 10
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
