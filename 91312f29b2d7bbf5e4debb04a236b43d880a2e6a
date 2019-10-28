@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f049119c_774ff835",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-10-28T17:44:07Z",
+      "side": 1,
+      "message": "This is in /device/amlogic/YUKAWA :)\nAnd really not Yukawa specific. So prefix not needed?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "91312f29b2d7bbf5e4debb04a236b43d880a2e6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab8565e7_24e7d251",
         "filename": "audio/audio_aec.c",
         "patchSetId": 5
