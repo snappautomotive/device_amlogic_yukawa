@@ -474,13 +474,35 @@ static int in_set_gain(struct audio_stream_in *stream, float gain)
 static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         size_t bytes)
 {
-    ALOGV("in_read: bytes %zu", bytes);
-
     int ret;
     struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
     struct alsa_audio_device *adev = in->dev;
     size_t frame_size = audio_stream_in_frame_size(stream);
     size_t in_frames = bytes / frame_size;
+
+    ALOGV("in_read: stream: %d, bytes %zu", in->source, bytes);
+
+    /* Special handling for Echo Reference: simply get the reference,
+     * with the same format and sample rate as the microphone inputs. */
+    if (in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        struct aec_info info;
+        info.bytes = bytes;
+
+        get_reference(adev->aec, buffer, &info);
+
+#if DEBUG_AEC
+        FILE *fp_ref = fopen("/data/local/traces/aec_ref.pcm", "a+");
+        if (fp_ref) {
+            fwrite((char *)buffer, 1, bytes, fp_ref);
+            fclose(fp_ref);
+        } else {
+            ALOGE("AEC debug: Could not open file aec_ref.pcm!");
+        }
+#endif
+        return info.bytes;
+    }
+
+    /* Microphone input stream read */
 
     /* acquiring hw device mutex systematically is useful if a low priority thread is waiting
      * on the input stream mutex - e.g. executing select_mode() while holding the hw device
@@ -525,6 +547,7 @@ exit:
             struct aec_info info;
             get_pcm_timestamp(in->pcm, in->config.rate, &info);
             info.bytes = bytes;
+
             int aec_ret = process_aec(adev->aec, buffer, &info);
             if (aec_ret) {
                 ALOGE("process_aec returned error code %d", aec_ret);
@@ -729,7 +752,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         struct audio_stream_in **stream_in,
         audio_input_flags_t flags __unused,
         const char *address __unused,
-        audio_source_t source __unused)
+        audio_source_t source)
 {
 
     ALOGV("adev_open_input_stream...");
@@ -775,12 +798,13 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         ret = -EINVAL;
     }
 
-    ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d",
-                in->config.channels, in->config.rate, in->config.format);
+    ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d source=%d",
+                in->config.channels, in->config.rate, in->config.format,source);
 
     in->dev = ladev;
     in->standby = true;
     in->unavailable = false;
+    in->source = source;
 
     config->format = in_get_format(&in->stream.common);
     config->channel_mask = in_get_channels(&in->stream.common);
@@ -800,6 +824,9 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         *stream_in = &in->stream;
     }
 
+#if DEBUG_AEC
+    remove("/data/local/traces/aec_ref.pcm");
+#endif
     return ret;
 }
 

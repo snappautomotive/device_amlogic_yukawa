@@ -33,6 +33,8 @@
 #include "audio_hw.h"
 #include "fifo_wrapper.h"
 
+#define MAX_READ_WAIT_TIME_MSEC 50
+
 struct aec_t {
     pthread_mutex_t lock;
     size_t num_reference_channels;
@@ -58,18 +60,6 @@ struct aec_t {
     bool prev_spk_running;
 };
 
-#ifdef AEC_HAL
-
-/* Write audio samples to AEC reference FIFO for use in AEC.
- * Both audio samples and timestamps are added in FIFO fashion.
- * Must be called after every write to PCM. */
-int write_to_reference_fifo (struct aec_t *aec, void *buffer, struct aec_info *info);
-
-/* Processing function call for AEC.
- * AEC output is updated at location pointed to by 'buffer'.
- * This function does not run AEC when there is no playback -
- * as communicated to this AEC interface using aec_set_spk_running().*/
-int process_aec (struct aec_t *aec, void* buffer, struct aec_info *info);
 
 /* Initialize AEC object.
  * This must be called when the audio device is opened.
@@ -79,19 +69,37 @@ int init_aec (int sampling_rate, int num_reference_channels,
 
 /* Release AEC object.
  * This must be called when the audio device is closed. */
-void release_aec(struct aec_t *aec);
+void release_aec (struct aec_t *aec);
 
 /* Initialize reference configuration for AEC.
  * Must be called when a new output stream is opened. */
 int init_aec_reference_config (struct aec_t *aec, struct alsa_stream_out *out);
 
-/* Initialize microphone configuration for AEC.
- * Must be called when a new input stream is opened. */
-int init_aec_mic_config (struct aec_t *aec, struct alsa_stream_in *in);
-
 /* Clear reference configuration for AEC.
  * Must be called when the output stream is closed. */
 void destroy_aec_reference_config (struct aec_t *aec);
+
+/* Write audio samples to AEC reference FIFO for use in AEC.
+ * Both audio samples and timestamps are added in FIFO fashion.
+ * Must be called after every write to PCM. */
+int write_to_reference_fifo (struct aec_t *aec, void *buffer, struct aec_info *info);
+
+/* Get reference audio samples + timestamp, in the format expected by AEC,
+ * i.e. same sample rate and bit rate as microphone audio.
+ * Timestamp is updated in field 'timestamp_usec', and not in 'timestamp'. */
+int get_reference (struct aec_t *aec, void *buffer, struct aec_info *info);
+
+#ifdef AEC_HAL
+
+/* Processing function call for AEC.
+ * AEC output is updated at location pointed to by 'buffer'.
+ * This function does not run AEC when there is no playback -
+ * as communicated to this AEC interface using aec_set_spk_running().*/
+int process_aec (struct aec_t *aec, void* buffer, struct aec_info *info);
+
+/* Initialize microphone configuration for AEC.
+ * Must be called when a new input stream is opened. */
+int init_aec_mic_config (struct aec_t *aec, struct alsa_stream_in *in);
 
 /* Clear microphone configuration for AEC.
  * Must be called when the input stream is closed. */
@@ -103,13 +111,8 @@ void aec_set_spk_running (struct aec_t *aec, bool state);
 
 #else /* #ifdef AEC_HAL */
 
-#define write_to_reference_fifo(...) ((int)0)
 #define process_aec(...) ((int)0)
-#define init_aec(...) ((int)0)
-#define release_aec(...) ((void)0)
-#define init_aec_reference_config(...) ((int)0)
 #define init_aec_mic_config(...) ((int)0)
-#define destroy_aec_reference_config(...) ((void)0)
 #define destroy_aec_mic_config(...) ((void)0)
 #define aec_set_spk_running(...) ((void)0)
 
