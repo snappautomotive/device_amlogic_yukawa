@@ -206,6 +206,52 @@
       "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0788bb88_37d7a6c5",
+        "filename": "audio/audio_policy_configuration.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-11-13T21:02:34Z",
+      "side": 1,
+      "message": "Should it be same as \"primary output\" ?",
+      "range": {
+        "startLine": 88,
+        "startChar": 29,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2dd63f1_c8ef3526",
+        "filename": "permissions/yukawa.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-11-13T21:02:34Z",
+      "side": 1,
+      "message": "Can you please verify if this feature is case sensitive?",
+      "range": {
+        "startLine": 19,
+        "startChar": 46,
+        "endLine": 19,
+        "endChar": 53
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
