@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76d96a9f_8a1fcfd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Would still love this tag to be removed given the project this change is submitted to. Hope at least we can unify upper-case vs. lower case :p",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0fe5725_bfd85ac4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Can we come up with some unit tests at least that test the API inputs/expected outputs?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11d33552_654ca2dd",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Variable is not used.",
+      "range": {
+        "startLine": 342,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 16
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aba5f37b_16d5cd77",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Can we \"const\" the variables here and below that are calculation shortcuts to easier see the difference between the calculation shortcuts and assignable variables (like \"read_bytes\" for example)?",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 79
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8430dc00_e0fcd334",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Did clang-format run on this change?\nIs our presubmit trigger broken?",
+      "range": {
+        "startLine": 399,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 5
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b8254b_61dd5036",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Probably not actionable, but why are we freeing speaker buffers etc. in a function called \"destroy_aec_MIC_config\"?\nBreak apart into two functions? Or are these two things so tightly related that this is ok?",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 534,
+        "endChar": 37
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fbbf6bb_d308e564",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "This is only used in the .c file, yes?\nAs in, users of this API do not need to know this.\nMaybe use to the .c file instead?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d5b08d4_32e4b21b",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "Whats the return value?\n(same below for write_to_reference_fifo and get_reference)",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "836b7c41_9a2c4642",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1058798
+      },
+      "writtenOn": "2019-11-13T20:52:17Z",
+      "side": 1,
+      "message": "\"get_reference_samples\" or \"get_audio_reference\" maybe?",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 17
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
