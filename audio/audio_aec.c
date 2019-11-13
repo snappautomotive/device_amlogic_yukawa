@@ -71,11 +71,19 @@
 #include <malloc.h>
 #include <sys/time.h>
 #include <tinyalsa/asoundlib.h>
+#include <unistd.h>
 #include <log/log.h>
 #include "audio_aec.h"
-#include "audio_aec_process.h"
 
-#define DEBUG_AEC 0
+#ifdef AEC_HAL
+#include "audio_aec_process.h"
+#else
+#define aec_spk_mic_init(...) ((int)0)
+#define aec_spk_mic_reset(...) ((void)0)
+#define aec_spk_mic_process(...) ((int32_t)0)
+#define aec_spk_mic_release(...) ((void)0)
+#endif
+
 #define MAX_TIMESTAMP_DIFF_USEC 200000
 
 uint64_t timespec_to_usec(struct timespec ts) {
@@ -203,6 +211,10 @@ int init_aec_reference_config(struct aec_t *aec, struct alsa_stream_out *out) {
         return -EINVAL;
     }
 
+    if (aec->spk_initialized) {
+        destroy_aec_reference_config(aec);
+    }
+
     int ret = 0;
     pthread_mutex_lock(&aec->lock);
     aec->spk_fifo = fifo_init(
@@ -227,148 +239,36 @@ int init_aec_reference_config(struct aec_t *aec, struct alsa_stream_out *out) {
     aec->spk_sampling_rate = out->config.rate;
     aec->spk_frame_size_bytes = audio_stream_out_frame_size(&out->stream);
     aec->spk_num_channels = out->config.channels;
+    aec->spk_initialized = true;
 exit:
     pthread_mutex_unlock(&aec->lock);
     ALOGV("%s exit", __func__);
     return ret;
 }
 
-int init_aec_mic_config(struct aec_t *aec, struct alsa_stream_in *in) {
-    ALOGV("%s enter", __func__);
-#if DEBUG_AEC
-    remove("/data/local/traces/aec_in.pcm");
-    remove("/data/local/traces/aec_out.pcm");
-    remove("/data/local/traces/aec_ref.pcm");
-    remove("/data/local/traces/aec_timestamps.txt");
-#endif /* #if DEBUG_AEC */
-
-    if (!aec) {
-        ALOGE("AEC: No valid interface found!");
-        return -EINVAL;
-    }
-
-    int ret = 0;
-    pthread_mutex_lock(&aec->lock);
-    aec->mic_sampling_rate = in->config.rate;
-    aec->mic_frame_size_bytes = audio_stream_in_frame_size(&in->stream);
-    aec->mic_num_channels = in->config.channels;
-
-    aec->mic_buf_size_bytes = in->config.period_size * audio_stream_in_frame_size(&in->stream);
-    aec->mic_buf = (int32_t *)malloc(aec->mic_buf_size_bytes);
-    if (aec->mic_buf == NULL) {
-        ret = -ENOMEM;
-        goto exit;
-    }
-    memset(aec->mic_buf, 0, aec->mic_buf_size_bytes);
-    /* Reference buffer is the same number of frames as mic,
-     * only with a different number of channels in the frame. */
-    aec->spk_buf_size_bytes = in->config.period_size * aec->spk_frame_size_bytes;
-    aec->spk_buf = (int32_t *)malloc(aec->spk_buf_size_bytes);
-    if (aec->spk_buf == NULL) {
-        ret = -ENOMEM;
-        goto exit_1;
-    }
-    memset(aec->spk_buf, 0, aec->spk_buf_size_bytes);
-
-    /* Pre-resampler buffer */
-    size_t spk_frame_out_format_bytes = aec->spk_sampling_rate / aec->mic_sampling_rate *
-                                            aec->spk_buf_size_bytes;
-    aec->spk_buf_playback_format = (int16_t *)malloc(spk_frame_out_format_bytes);
-    if (aec->spk_buf_playback_format == NULL) {
-        ret = -ENOMEM;
-        goto exit_2;
-    }
-    /* Resampler is 16-bit */
-    aec->spk_buf_resampler_out = (int16_t *)malloc(aec->spk_buf_size_bytes);
-    if (aec->spk_buf_resampler_out == NULL) {
-        ret = -ENOMEM;
-        goto exit_3;
-    }
-
-    int resampler_ret = create_resampler(
-                            aec->spk_sampling_rate,
-                            in->config.rate,
-                            aec->num_reference_channels,
-                            RESAMPLER_QUALITY_MAX - 1, /* MAX - 1 is the real max */
-                            NULL, /* resampler_buffer_provider */
-                            &aec->spk_resampler);
-    if (resampler_ret) {
-        ALOGE("AEC: Resampler initialization failed! Error code %d", resampler_ret);
-        ret = resampler_ret;
-        goto exit_4;
-    }
-
-    flush_aec_fifos(aec);
-    aec_spk_mic_reset();
-
-exit:
-    pthread_mutex_unlock(&aec->lock);
-    ALOGV("%s exit", __func__);
-    return ret;
-
-exit_4:
-    free(aec->spk_buf_resampler_out);
-exit_3:
-    free(aec->spk_buf_playback_format);
-exit_2:
-    free(aec->spk_buf);
-exit_1:
-    free(aec->mic_buf);
-    pthread_mutex_unlock(&aec->lock);
-    ALOGV("%s exit", __func__);
-    return ret;
-}
-
-void aec_set_spk_running(struct aec_t *aec, bool state) {
-    ALOGV("%s enter", __func__);
-    pthread_mutex_lock(&aec->lock);
-    aec->spk_running = state;
-    pthread_mutex_unlock(&aec->lock);
-    ALOGV("%s exit", __func__);
-}
-
-bool aec_get_spk_running(struct aec_t *aec) {
-    ALOGV("%s enter", __func__);
-    pthread_mutex_lock(&aec->lock);
-    bool state = aec->spk_running;
-    pthread_mutex_unlock(&aec->lock);
-    ALOGV("%s exit", __func__);
-    return state;
-}
 
 void destroy_aec_reference_config(struct aec_t *aec) {
     ALOGV("%s enter", __func__);
     if (aec == NULL) {
         ALOGV("%s exit", __func__);
         return;
-    }
-    pthread_mutex_lock(&aec->lock);
-    aec_set_spk_running(aec, false);
-    fifo_release(aec->spk_fifo);
-    fifo_release(aec->ts_fifo);
-    memset(&aec->last_spk_info, 0, sizeof(struct aec_info));
-    pthread_mutex_unlock(&aec->lock);
-    ALOGV("%s exit", __func__);
-}
-
-void destroy_aec_mic_config(struct aec_t *aec) {
-    ALOGV("%s enter", __func__);
-    if (aec == NULL) {
+    } else if (!aec->spk_initialized) {
         ALOGV("%s exit", __func__);
         return;
     }
+
+    aec_set_spk_running(aec, false);
     pthread_mutex_lock(&aec->lock);
-    release_resampler(aec->spk_resampler);
-    free(aec->mic_buf);
-    free(aec->spk_buf);
-    free(aec->spk_buf_playback_format);
-    free(aec->spk_buf_resampler_out);
-    memset(&aec->last_mic_info, 0, sizeof(struct aec_info));
+    fifo_release(aec->spk_fifo);
+    fifo_release(aec->ts_fifo);
+    memset(&aec->last_spk_info, 0, sizeof(struct aec_info));
+    aec->spk_initialized = false;
     pthread_mutex_unlock(&aec->lock);
     ALOGV("%s exit", __func__);
 }
 
-int write_to_reference_fifo (struct aec_t *aec, void *buffer, struct aec_info *info) {
+
+int write_to_reference_fifo(struct aec_t *aec, void *buffer, struct aec_info *info) {
     ALOGV("%s enter", __func__);
     int ret = 0;
     size_t bytes = info->bytes;
@@ -437,12 +337,220 @@ void get_spk_timestamp(struct aec_t *aec, ssize_t read_bytes, uint64_t *spk_time
     aec->last_spk_info = spk_info;
 }
 
+int get_reference(struct aec_t *aec, void *buffer, struct aec_info *info) {
+    ALOGV("%s enter", __func__);
+    int ret = 0;
+
+    if (!aec->spk_initialized) {
+        ALOGE("%s called with no reference initialized", __func__);
+        return -EINVAL;
+    }
+
+    size_t bytes = info->bytes;
+    size_t frames = bytes / aec->mic_frame_size_bytes;
+    size_t sample_rate_ratio = aec->spk_sampling_rate / aec->mic_sampling_rate;
+
+    /* Read audio samples from FIFO */
+    size_t req_bytes = frames * sample_rate_ratio * aec->spk_frame_size_bytes;
+    size_t read_bytes = 0;
+    ssize_t available_bytes = 0;
+    unsigned int wait_count = MAX_READ_WAIT_TIME_MSEC;
+    while (true) {
+        available_bytes = fifo_available_to_read(aec->spk_fifo);
+        if (available_bytes >= req_bytes) {
+            break;
+        } else if (available_bytes < 0) {
+            ALOGE("fifo_read returned code %zu ", available_bytes);
+            return -ENOMEM;
+        }
+
+        ALOGV("Sleeping, required bytes: %zu, available bytes: %zd", req_bytes, available_bytes);
+        usleep(1000);
+        if ((wait_count--) == 0) {
+            ALOGE("Timed out waiting for read from reference FIFO");
+            return -ETIMEDOUT;
+        }
+    }
+
+    read_bytes = fifo_read(aec->spk_fifo, aec->spk_buf_playback_format, req_bytes);
+
+    /* Get timestamp*/
+    get_spk_timestamp(aec, read_bytes, &info->timestamp_usec);
+
+    /* Get reference - could be mono, downmixed from multichannel.
+     * Reference stored at spk_buf_playback_format */
+    size_t resampler_in_frames = frames * sample_rate_ratio;
+    get_reference_audio_in_place(aec, resampler_in_frames);
+
+    /* Resample to mic sampling rate (16-bit resampler) */
+    size_t in_frame_count = resampler_in_frames;
+    size_t out_frame_count = frames;
+    aec->spk_resampler->resample_from_input(
+                            aec->spk_resampler,
+                            aec->spk_buf_playback_format,
+                            &in_frame_count,
+                            aec->spk_buf_resampler_out,
+                            &out_frame_count);
+
+    /* Convert to 32 bit */
+    int16_t *src16 = aec->spk_buf_resampler_out;
+    int32_t *dst32 = buffer;
+    size_t frame, ch;
+    for (frame = 0; frame < frames; frame++) {
+        for (ch = 0; ch < aec->num_reference_channels; ch++) {
+           *dst32++ = ((int32_t)*src16++) << 16;
+        }
+    }
+
+    info->bytes = bytes;
+
+    ALOGV("%s exit", __func__);
+    return ret;
+}
+
+int init_aec_mic_config(struct aec_t *aec, struct alsa_stream_in *in) {
+    ALOGV("%s enter", __func__);
+#if DEBUG_AEC
+    remove("/data/local/traces/aec_in.pcm");
+    remove("/data/local/traces/aec_out.pcm");
+    remove("/data/local/traces/aec_ref.pcm");
+    remove("/data/local/traces/aec_timestamps.txt");
+#endif /* #if DEBUG_AEC */
+
+    if (!aec) {
+        ALOGE("AEC: No valid interface found!");
+        return -EINVAL;
+    }
+
+    if (aec->mic_initialized) {
+        destroy_aec_mic_config(aec);
+    }
+
+    int ret = 0;
+    pthread_mutex_lock(&aec->lock);
+    aec->mic_sampling_rate = in->config.rate;
+    aec->mic_frame_size_bytes = audio_stream_in_frame_size(&in->stream);
+    aec->mic_num_channels = in->config.channels;
+
+    aec->mic_buf_size_bytes = in->config.period_size * audio_stream_in_frame_size(&in->stream);
+    aec->mic_buf = (int32_t *)malloc(aec->mic_buf_size_bytes);
+    if (aec->mic_buf == NULL) {
+        ret = -ENOMEM;
+        goto exit;
+    }
+    memset(aec->mic_buf, 0, aec->mic_buf_size_bytes);
+    /* Reference buffer is the same number of frames as mic,
+     * only with a different number of channels in the frame. */
+    aec->spk_buf_size_bytes = in->config.period_size * aec->spk_frame_size_bytes;
+    aec->spk_buf = (int32_t *)malloc(aec->spk_buf_size_bytes);
+    if (aec->spk_buf == NULL) {
+        ret = -ENOMEM;
+        goto exit_1;
+    }
+    memset(aec->spk_buf, 0, aec->spk_buf_size_bytes);
+
+    /* Pre-resampler buffer */
+    size_t spk_frame_out_format_bytes = aec->spk_sampling_rate / aec->mic_sampling_rate *
+                                            aec->spk_buf_size_bytes;
+    aec->spk_buf_playback_format = (int16_t *)malloc(spk_frame_out_format_bytes);
+    if (aec->spk_buf_playback_format == NULL) {
+        ret = -ENOMEM;
+        goto exit_2;
+    }
+    /* Resampler is 16-bit */
+    aec->spk_buf_resampler_out = (int16_t *)malloc(aec->spk_buf_size_bytes);
+    if (aec->spk_buf_resampler_out == NULL) {
+        ret = -ENOMEM;
+        goto exit_3;
+    }
+
+    int resampler_ret = create_resampler(
+                            aec->spk_sampling_rate,
+                            in->config.rate,
+                            aec->num_reference_channels,
+                            RESAMPLER_QUALITY_MAX - 1, /* MAX - 1 is the real max */
+                            NULL, /* resampler_buffer_provider */
+                            &aec->spk_resampler);
+    if (resampler_ret) {
+        ALOGE("AEC: Resampler initialization failed! Error code %d", resampler_ret);
+        ret = resampler_ret;
+        goto exit_4;
+    }
+
+    flush_aec_fifos(aec);
+    aec_spk_mic_reset();
+    aec->mic_initialized = true;
+
+exit:
+    pthread_mutex_unlock(&aec->lock);
+    ALOGV("%s exit", __func__);
+    return ret;
+
+exit_4:
+    free(aec->spk_buf_resampler_out);
+exit_3:
+    free(aec->spk_buf_playback_format);
+exit_2:
+    free(aec->spk_buf);
+exit_1:
+    free(aec->mic_buf);
+    pthread_mutex_unlock(&aec->lock);
+    ALOGV("%s exit", __func__);
+    return ret;
+}
+
+void aec_set_spk_running(struct aec_t *aec, bool state) {
+    ALOGV("%s enter", __func__);
+    pthread_mutex_lock(&aec->lock);
+    aec->spk_running = state;
+    pthread_mutex_unlock(&aec->lock);
+    ALOGV("%s exit", __func__);
+}
+
+bool aec_get_spk_running(struct aec_t *aec) {
+    ALOGV("%s enter", __func__);
+    pthread_mutex_lock(&aec->lock);
+    bool state = aec->spk_running;
+    pthread_mutex_unlock(&aec->lock);
+    ALOGV("%s exit", __func__);
+    return state;
+}
+
+void destroy_aec_mic_config(struct aec_t *aec) {
+    ALOGV("%s enter", __func__);
+    if (aec == NULL)  {
+        ALOGV("%s exit", __func__);
+        return;
+    } else if (!aec->mic_initialized) {
+        ALOGV("%s exit", __func__);
+        return;
+    }
+
+    pthread_mutex_lock(&aec->lock);
+    release_resampler(aec->spk_resampler);
+    free(aec->mic_buf);
+    free(aec->spk_buf);
+    free(aec->spk_buf_playback_format);
+    free(aec->spk_buf_resampler_out);
+    memset(&aec->last_mic_info, 0, sizeof(struct aec_info));
+    aec->mic_initialized = false;
+    pthread_mutex_unlock(&aec->lock);
+    ALOGV("%s exit", __func__);
+}
+
+#ifdef AEC_HAL
 int process_aec(struct aec_t *aec, void* buffer, struct aec_info *info) {
     ALOGV("%s enter", __func__);
     int ret = 0;
 
     if (aec == NULL) {
         ALOGE("AEC: Interface uninitialized! Cannot process.");
+        return -EINVAL;
+    }
+
+    if ((!aec->mic_initialized) || (!aec->spk_initialized)) {
+        ALOGE("%s called with initialization: mic: %d, spk: %d", __func__,
+                aec->mic_initialized, aec->spk_initialized);
         return -EINVAL;
     }
 
@@ -475,11 +583,6 @@ int process_aec(struct aec_t *aec, void* buffer, struct aec_info *info) {
         flush_aec_fifos(aec);
     }
 
-    size_t spk_frame_size_bytes = aec->spk_frame_size_bytes;
-    size_t sample_rate_ratio = aec->spk_sampling_rate / aec->mic_sampling_rate;
-    size_t resampler_in_frames = in_frames * sample_rate_ratio;
-    size_t req_bytes = resampler_in_frames * spk_frame_size_bytes;
-
     /* If there's no data in FIFO, exit */
     if (fifo_available_to_read(aec->spk_fifo) <= 0) {
         ALOGV("Echo reference buffer empty, zeroing reference....");
@@ -488,47 +591,17 @@ int process_aec(struct aec_t *aec, void* buffer, struct aec_info *info) {
 
     print_queue_status_to_log(aec, false);
 
-    /* Read from FIFO */
-    ssize_t read_bytes = fifo_read(aec->spk_fifo, aec->spk_buf_playback_format, req_bytes);
-    get_spk_timestamp(aec, read_bytes, &spk_time);
+    /* Get reference, with format and sample rate required by AEC */
+    struct aec_info spk_info;
+    spk_info.bytes = bytes;
+    int ref_ret = get_reference(aec, aec->spk_buf, &spk_info);
+    spk_time = spk_info.timestamp_usec;
 
-    if (read_bytes < req_bytes) {
-        ALOGI("Could only read %zd of %zu bytes", read_bytes, req_bytes);
-        if (read_bytes > 0) {
-            memmove(aec->spk_buf_playback_format + req_bytes - read_bytes,
-                        aec->spk_buf_playback_format, read_bytes);
-            memset(aec->spk_buf_playback_format, 0, req_bytes - read_bytes);
-        } else {
-            ALOGE("Fifo read returned code %zd ", read_bytes);
-            ret = -ENOMEM;
-            goto exit;
-        }
+    if (ref_ret) {
+        ALOGE("get_reference returned code %zu ", ref_ret);
+        ret = -ENOMEM;
+        goto exit;
     }
-
-    /* Get reference - could be mono, downmixed from multichannel.
-     * Reference stored at spk_buf_playback_format */
-    get_reference_audio_in_place(aec, resampler_in_frames);
-
-    /* Resample to mic sampling rate (16-bit resampler) */
-    size_t in_frame_count = resampler_in_frames;
-    size_t out_frame_count = in_frames;
-    aec->spk_resampler->resample_from_input(
-                            aec->spk_resampler,
-                            aec->spk_buf_playback_format,
-                            &in_frame_count,
-                            aec->spk_buf_resampler_out,
-                            &out_frame_count);
-
-    /* Convert to 32 bit */
-    int16_t *src16 = aec->spk_buf_resampler_out;
-    int32_t *dst32 = aec->spk_buf;
-    size_t frame, ch;
-    for (frame = 0; frame < in_frames; frame++) {
-        for (ch = 0; ch < aec->num_reference_channels; ch++) {
-           *dst32++ = ((int32_t)*src16++) << 16;
-        }
-    }
-
 
     int64_t time_diff = (mic_time > spk_time) ? (mic_time - spk_time) : (spk_time - mic_time);
     if ((spk_time == 0) || (mic_time == 0) || (time_diff > MAX_TIMESTAMP_DIFF_USEC)) {
@@ -600,3 +673,5 @@ exit:
     ALOGV("%s exit", __func__);
     return ret;
 }
+
+#endif /*#ifdef AEC_HAL*/
