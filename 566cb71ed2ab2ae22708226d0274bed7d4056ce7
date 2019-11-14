@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1efa30ba_1da3e227",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Made it lowercase, though I\u0027ve seen camelcase before.",
+      "parentUuid": "b3b3b24e_8c2d95e0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0fe5725_bfd85ac4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -69,6 +93,30 @@
       "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29542791_12b7abdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "I\u0027ll take this as a TODO, I have been reusing some tests from vendor/google/tools which can possibly be used here.",
+      "parentUuid": "b0fe5725_bfd85ac4",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "25519064_b5cd666c",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11d33552_654ca2dd",
+      "range": {
+        "startLine": 342,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 16
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aba5f37b_16d5cd77",
         "filename": "audio/audio_aec.c",
         "patchSetId": 2
@@ -115,6 +187,30 @@
       "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "602f2f57_cad4cf9b",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba5f37b_16d5cd77",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 79
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "efa95d51_4f25c687",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Should be fixed now.",
+      "parentUuid": "8430dc00_e0fcd334",
+      "range": {
+        "startLine": 399,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 5
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b8254b_61dd5036",
         "filename": "audio/audio_aec.c",
         "patchSetId": 2
@@ -152,6 +272,30 @@
       "writtenOn": "2019-11-13T20:52:17Z",
       "side": 1,
       "message": "Probably not actionable, but why are we freeing speaker buffers etc. in a function called \"destroy_aec_MIC_config\"?\nBreak apart into two functions? Or are these two things so tightly related that this is ok?",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 534,
+        "endChar": 37
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa979d17_533bfb67",
+        "filename": "audio/audio_aec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Maybe renaming the buffers will help here, but this is processing on the microphone side to bring speaker (reference) data from its native format/rate to the microphone format/rate. Would reference instead of speaker help here?",
+      "parentUuid": "90b8254b_61dd5036",
       "range": {
         "startLine": 532,
         "startChar": 4,
@@ -187,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "1875c58a_b57a3163",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fbbf6bb_d308e564",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d5b08d4_32e4b21b",
         "filename": "audio/audio_aec.h",
         "patchSetId": 2
@@ -207,6 +375,30 @@
       "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b8d72d6_48e8e813",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d5b08d4_32e4b21b",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -233,6 +425,30 @@
     },
     {
       "key": {
+        "uuid": "893165d8_30dca79f",
+        "filename": "audio/audio_aec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "836b7c41_9a2c4642",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 17
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0788bb88_37d7a6c5",
         "filename": "audio/audio_policy_configuration.xml",
         "patchSetId": 2
@@ -256,6 +472,30 @@
     },
     {
       "key": {
+        "uuid": "298e6537_ce7607ad",
+        "filename": "audio/audio_policy_configuration.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Per our discussion, made this support only 48kHz since we don\u0027t want to resample in the HAL if there\u0027s no AEC in the HAL.",
+      "parentUuid": "0788bb88_37d7a6c5",
+      "range": {
+        "startLine": 88,
+        "startChar": 29,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2dd63f1_c8ef3526",
         "filename": "permissions/yukawa.xml",
         "patchSetId": 2
@@ -276,6 +516,30 @@
       "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aeb27e1_5157f0ff",
+        "filename": "permissions/yukawa.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-14T01:09:15Z",
+      "side": 1,
+      "message": "Removed everything except ECHO_REFERENCE as it is not used right now.",
+      "parentUuid": "a2dd63f1_c8ef3526",
+      "range": {
+        "startLine": 19,
+        "startChar": 46,
+        "endLine": 19,
+        "endChar": 53
+      },
+      "revId": "566cb71ed2ab2ae22708226d0274bed7d4056ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
