@@ -47,8 +47,7 @@
 #include "audio_hw.h"
 #include "audio_aec.h"
 
-
-static void timestamp_adjust(struct timespec *ts, size_t frames, uint32_t sampling_rate) {
+static void timestamp_adjust(struct timespec* ts, ssize_t frames, uint32_t sampling_rate) {
     /* This function assumes the adjustment (in nsec) is less than the max value of long,
      * which for 32-bit long this is 2^31 * 1e-9 seconds, slightly over 2 seconds.
      * For 64-bit long it is  9e+9 seconds. */
@@ -58,12 +57,16 @@ static void timestamp_adjust(struct timespec *ts, size_t frames, uint32_t sampli
         ts->tv_sec++;
         ts->tv_nsec -= 1E9L;
     }
+    if (ts->tv_nsec < 0) {
+        ts->tv_sec--;
+        ts->tv_nsec += 1E9L;
+    }
 }
 
 /* Helper function to get PCM hardware timestamp.
  * Only the field 'timestamp' of argument 'ts' is updated. */
-static int get_pcm_timestamp(struct pcm *pcm, uint32_t sample_rate,
-                                struct aec_info *info) {
+static int get_pcm_timestamp(struct pcm* pcm, uint32_t sample_rate, struct aec_info* info,
+                             bool isOutput) {
     int ret = 0;
     if (pcm_get_htimestamp(pcm, &info->available, &info->timestamp) < 0) {
         ALOGE("Error getting PCM timestamp!");
@@ -71,10 +74,13 @@ static int get_pcm_timestamp(struct pcm *pcm, uint32_t sample_rate,
         info->timestamp.tv_nsec = 0;
         return -EINVAL;
     }
-    timestamp_adjust(
-        &info->timestamp,
-        pcm_get_buffer_size(pcm) - info->available,
-        sample_rate);
+    ssize_t frames;
+    if (isOutput) {
+        frames = pcm_get_buffer_size(pcm) - info->available;
+    } else {
+        frames = -info->available; /* rewind timestamp */
+    }
+    timestamp_adjust(&info->timestamp, frames, sample_rate);
     return ret;
 }
 
@@ -272,7 +278,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
         out->written += out_frames;
 
         struct aec_info info;
-        get_pcm_timestamp(out->pcm, out->config.rate, &info);
+        get_pcm_timestamp(out->pcm, out->config.rate, &info, true /*isOutput*/);
         info.bytes = out_frames * frame_size;
         int aec_ret = write_to_reference_fifo(adev->aec, (void *)buffer, &info);
         if (aec_ret) {
@@ -384,12 +390,10 @@ static int in_set_sample_rate(struct audio_stream *stream, uint32_t rate)
     return -ENOSYS;
 }
 
-static size_t get_input_buffer_size(audio_format_t format,
-                                    audio_channel_mask_t channel_mask)
-{
+static size_t get_input_buffer_size(size_t frames, audio_format_t format,
+                                    audio_channel_mask_t channel_mask) {
     /* return the closest majoring multiple of 16 frames, as
      * audioflinger expects audio buffers to be a multiple of 16 frames */
-    size_t frames = CAPTURE_PERIOD_SIZE;
     frames = ((frames + 15) / 16) * 16;
     size_t bytes_per_frame = audio_channel_count_from_in_mask(channel_mask) *
                             audio_bytes_per_sample(format);
@@ -418,8 +422,14 @@ static int in_set_format(struct audio_stream *stream, audio_format_t format)
 
 static size_t in_get_buffer_size(const struct audio_stream *stream)
 {
-    size_t buffer_size = get_input_buffer_size(stream->get_format(stream),
-                            stream->get_channels(stream));
+    struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
+    size_t frames = CAPTURE_PERIOD_SIZE;
+    if (in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        frames = CAPTURE_PERIOD_SIZE * PLAYBACK_CODEC_SAMPLING_RATE / CAPTURE_CODEC_SAMPLING_RATE;
+    }
+
+    size_t buffer_size =
+            get_input_buffer_size(frames, stream->get_format(stream), stream->get_channels(stream));
     ALOGV("in_get_buffer_size: %zu", buffer_size);
     return buffer_size;
 }
@@ -474,13 +484,41 @@ static int in_set_gain(struct audio_stream_in *stream, float gain)
 static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         size_t bytes)
 {
-    ALOGV("in_read: bytes %zu", bytes);
-
     int ret;
     struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
     struct alsa_audio_device *adev = in->dev;
     size_t frame_size = audio_stream_in_frame_size(stream);
     size_t in_frames = bytes / frame_size;
+
+    ALOGV("in_read: stream: %d, bytes %zu", in->source, bytes);
+
+    /* Special handling for Echo Reference: simply get the reference from FIFO.
+     * The format and sample rate should be specified by arguments to adev_open_input_stream. */
+    if (in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        struct aec_info info;
+        info.bytes = bytes;
+
+        if (!adev->aec->spk_running) {
+            memset(buffer, 0, bytes);
+            usleep((int64_t)bytes * 1000000 / audio_stream_in_frame_size(stream) /
+                   in_get_sample_rate(&stream->common));
+        } else {
+            get_reference_samples(adev->aec, buffer, &info);
+        }
+
+#if DEBUG_AEC
+        FILE* fp_ref = fopen("/data/local/traces/aec_ref.pcm", "a+");
+        if (fp_ref) {
+            fwrite((char*)buffer, 1, bytes, fp_ref);
+            fclose(fp_ref);
+        } else {
+            ALOGE("AEC debug: Could not open file aec_ref.pcm!");
+        }
+#endif
+        return info.bytes;
+    }
+
+    /* Microphone input stream read */
 
     /* acquiring hw device mutex systematically is useful if a low priority thread is waiting
      * on the input stream mutex - e.g. executing select_mode() while holding the hw device
@@ -501,6 +539,8 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     pthread_mutex_unlock(&adev->lock);
 
     ret = pcm_read(in->pcm, buffer, in_frames * frame_size);
+    struct aec_info info;
+    get_pcm_timestamp(in->pcm, in->config.rate, &info, false /*isOutput*/);
     if (ret == 0) {
         in->read += in_frames;
     }
@@ -522,8 +562,6 @@ exit:
         /* Process AEC if available */
         /* TODO move to a separate thread */
         if (!adev->mic_mute) {
-            struct aec_info info;
-            get_pcm_timestamp(in->pcm, in->config.rate, &info);
             info.bytes = bytes;
             int aec_ret = process_aec(adev->aec, buffer, &info);
             if (aec_ret) {
@@ -531,6 +569,16 @@ exit:
             }
         }
     }
+
+#if DEBUG_AEC && !defined(AEC_HAL)
+    FILE* fp_in = fopen("/data/local/traces/aec_in.pcm", "a+");
+    if (fp_in) {
+        fwrite((char*)buffer, 1, bytes, fp_in);
+        fclose(fp_in);
+    } else {
+        ALOGE("AEC debug: Could not open file aec_in.pcm!");
+    }
+#endif
 
     return bytes;
 }
@@ -656,6 +704,29 @@ static char * adev_get_parameters(const struct audio_hw_device *dev,
     return strdup("");
 }
 
+static void set_mic_characteristics(struct audio_microphone_characteristic_t* mic_data) {
+    strcpy(mic_data->device_id, "builtin_mic");
+    strcpy(mic_data->address, "top");
+    mic_data->sensitivity = -37.0;
+    mic_data->max_spl = AUDIO_MICROPHONE_SPL_UNKNOWN;
+    mic_data->min_spl = AUDIO_MICROPHONE_SPL_UNKNOWN;
+    mic_data->orientation.x = 0.0f;
+    mic_data->orientation.y = 0.0f;
+    mic_data->orientation.z = 0.0f;
+    mic_data->geometric_location.x = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
+    mic_data->geometric_location.y = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
+    mic_data->geometric_location.z = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
+}
+
+static int adev_get_microphones(const struct audio_hw_device* dev,
+                                struct audio_microphone_characteristic_t* mic_array,
+                                size_t* mic_count) {
+    ALOGV("adev_get_microphones");
+    set_mic_characteristics(mic_array);
+    *mic_count = 1;
+    return 0;
+}
+
 static int adev_init_check(const struct audio_hw_device *dev)
 {
     ALOGV("adev_init_check");
@@ -717,21 +788,17 @@ static int adev_get_mic_mute(const struct audio_hw_device *dev, bool *state)
 static size_t adev_get_input_buffer_size(const struct audio_hw_device *dev,
         const struct audio_config *config)
 {
-    size_t buffer_size = get_input_buffer_size(config->format, config->channel_mask);
+    size_t buffer_size =
+            get_input_buffer_size(CAPTURE_PERIOD_SIZE, config->format, config->channel_mask);
     ALOGV("adev_get_input_buffer_size: %zu", buffer_size);
     return buffer_size;
 }
 
-static int adev_open_input_stream(struct audio_hw_device *dev,
-        audio_io_handle_t handle,
-        audio_devices_t devices,
-        struct audio_config *config,
-        struct audio_stream_in **stream_in,
-        audio_input_flags_t flags __unused,
-        const char *address __unused,
-        audio_source_t source __unused)
-{
-
+static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t handle,
+                                  audio_devices_t devices, struct audio_config* config,
+                                  struct audio_stream_in** stream_in,
+                                  audio_input_flags_t flags __unused, const char* address __unused,
+                                  audio_source_t source) {
     ALOGV("adev_open_input_stream...");
 
     struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
@@ -764,7 +831,11 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
     in->stream.get_input_frames_lost = in_get_input_frames_lost;
 
     in->config.channels = CHANNEL_STEREO;
-    in->config.rate = CAPTURE_CODEC_SAMPLING_RATE;
+    if (source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        in->config.rate = PLAYBACK_CODEC_SAMPLING_RATE;
+    } else {
+        in->config.rate = CAPTURE_CODEC_SAMPLING_RATE;
+    }
     in->config.format = PCM_FORMAT_S32_LE;
     in->config.period_size = CAPTURE_PERIOD_SIZE;
     in->config.period_count = CAPTURE_PERIOD_COUNT;
@@ -775,18 +846,26 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         ret = -EINVAL;
     }
 
-    ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d",
-                in->config.channels, in->config.rate, in->config.format);
+    ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d source=%d",
+          in->config.channels, in->config.rate, in->config.format, source);
 
     in->dev = ladev;
     in->standby = true;
     in->unavailable = false;
+    in->source = source;
 
     config->format = in_get_format(&in->stream.common);
     config->channel_mask = in_get_channels(&in->stream.common);
     config->sample_rate = in_get_sample_rate(&in->stream.common);
 
-    if (ret == 0) {
+    /* If AEC is in the app, only configure based on ECHO_REFERENCE spec.
+     * If AEC is in the HAL, configure using the given mic stream. */
+    bool aecInput = true;
+#if !defined(AEC_HAL)
+    aecInput = (in->source == AUDIO_SOURCE_ECHO_REFERENCE);
+#endif
+
+    if ((ret == 0) && aecInput) {
         int aec_ret = init_aec_mic_config(ladev->aec, in);
         if (aec_ret) {
             ALOGE("AEC: Mic config init failed!");
@@ -800,6 +879,10 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         *stream_in = &in->stream;
     }
 
+#if DEBUG_AEC
+    remove("/data/local/traces/aec_ref.pcm");
+    remove("/data/local/traces/aec_in.pcm");
+#endif
     return ret;
 }
 
@@ -864,6 +947,7 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.open_input_stream = adev_open_input_stream;
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
+    adev->hw_device.get_microphones = adev_get_microphones;
 
     adev->devices = AUDIO_DEVICE_NONE;
 
