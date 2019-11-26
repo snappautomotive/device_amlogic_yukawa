@@ -88,6 +88,7 @@ struct alsa_stream_in {
     struct alsa_audio_device *dev;
     int read_threshold;
     unsigned int read;
+    uint64_t timestamp_nsec;
     audio_source_t source;
 };
 
