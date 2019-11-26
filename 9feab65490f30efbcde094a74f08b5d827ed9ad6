@@ -22,6 +22,30 @@
       "revId": "9feab65490f30efbcde094a74f08b5d827ed9ad6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19dabd03_0a78dfd4",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2019-11-26T18:25:59Z",
+      "side": 1,
+      "message": "Changed.",
+      "parentUuid": "0928332d_6410d33a",
+      "range": {
+        "startLine": 90,
+        "startChar": 17,
+        "endLine": 90,
+        "endChar": 21
+      },
+      "revId": "9feab65490f30efbcde094a74f08b5d827ed9ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
