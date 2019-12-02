@@ -499,16 +499,30 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         struct aec_info info;
         info.bytes = bytes;
 
-        if (!adev->aec->spk_running) {
-            struct timespec now;
-            clock_gettime(CLOCK_MONOTONIC, &now);
-            in->timestamp_nsec = now.tv_sec * 1000000000LL + now.tv_nsec;
+        const uint64_t time_increment_usec = (uint64_t)bytes * 1000000 /
+                                             audio_stream_in_frame_size(stream) /
+                                             in_get_sample_rate(&stream->common);
+        const uint64_t time_increment_nsec = 1000 * time_increment_usec;
+
+        if (!aec_get_spk_running(adev->aec)) {
+            if (in->timestamp_nsec == 0) {
+                struct timespec now;
+                clock_gettime(CLOCK_MONOTONIC, &now);
+                const uint64_t timestamp_nsec = now.tv_sec * 1000000000LL + now.tv_nsec;
+                in->timestamp_nsec = timestamp_nsec;
+            } else {
+                in->timestamp_nsec += time_increment_nsec;
+            }
             memset(buffer, 0, bytes);
-            usleep((int64_t)bytes * 1000000 / audio_stream_in_frame_size(stream) /
-                   in_get_sample_rate(&stream->common));
+            usleep(time_increment_usec);
         } else {
-            get_reference_samples(adev->aec, buffer, &info);
-            in->timestamp_nsec = 1000 * info.timestamp_usec;
+            int ref_ret = get_reference_samples(adev->aec, buffer, &info);
+            if ((ref_ret) || (info.timestamp_usec == 0)) {
+                memset(buffer, 0, bytes);
+                in->timestamp_nsec += time_increment_nsec;
+            } else {
+                in->timestamp_nsec = 1000 * info.timestamp_usec;
+            }
         }
         in->frames_read += in_frames;
 
