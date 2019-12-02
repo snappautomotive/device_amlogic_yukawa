@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f14e7697_27c3e102",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-12-02T20:49:38Z",
+      "side": 1,
+      "message": "Can use: audio_utils_ns_from_timespec(\u0026now);",
+      "range": {
+        "startLine": 511,
+        "startChar": 48,
+        "endLine": 511,
+        "endChar": 51
+      },
+      "revId": "a34fac211e50cb08a2a509a3cd09e7d30f2b9e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
