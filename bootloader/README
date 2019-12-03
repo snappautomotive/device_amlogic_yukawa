@@ -1,0 +1,44 @@
+Build Mainline u-boot - bl33:
+=============================
+
+Download the toolchain : gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf
+
+Download U-Boot Source Code From :
+        https://gitlab.com/baylibre/amlogic/atv/u-boot.git branch:  u-boot/v2019.10/sei610
+
+Compile
+
+        export PATH=<path-to-toolchain>/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf/bin:$PATH
+        export CROSS_COMPILE=aarch64-elf-
+        make [sei510|sei610]_defconfig
+        make
+
+Collect Fip binary
+===================
+
+Use script in scripts folder
+
+- For sei510 (yukawa_sei510):
+        ./collect-aml-binaries-git.sh amlogic-dev_9.2.1811_21 g12a g12a_u200_v1
+
+- For sei610 (yukawa):
+        ./collect-aml-binaries-git.sh amlogic-dev_9.2.1811_21 sm1 sm1_ac200_v1
+
+Generate fip binary
+===================
+
+use collect folder from previous step or used tarball in fip_packages folder
+
+- For sei510 (yukawa_sei510):
+        fip-collect-g12a-g12a_u200_v1-amlogic-dev_9.2.1811_21-20191203-113239.tar.gz
+
+- For sei610 (yukawa):
+        fip-collect-g12a-sm1_ac200_v1-amlogic-dev_9.2.1811_21-20191203-103421.tar.gz
+
+
+Then launch script:
+
+        ./generate-bins-new.sh <fip-collect-directory> <target-bl33-binary>
+
+flash result with:
+        fastboot flash bootloader <target-bl33-binary>
