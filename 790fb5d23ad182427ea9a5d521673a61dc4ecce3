@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3b10b22_de20ac87",
+        "filename": "bootloader/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-12-03T19:49:29Z",
+      "side": 1,
+      "message": "Script fails to compile.\n\nIn file included from ../include/linux/compiler.h:54:0,\n                 from ../include/part_efi.h:16,\n                 from ../include/part.h:278,\n                 from ../include/common.h:80:\n../include/linux/compiler-gcc.h:114:1: fatal error: linux/compiler-gcc7.h: No such file or directory\n #include gcc_header(__GNUC__)\n ^~~~\ncompilation terminated.",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 78
+      },
+      "revId": "790fb5d23ad182427ea9a5d521673a61dc4ecce3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
