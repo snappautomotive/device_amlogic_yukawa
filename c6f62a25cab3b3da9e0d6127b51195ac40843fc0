@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a479c1d_a973a69b",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1437603
+      },
+      "writtenOn": "2019-12-05T15:14:53Z",
+      "side": 1,
+      "message": "This is unclear.  Using \u003ctarget-bl33-binary\u003e here makes it look like you flash the same u-boot.bin that was passed to generate-new-bins.\n\nRather, this should be clear that you\u0027re flashing the resulting \"packaged\" u-boot in the uboot-bins dir.",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
