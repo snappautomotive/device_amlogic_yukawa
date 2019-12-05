@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "7e1fa5d2_e0aa6fff",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1437603
+      },
+      "writtenOn": "2019-12-05T15:16:07Z",
+      "side": 1,
+      "message": "I think this should be aarch64-elf-none- for the linaro toolchain.",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73004b13_2c867804",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1437603
+      },
+      "writtenOn": "2019-12-05T15:16:07Z",
+      "side": 1,
+      "message": "s/used/use/\n\nActually, better would to suggest to unpack the tarball, and suggest the commandline:\ne.g. tar -xaf ./fip_packages/\u003cfip-collect-tarball\u003e",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a479c1d_a973a69b",
         "filename": "bootloader/README",
         "patchSetId": 2
