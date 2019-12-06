@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "04b7444c_ad440c67",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-12-06T20:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4fde96c_1eb91b81",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73004b13_2c867804",
         "filename": "bootloader/README",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "eb72d224_347b6cab",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-12-06T20:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73004b13_2c867804",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a479c1d_a973a69b",
         "filename": "bootloader/README",
         "patchSetId": 2
@@ -68,6 +104,24 @@
       "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dac23e7d_66270ada",
+        "filename": "bootloader/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2019-12-06T20:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a479c1d_a973a69b",
+      "revId": "c6f62a25cab3b3da9e0d6127b51195ac40843fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
