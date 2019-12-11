@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4803510a_e5c1adc7",
+        "filename": "sei610/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-12-11T18:52:53Z",
+      "side": 1,
+      "message": "$ANDROID_BUILD_TOP",
+      "range": {
+        "startLine": 17,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "7d51e6a24d2a1d381c95168209de5d660f8fa706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dabbfc67_64fa1bf4",
+        "filename": "sei610/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-12-11T18:52:53Z",
+      "side": 1,
+      "message": "\"$ lunch yukawa-userdebug\" adds this path automatically.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 96
+      },
+      "revId": "7d51e6a24d2a1d381c95168209de5d660f8fa706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b3ef65f_bc88ae98",
+        "filename": "sei610/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-12-11T18:52:53Z",
+      "side": 1,
+      "message": "redundant to line 14",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 80
+      },
+      "revId": "7d51e6a24d2a1d381c95168209de5d660f8fa706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b14e3f8c_52bdc302",
+        "filename": "sei610/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1498329
+      },
+      "writtenOn": "2019-12-11T18:52:53Z",
+      "side": 1,
+      "message": "Do we need \"meson_defconfig\" here?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 100
+      },
+      "revId": "7d51e6a24d2a1d381c95168209de5d660f8fa706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
