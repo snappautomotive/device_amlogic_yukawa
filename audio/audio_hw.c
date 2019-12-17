@@ -18,11 +18,12 @@
 //#define LOG_NDEBUG 0
 
 #include <errno.h>
+#include <inttypes.h>
 #include <malloc.h>
 #include <pthread.h>
 #include <stdint.h>
-#include <sys/time.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 #include <log/log.h>
@@ -33,14 +34,15 @@
 #include <system/audio.h>
 #include <hardware/audio.h>
 
-#include <sound/asound.h>
-#include <tinyalsa/asoundlib.h>
-#include <audio_utils/resampler.h>
-#include <audio_utils/echo_reference.h>
-#include <hardware/audio_effect.h>
-#include <hardware/audio_alsaops.h>
 #include <audio_effects/effect_aec.h>
 #include <audio_route/audio_route.h>
+#include <audio_utils/clock.h>
+#include <audio_utils/echo_reference.h>
+#include <audio_utils/resampler.h>
+#include <hardware/audio_alsaops.h>
+#include <hardware/audio_effect.h>
+#include <sound/asound.h>
+#include <tinyalsa/asoundlib.h>
 
 #include <sys/ioctl.h>
 
@@ -275,7 +277,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
 
     ret = pcm_write(out->pcm, buffer, out_frames * frame_size);
     if (ret == 0) {
-        out->written += out_frames;
+        out->frames_written += out_frames;
 
         struct aec_info info;
         get_pcm_timestamp(out->pcm, out->config.rate, &info, true /*isOutput*/);
@@ -315,7 +317,7 @@ static int out_get_presentation_position(const struct audio_stream_out *stream,
             unsigned int avail;
             if (pcm_get_htimestamp(out->pcm, &avail, timestamp) == 0) {
                 size_t kernel_buffer_size = out->config.period_size * out->config.period_count;
-                int64_t signed_frames = out->written - kernel_buffer_size + avail;
+                int64_t signed_frames = out->frames_written - kernel_buffer_size + avail;
                 if (signed_frames >= 0) {
                     *frames = signed_frames;
                     ret = 0;
@@ -498,13 +500,31 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         struct aec_info info;
         info.bytes = bytes;
 
-        if (!adev->aec->spk_running) {
+        const uint64_t time_increment_nsec = (uint64_t)bytes * NANOS_PER_SECOND /
+                                             audio_stream_in_frame_size(stream) /
+                                             in_get_sample_rate(&stream->common);
+        if (!aec_get_spk_running(adev->aec)) {
+            if (in->timestamp_nsec == 0) {
+                struct timespec now;
+                clock_gettime(CLOCK_MONOTONIC, &now);
+                const uint64_t timestamp_nsec = audio_utils_ns_from_timespec(&now);
+                in->timestamp_nsec = timestamp_nsec;
+            } else {
+                in->timestamp_nsec += time_increment_nsec;
+            }
             memset(buffer, 0, bytes);
-            usleep((int64_t)bytes * 1000000 / audio_stream_in_frame_size(stream) /
-                   in_get_sample_rate(&stream->common));
+            const uint64_t time_increment_usec = time_increment_nsec / 1000;
+            usleep(time_increment_usec);
         } else {
-            get_reference_samples(adev->aec, buffer, &info);
+            int ref_ret = get_reference_samples(adev->aec, buffer, &info);
+            if ((ref_ret) || (info.timestamp_usec == 0)) {
+                memset(buffer, 0, bytes);
+                in->timestamp_nsec += time_increment_nsec;
+            } else {
+                in->timestamp_nsec = 1000 * info.timestamp_usec;
+            }
         }
+        in->frames_read += in_frames;
 
 #if DEBUG_AEC
         FILE* fp_ref = fopen("/data/local/traces/aec_ref.pcm", "a+");
@@ -513,6 +533,13 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
             fclose(fp_ref);
         } else {
             ALOGE("AEC debug: Could not open file aec_ref.pcm!");
+        }
+        FILE* fp_ref_ts = fopen("/data/local/traces/aec_ref_timestamps.txt", "a+");
+        if (fp_ref_ts) {
+            fprintf(fp_ref_ts, "%" PRIu64 "\n", in->timestamp_nsec);
+            fclose(fp_ref_ts);
+        } else {
+            ALOGE("AEC debug: Could not open file aec_ref_timestamps.txt!");
         }
 #endif
         return info.bytes;
@@ -542,7 +569,8 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     struct aec_info info;
     get_pcm_timestamp(in->pcm, in->config.rate, &info, false /*isOutput*/);
     if (ret == 0) {
-        in->read += in_frames;
+        in->frames_read += in_frames;
+        in->timestamp_nsec = audio_utils_ns_from_timespec(&info.timestamp);
     }
     else {
         ALOGE("pcm_read failed with code %d", ret);
@@ -578,9 +606,30 @@ exit:
     } else {
         ALOGE("AEC debug: Could not open file aec_in.pcm!");
     }
+    FILE* fp_mic_ts = fopen("/data/local/traces/aec_in_timestamps.txt", "a+");
+    if (fp_mic_ts) {
+        fprintf(fp_mic_ts, "%" PRIu64 "\n", in->timestamp_nsec);
+        fclose(fp_mic_ts);
+    } else {
+        ALOGE("AEC debug: Could not open file aec_in_timestamps.txt!");
+    }
 #endif
 
     return bytes;
+}
+
+static int in_get_capture_position(const struct audio_stream_in* stream, int64_t* frames,
+                                   int64_t* time) {
+    if (stream == NULL || frames == NULL || time == NULL) {
+        return -EINVAL;
+    }
+    struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
+
+    *frames = in->frames_read;
+    *time = in->timestamp_nsec;
+    ALOGV("%s: source: %d, timestamp (nsec): %" PRIu64, __func__, in->source, *time);
+
+    return 0;
 }
 
 static uint32_t in_get_input_frames_lost(struct audio_stream_in *stream)
@@ -829,6 +878,7 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     in->stream.set_gain = in_set_gain;
     in->stream.read = in_read;
     in->stream.get_input_frames_lost = in_get_input_frames_lost;
+    in->stream.get_capture_position = in_get_capture_position;
 
     in->config.channels = CHANNEL_STEREO;
     if (source == AUDIO_SOURCE_ECHO_REFERENCE) {
@@ -882,6 +932,8 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
 #if DEBUG_AEC
     remove("/data/local/traces/aec_ref.pcm");
     remove("/data/local/traces/aec_in.pcm");
+    remove("/data/local/traces/aec_ref_timestamps.txt");
+    remove("/data/local/traces/aec_in_timestamps.txt");
 #endif
     return ret;
 }
