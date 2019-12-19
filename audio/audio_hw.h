@@ -87,8 +87,7 @@ struct alsa_stream_in {
     bool standby;
     struct alsa_audio_device *dev;
     int read_threshold;
-    unsigned int frames_read;
-    uint64_t timestamp_nsec;
+    unsigned int read;
     audio_source_t source;
 };
 
@@ -102,7 +101,7 @@ struct alsa_stream_out {
     int standby;
     struct alsa_audio_device *dev;
     int write_threshold;
-    unsigned int frames_written;
+    unsigned int written;
 };
 
 /* 'bytes' are the number of bytes written to audio FIFO, for which 'timestamp' is valid.
