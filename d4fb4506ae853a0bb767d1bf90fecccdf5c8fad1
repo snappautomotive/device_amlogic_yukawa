@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15ba1c61_47b34cf5",
+        "filename": "audio/audio_policy_configuration.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2020-01-09T19:28:41Z",
+      "side": 1,
+      "message": "HDMI is a removable device and should not be listed in the attached devices list",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "d4fb4506ae853a0bb767d1bf90fecccdf5c8fad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9059927_3e6886e0",
+        "filename": "audio/audio_policy_configuration.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2020-01-09T19:28:41Z",
+      "side": 1,
+      "message": "remove primary flag",
+      "range": {
+        "startLine": 60,
+        "startChar": 65,
+        "endLine": 60,
+        "endChar": 90
+      },
+      "revId": "d4fb4506ae853a0bb767d1bf90fecccdf5c8fad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
