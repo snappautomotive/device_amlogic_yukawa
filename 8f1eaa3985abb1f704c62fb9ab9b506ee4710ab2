@@ -1,0 +1,11 @@
+Verified+1: Alden DSouza <aldend@google.com>
+Autosubmit+1: Alden DSouza <aldend@google.com>
+Code-Review+2: Eric Laurent <elaurent@google.com>
+Code-Review+1: Dmitry Shmidt <dimitrysh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 10 Jan 2020 06:10:30 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1203968
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
