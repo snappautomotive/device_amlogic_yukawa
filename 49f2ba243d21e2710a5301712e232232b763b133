@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f952d438_5286f2b6",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-01-15T20:59:46Z",
+      "side": 1,
+      "message": "I would do it in loop",
+      "range": {
+        "startLine": 502,
+        "startChar": 4,
+        "endLine": 502,
+        "endChar": 11
+      },
+      "revId": "49f2ba243d21e2710a5301712e232232b763b133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
