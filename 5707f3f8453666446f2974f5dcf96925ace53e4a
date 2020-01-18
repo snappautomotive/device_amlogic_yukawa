@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87f75462_e9238f09",
+        "filename": "sepolicy/netd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-18T23:59:31Z",
+      "side": 1,
+      "message": "Just FYI: this reasoning is incorrect.\n\nAndroid *requires* CONFIG_MODULES\u003dy and this is validated by VINTF.\n\nWhat this really means is that your kernel is missing configuration options that are required by netd for proper operation.\n\nIf they\u0027re not \u0027\u003dy\u0027 or \u0027\u003dm and already loaded into the kernel\u0027, then trying to use the functionality will attempt to load them from a module (thus going from \u0027\u003dm unloaded\u0027 to \u0027\u003dm loaded\u0027 or a no-op in case of them having been \u0027\u003dn\u0027 or not being present on disk).\n\nWhether the options are \u003dy or \u003dm is not important.  It\u0027s just important they\u0027re not \u003dn.\n\nYour kernel is most likely missing CONFIG_DUMMY and/or CONFIG_NETFILTER_XT_MATCH_QUOTA2_LOG\u003dy.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 64
+      },
+      "revId": "5707f3f8453666446f2974f5dcf96925ace53e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
