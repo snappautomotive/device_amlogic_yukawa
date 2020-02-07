@@ -94,6 +94,30 @@
       "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47b98d8d_fb58e81e",
+        "filename": "lights/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-07T05:21:04Z",
+      "side": 1,
+      "message": "Yes, and both defined lights.yukawa in this file before (and after) this change, as TARGET_BOARD_PLATFORM is the same for both devices. yukawa_sei510 does not install the lights hal however, since it\u0027s only requested/configured in device-yukawa.mk, which is not included in yukawa_sei510.\n\nThe PRODUCT_PROPERTY_OVERRIDES isn\u0027t strictly necessary because of that value, but this makes the configuration much more explicit and centralized, rather than splitting it between the product makefile, the BoardConfig, and the Android.mk (as you\u0027re choosing this lights hal by conditionally including this Android.mk file).",
+      "parentUuid": "37596c1b_4d5b1f96",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
