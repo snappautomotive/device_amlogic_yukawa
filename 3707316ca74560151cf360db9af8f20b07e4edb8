@@ -70,6 +70,30 @@
       "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37596c1b_4d5b1f96",
+        "filename": "lights/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-02-07T04:16:03Z",
+      "side": 1,
+      "message": "We are hosting two builds here - yukawa and yukawa_sei510",
+      "parentUuid": "e5f0111d_7a09b976",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
