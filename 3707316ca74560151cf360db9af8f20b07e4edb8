@@ -22,6 +22,30 @@
       "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5891b9ad_cea070b4",
+        "filename": "lights/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-07T00:45:42Z",
+      "side": 1,
+      "message": "There\u0027s no point, why would you change the name of what gets installed based on which device you\u0027re building, if it\u0027s the exact same code? It can cause some number of issues when creating derivative devices, since it\u0027ll automatically change and you\u0027re not using the same variable in both places.\n\nAlso, the bigger issue, it\u0027s not supported in Soong.",
+      "parentUuid": "8987c170_3dd0641a",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "3707316ca74560151cf360db9af8f20b07e4edb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
