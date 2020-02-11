@@ -82,7 +82,7 @@ BOARD_SEPOLICY_DIRS += \
         device/amlogic/yukawa/sepolicy
 
 DEVICE_MANIFEST_FILE := device/amlogic/yukawa/manifest.xml
+ifeq ($(TARGET_KERNEL_USE), 5.4)
+DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest_kernel5.xml
+endif
 DEVICE_MATRIX_FILE := device/amlogic/yukawa/compatibility_matrix.xml
-
-# TODO(b/131162102): remove this after cleaning up accesses of sysprop
-BUILD_BROKEN_TREBLE_SYSPROP_NEVERALLOW := true
