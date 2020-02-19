@@ -22,6 +22,30 @@
       "revId": "28d570d18fd50f0cc9cc5bb9956bed3d8f975d68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a0ae355_7937cc1a",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2020-02-19T15:21:45Z",
+      "side": 0,
+      "message": "Discussed offline with Ivailo: no, it\u0027s not necessary. Hongguang fixed the upstream issue where this was needed, so we can remove it, but it was my mistake to include it in this CL.",
+      "parentUuid": "3ec679ac_8792e914",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 16
+      },
+      "revId": "28d570d18fd50f0cc9cc5bb9956bed3d8f975d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
