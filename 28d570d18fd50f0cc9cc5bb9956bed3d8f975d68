@@ -46,6 +46,30 @@
       "revId": "28d570d18fd50f0cc9cc5bb9956bed3d8f975d68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d5f85d5_e3b0a374",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1626944
+      },
+      "writtenOn": "2020-02-19T15:41:48Z",
+      "side": 0,
+      "message": "Done. I\u0027ve reverted this change.",
+      "parentUuid": "8a0ae355_7937cc1a",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 16
+      },
+      "revId": "28d570d18fd50f0cc9cc5bb9956bed3d8f975d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
