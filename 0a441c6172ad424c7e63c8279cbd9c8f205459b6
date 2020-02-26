@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7414857b_1247a681",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2020-02-26T19:27:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8f9c47b_08d76771",
+      "range": {
+        "startLine": 395,
+        "startChar": 4,
+        "endLine": 395,
+        "endChar": 11
+      },
+      "revId": "0a441c6172ad424c7e63c8279cbd9c8f205459b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ac9d860_794ebaaa",
         "filename": "audio/audio_hw.c",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "0a441c6172ad424c7e63c8279cbd9c8f205459b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7feee2a1_3b6633c0",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2020-02-26T19:27:07Z",
+      "side": 1,
+      "message": "Good point, added this.",
+      "parentUuid": "4ac9d860_794ebaaa",
+      "range": {
+        "startLine": 476,
+        "startChar": 9,
+        "endLine": 476,
+        "endChar": 18
+      },
+      "revId": "0a441c6172ad424c7e63c8279cbd9c8f205459b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
