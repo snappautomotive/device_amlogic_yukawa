@@ -1,7 +1,7 @@
 PRODUCT_SOONG_NAMESPACES += device/amlogic/yukawa
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/amlogic/yukawa-kernel/Image.lz4
+LOCAL_KERNEL := device/amlogic/yukawa-kernel/Image.lz4-$(TARGET_KERNEL_USE)
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -22,6 +22,8 @@ PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_IS_ATV := true
 DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/atv/overlay
+
+PRODUCT_PACKAGES += llkd
 
 # All VNDK libraries (HAL interfaces, VNDK, VNDK-SP, LL-NDK)
 PRODUCT_PACKAGES += vndk_package
@@ -52,6 +54,9 @@ PRODUCT_PACKAGES += \
     tv_input.default \
     com.android.media.tv.remoteprovider \
     InputDevices
+
+PRODUCT_PACKAGES += \
+    LeanbackIME
 
 ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa_sei510_gms))
 PRODUCT_PACKAGES += \
@@ -97,17 +102,19 @@ PRODUCT_PACKAGES += \
 # Video
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/video_firmware/g12a_h264.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_h264.bin \
+    $(LOCAL_PATH)/video_firmware/g12a_hevc_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_hevc_mmu.bin \
     $(LOCAL_PATH)/video_firmware/g12a_vp9.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_vp9.bin \
     $(LOCAL_PATH)/video_firmware/gxl_mpeg4_5.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mpeg4_5.bin \
     $(LOCAL_PATH)/video_firmware/gxl_mpeg12.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mpeg12.bin \
-    $(LOCAL_PATH)/video_firmware/gxl_mjpeg.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mjpeg.bin
+    $(LOCAL_PATH)/video_firmware/gxl_mjpeg.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mjpeg.bin \
+    $(LOCAL_PATH)/video_firmware/sm1_hevc_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_hevc_mmu.bin \
+    $(LOCAL_PATH)/video_firmware/sm1_vp9_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_vp9_mmu.bin
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@4.0-impl \
-    android.hardware.audio.effect@4.0-impl \
-    android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.1-impl \
+    android.hardware.audio@6.0-impl \
+    android.hardware.audio.effect@6.0-impl \
+    android.hardware.soundtrigger@2.2-impl \
 
 # Hardware Composer HAL
 #
@@ -115,6 +122,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.drm_meson \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
+    android.hardware.drm@1.2-service.widevine \
+    android.hardware.drm@1.2-service.clearkey
 
 # CEC
 PRODUCT_PACKAGES += \
