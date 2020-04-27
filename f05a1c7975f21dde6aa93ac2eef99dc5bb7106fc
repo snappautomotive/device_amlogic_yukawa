@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "154fcec6_bf416052",
+        "filename": "yukawa/BoardConfig.mk",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-04-27T17:16:41Z",
+      "side": 1,
+      "message": "It should be dependent on TARGET_USE_AB_SLOT too due to different bootloader",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "f05a1c7975f21dde6aa93ac2eef99dc5bb7106fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
