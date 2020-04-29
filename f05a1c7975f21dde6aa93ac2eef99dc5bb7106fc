@@ -22,6 +22,30 @@
       "revId": "f05a1c7975f21dde6aa93ac2eef99dc5bb7106fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6fbf9c2_cd8db4eb",
+        "filename": "yukawa/BoardConfig.mk",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2020-04-29T11:20:22Z",
+      "side": 1,
+      "message": "in fact no it\u0027s the same version.\nuboot version is based on uboot release number and shaone.\nfor both bootloader this two number are the same.\n\nBTW i forgot to update ab fip bin with fix for fastboot reboot fasboot so i upload a new patchset.",
+      "parentUuid": "154fcec6_bf416052",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "f05a1c7975f21dde6aa93ac2eef99dc5bb7106fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
