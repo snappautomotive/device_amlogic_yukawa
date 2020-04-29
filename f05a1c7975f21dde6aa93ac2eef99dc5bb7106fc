@@ -46,6 +46,30 @@
       "revId": "f05a1c7975f21dde6aa93ac2eef99dc5bb7106fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c51648_e702dbad",
+        "filename": "yukawa/BoardConfig.mk",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-04-29T15:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6fbf9c2_cd8db4eb",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "f05a1c7975f21dde6aa93ac2eef99dc5bb7106fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
