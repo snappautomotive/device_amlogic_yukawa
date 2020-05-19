@@ -1,0 +1,12 @@
+Code-Review+2: Dmitry Shmidt <dimitrysh@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Lint+1: Max Zhang <zhangmax@google.com>
+Verified+1: Max Zhang <zhangmax@google.com>
+Open-Source-Licensing+1: Max Zhang <zhangmax@google.com>
+Autosubmit+1: Max Zhang <zhangmax@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 19 May 2020 03:59:12 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1314622
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
