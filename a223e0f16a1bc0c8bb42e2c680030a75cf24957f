@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Bob Badour <bbadour@google.com>
+Global-Approval+1: Bob Badour <bbadour@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Bob Badour <bbadour@google.com>
+Submitted-at: Tue, 16 Jun 2020 18:20:05 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1299518
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
