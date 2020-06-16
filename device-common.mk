@@ -1,4 +1,6 @@
-PRODUCT_SOONG_NAMESPACES += device/amlogic/yukawa
+PRODUCT_SOONG_NAMESPACES += \
+    device/amlogic/yukawa \
+    external/v4l2_codec2
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/amlogic/yukawa-kernel/Image.lz4-$(TARGET_KERNEL_USE)
@@ -204,6 +206,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/video_firmware/sm1_hevc_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_hevc_mmu.bin \
     $(LOCAL_PATH)/binaries/video_firmware/sm1_vp9_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_vp9_mmu.bin
 
+# V4L2-Codec2
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.0-service-v4l2:64 \
+    libv4l2_codec2_components \
+    libv4l2_codec2_store
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy
+
+# Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@6.0-impl \
@@ -211,7 +223,6 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.2-impl \
 
 # Hardware Composer HAL
-#
 PRODUCT_PACKAGES += \
     hwcomposer.drm_meson \
     android.hardware.drm@1.0-impl \
@@ -347,6 +358,7 @@ endif
 # Copy media codecs config file
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/media_xml/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/amlogic/yukawa/media_xml/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml
 
 # Enable BT Pairing with button BTN_0 (key 256)
