@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff344b20_190820a6",
+        "filename": "device-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-08T17:46:07Z",
+      "side": 0,
+      "message": "Is it not necessary?",
+      "range": {
+        "startLine": 144,
+        "startChar": 20,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "f0ffcb6f8c6e2b1b017bfd85f7ee02683a3d6c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
