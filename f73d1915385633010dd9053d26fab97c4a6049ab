@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0fb7a84_a42f6011",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-16T18:39:27Z",
+      "side": 1,
+      "message": "fclose(fp); at line above?",
+      "range": {
+        "startLine": 821,
+        "startChar": 12,
+        "endLine": 821,
+        "endChar": 15
+      },
+      "revId": "f73d1915385633010dd9053d26fab97c4a6049ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f761d71_f63b2ea4",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-16T18:39:27Z",
+      "side": 1,
+      "message": "Do you have to fail here?",
+      "range": {
+        "startLine": 827,
+        "startChar": 16,
+        "endLine": 827,
+        "endChar": 23
+      },
+      "revId": "f73d1915385633010dd9053d26fab97c4a6049ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "017a1e42_4d877724",
+        "filename": "audio/audio_hw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-16T18:39:27Z",
+      "side": 1,
+      "message": "Please check if you need SELinux rule",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 24
+      },
+      "revId": "f73d1915385633010dd9053d26fab97c4a6049ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
