@@ -46,8 +46,8 @@
 
 #include <sys/ioctl.h>
 
-#include "audio_hw.h"
 #include "audio_aec.h"
+#include "audio_hw.h"
 
 static int adev_get_mic_mute(const struct audio_hw_device* dev, bool* state);
 static int adev_get_microphones(const struct audio_hw_device* dev,
@@ -185,6 +185,10 @@ static int do_output_standby(struct alsa_stream_out *out)
 {
     struct alsa_audio_device *adev = out->dev;
 
+    if (out->speaker_eq != NULL) {
+        fir_reset(out->speaker_eq);
+    }
+
     if (!out->standby) {
         pcm_close(out->pcm);
         out->pcm = NULL;
@@ -292,6 +296,9 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
 
     pthread_mutex_unlock(&adev->lock);
 
+    if (out->speaker_eq != NULL) {
+        fir_process_interleaved(out->speaker_eq, (int16_t*)buffer, (int16_t*)buffer, out_frames);
+    }
 
     ret = pcm_write(out->pcm, buffer, out_frames * frame_size);
     if (ret == 0) {
@@ -793,6 +800,35 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
 
     *stream_out = &out->stream;
 
+    out->speaker_eq = NULL;
+    if (out_port == PORT_INTERNAL_SPEAKER) {
+        FILE* fp = fopen(SPEAKER_EQ_FILE, "r");
+        if (fp == NULL) {
+            ALOGI("%s: Speaker EQ file not found, EQ not applied.", __func__);
+        } else {
+            int16_t* speaker_eq_coeffs = (int16_t*)calloc(SPEAKER_MAX_EQ_LENGTH, sizeof(int16_t));
+            if (speaker_eq_coeffs == NULL) {
+                ALOGE("%s: Failed to allocate speaker EQ", __func__);
+                return -EINVAL;
+            }
+            int tap = 0;
+            while (!feof(fp)) {
+                fscanf(fp, "%" PRIi16 "\n", &speaker_eq_coeffs[tap++]);
+                if (tap == SPEAKER_MAX_EQ_LENGTH) {
+                    break;
+                }
+            }
+            out->speaker_eq = fir_init(out->config.channels, FIR_SINGLE_FILTER, tap,
+                                       out_get_buffer_size(&out->stream.common) /
+                                               out->config.channels / sizeof(int16_t),
+                                       speaker_eq_coeffs);
+            if (out->speaker_eq == NULL) {
+                ALOGE("%s: Failed to initialize speaker EQ", __func__);
+                return -EINVAL;
+            }
+        }
+    }
+
     /* TODO The retry mechanism isn't implemented in AudioPolicyManager/AudioFlinger. */
     ret = 0;
 
@@ -813,6 +849,10 @@ static void adev_close_output_stream(struct audio_hw_device *dev,
     ALOGV("adev_close_output_stream...");
     struct alsa_audio_device *adev = (struct alsa_audio_device *)dev;
     destroy_aec_reference_config(adev->aec);
+    struct alsa_stream_out* out = (struct alsa_stream_out*)stream;
+    if (out->speaker_eq != NULL) {
+        fir_release(out->speaker_eq);
+    }
     free(stream);
 }
 
