@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003958804",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1368217?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5e39f407_045942b6",
+        "filename": "binaries/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-21T15:06:15Z",
+      "side": 1,
+      "message": "Android.​mk files are being deprecated, please use blueprint files (go/soong) to define the modules",
+      "revId": "6a6d32aa374f440e2397bfe09956f0c8a51257b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003958804",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1368217?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ded50674_4dc04853",
+        "filename": "hal/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-21T15:06:15Z",
+      "side": 1,
+      "message": "Android.​mk files are being deprecated, please use blueprint files (go/soong) to define the modules",
+      "revId": "6a6d32aa374f440e2397bfe09956f0c8a51257b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
