@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "acac01f4_8481b1c9",
+        "filename": "build/tasks/dtimages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-22T19:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0983d8b8_1f195b43",
+      "range": {
+        "startLine": 10,
+        "startChar": 13,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "70ff5a7a06c4e9409d1920a9e09797217dace772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52e597dc_2f29e342",
         "filename": "build/tasks/dtimages.mk",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "70ff5a7a06c4e9409d1920a9e09797217dace772",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd8f5820_0464ce8d",
+        "filename": "build/tasks/dtimages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-07-22T19:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52e597dc_2f29e342",
+      "revId": "70ff5a7a06c4e9409d1920a9e09797217dace772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
