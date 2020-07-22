@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbc9d222_6dbf0735",
+        "filename": "build/tasks/dtimages.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-07-22T19:40:56Z",
+      "side": 1,
+      "message": "Instead of just namespacing variables by name, use the actual target-specific variables (which we conventionally call PRIVATE_*):\n\n $(DTBOIMAGE): PRIVATE_MKDTIMG :\u003d $(MKDTIMG)\n $(DTBOIMAGE): PRIVATE_DTBO_FILES :\u003d $(DTBO_FILES)\n $(DTBOIMAGE): $(DTBO_FILES) $(MKDTIMG)\n   $(PRIVATE_MKDTIMG) create $@ $(PRIVATE_DTBO_FILES)\n\n(It also uses them for the DTBO_FILES, since $^ will include the mkdtboimg.py path once you add it as a dependency)",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "2d86d48fb94f458be57bc2b0d668a470cad9db9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
