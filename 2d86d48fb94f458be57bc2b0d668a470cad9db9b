@@ -46,6 +46,30 @@
       "revId": "2d86d48fb94f458be57bc2b0d668a470cad9db9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af4c8c94_1fadb83d",
+        "filename": "build/tasks/dtimages.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-07-22T19:59:51Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "cfd92dad_37c8264a",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "2d86d48fb94f458be57bc2b0d668a470cad9db9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
