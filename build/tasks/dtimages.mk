@@ -7,7 +7,7 @@
 
 ifneq ($(filter yukawa%, $(TARGET_DEVICE)),)
 
-MKDTIMG := $(realpath prebuilts/misc/$(HOST_PREBUILT_TAG)/libufdt/mkdtimg)
+MKDTIMG := $(realpath system/libufdt/utils/src/mkdtboimg.py)
 DTBIMAGE := $(PRODUCT_OUT)/dtb.img
 DTBOIMAGE := $(PRODUCT_OUT)/$(DTBO_UNSIGNED)
 
