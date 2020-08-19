@@ -125,6 +125,7 @@ BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/ffe07000.mmc
 BOARD_KERNEL_CMDLINE += init=/init
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += androidboot.hardware=yukawa
+BOARD_KERNEL_CMDLINE += cma=64M
 ifneq ($(TARGET_SELINUX_ENFORCE), true)
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
