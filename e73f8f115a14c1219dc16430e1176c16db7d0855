@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9ad855b_4e878e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-09-16T08:05:37Z",
+      "side": 1,
+      "message": "I get :\n09-16 07:58:37.718  4351  4566 D C2PlatformStorePluginLoader: Failed to load library: libc2plugin_store.so (dlopen failed: library \"libc2plugin_store.so\" not found)\n\nwhen playing a video",
+      "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
