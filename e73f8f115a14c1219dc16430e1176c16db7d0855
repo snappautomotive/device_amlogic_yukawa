@@ -34,6 +34,24 @@
       "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da2b0bea_7909b5b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-09-16T15:13:58Z",
+      "side": 1,
+      "message": "the previous changes gives:\n09-16 10:50:31.037   238  1704 W libc    : Unable to set property \"ctl.interface_start\" to \"android.hardware.media.c2@1.0::IComponentStore/default\": error code: 0x20\n01-01 00:00:43.212     0     0 E init    : Control message: Could not find \u0027android.hardware.media.c2@1.0::IComponentStore/default\u0027 for ctl.interface_start from pid: 238 (/system/bin/hwservicemanager)\n\ntried differently, changing to:\nproject device/amlogic/yukawa/\ndiff --git a/device/amlogic/yukawa/device-common.mk b/device/amlogic/yukawa/device-common.mk\nindex a0387fd..0daa43e 100644\n--- a/device/amlogic/yukawa/device-common.mk\n+++ b/device/amlogic/yukawa/device-common.mk\n@@ -1,5 +1,6 @@\n\n PRODUCT_SOONG_NAMESPACES +\u003d \\\n     device/amlogic/yukawa \\\n+    vendor/google_arc/libs/codec2 \\\n     external/v4l2_codec2\n ifeq ($(TARGET_PREBUILT_KERNEL),)\nproject external/v4l2_codec2/\ndiff --git a/external/v4l2_codec2/accel/Android.bp b/external/v4l2_codec2/accel/Android.bp\nindex 214376a..4d50571 100644\n--- a/external/v4l2_codec2/accel/Android.bp\n+++ b/external/v4l2_codec2/accel/Android.bp\n@@ -1,6 +1,6 @@\n\n cc_library {\n     name: \"libv4l2_codec2_accel\",\nvendor: true,\n+    vendor_available: true,\n\n \n     srcs: [\n         \"bit_reader.cc\",\ndiff --git a/external/v4l2_codec2/common/Android.bp b/external/v4l2_codec2/common/Android.bp\nindex e9d407b..53bfa24 100644\n--- a/external/v4l2_codec2/common/Android.bp\n+++ b/external/v4l2_codec2/common/Android.bp\n@@ -1,6 +1,6 @@\n cc_library {\n     name: \"libv4l2_codec2_common\",\nvendor: true,\n+    vendor_available: true,\n\n \n     defaults: [\n         \"libcodec2-impl-defaults\",\ndiff --git a/external/v4l2_codec2/plugin_store/Android.bp b/external/v4l2_codec2/plugin_store/Android.bp\nindex 3d3d040..8d9782a 100644\n--- a/external/v4l2_codec2/plugin_store/Android.bp\n+++ b/external/v4l2_codec2/plugin_store/Android.bp\n@@ -1,6 +1,6 @@\n cc_library_shared {\n     name: \"libc2plugin_store\",\nvendor: true,\n+    vendor_available: true,\n\n \n     defaults: [\n         \"libcodec2-impl-defaults\",\n\nsolved the folllwing build issues I got:\nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libv4l2_codec2_common (native:vendor)\" \nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libc2plugin_store (native:vendor)\" \nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libv4l2_codec2_common (native:vendor)\" \nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libc2plugin_store (native:vendor)\" \nexternal/v4l2_codec2/Android.mk: error: \"libv4l2_codec2 (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VDACompIntf_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VDACompIntf_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VEACompIntf_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VEACompIntf_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VDAComponent_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\" \nexternal/v4l2_codec2/tests/c2_comp_intf/Android.mk: error: \"C2VDAComponent_test (native:platform) can not link against libv4l2_codec2_accel (native:vendor)\"",
+      "parentUuid": "385c4d14_b43adc45",
+      "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
