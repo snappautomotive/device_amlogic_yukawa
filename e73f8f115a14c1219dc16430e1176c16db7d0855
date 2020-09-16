@@ -16,6 +16,24 @@
       "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "385c4d14_b43adc45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-09-16T09:25:38Z",
+      "side": 1,
+      "message": "project device/amlogic/yukawa/\n diff --git a/device/amlogic/yukawa/device-common.mk \n b/device/amlogic/yukawa/device-common.mk\n index a0387fd..0daa43e 100644\n --- a/device/amlogic/yukawa/device-common.mk\n +++ b/device/amlogic/yukawa/device-common.mk\n @@ -1,5 +1,6 @@\n  PRODUCT_SOONG_NAMESPACES +\u003d \\\n      device/amlogic/yukawa \\\n +    vendor/google_arc/libs/codec2 \\\n      external/v4l2_codec2\n  \n  ifeq ($(TARGET_PREBUILT_KERNEL),)\n \n project external/v4l2_codec2/\n diff --git a/external/v4l2_codec2/accel/Android.bp \n b/external/v4l2_codec2/accel/Android.bp\n index 214376a..ae75d75 100644\n --- a/external/v4l2_codec2/accel/Android.bp\n +++ b/external/v4l2_codec2/accel/Android.bp\n @@ -1,6 +1,5 @@\n  cc_library {\n      name: \"libv4l2_codec2_accel\",\n -    vendor: true,\n  \n      srcs: [\n          \"bit_reader.cc\",\n diff --git a/external/v4l2_codec2/common/Android.bp \n b/external/v4l2_codec2/common/Android.bp\n index e9d407b..d8742c6 100644\n --- a/external/v4l2_codec2/common/Android.bp\n +++ b/external/v4l2_codec2/common/Android.bp\n @@ -1,6 +1,5 @@\n  cc_library {\n      name: \"libv4l2_codec2_common\",\n -    vendor: true,\n  \n      defaults: [\n          \"libcodec2-impl-defaults\",\n diff --git a/external/v4l2_codec2/components/Android.bp \n b/external/v4l2_codec2/components/Android.bp\n index 5e4e45d..83f0f20 100644\n --- a/external/v4l2_codec2/components/Android.bp\n +++ b/external/v4l2_codec2/components/Android.bp\n @@ -1,6 +1,5 @@\n  cc_library {\n      name: \"libv4l2_codec2_components\",\n -    vendor: true,\n \n      defaults: [\n          \"libcodec2-impl-defaults\",\n diff --git a/external/v4l2_codec2/plugin_store/Android.bp \n b/external/v4l2_codec2/plugin_store/Android.bp\n index 3d3d040..bd3b0f8 100644\n --- a/external/v4l2_codec2/plugin_store/Android.bp\n +++ b/external/v4l2_codec2/plugin_store/Android.bp\n @@ -1,6 +1,5 @@\n  cc_library_shared {\n      name: \"libc2plugin_store\",\n -    vendor: true,\n \n      defaults: [\n          \"libcodec2-impl-defaults\",\n diff --git a/external/v4l2_codec2/service/Android.bp \n b/external/v4l2_codec2/service/Android.bp\n index 3fcc66c..17f535b 100644\n --- a/external/v4l2_codec2/service/Android.bp\n +++ b/external/v4l2_codec2/service/Android.bp\n @@ -5,7 +5,6 @@ cc_binary {\n          \"hidl_defaults\",\n          \"libcodec2-hidl-defaults\",\n      ],\n -    vendor: true,\n      relative_install_path: \"hw\",\n \n      srcs: [\n @@ -16,7 +15,7 @@ cc_binary {\n  \n      shared_libs: [\n          \"libv4l2_codec2_store\",\n -        \"libavservices_minijail_vendor\",\n +        \"libavservices_minijail\",\n          \"libchrome\",\n          \"libcutils\",\n          \"libhidlbase\",\n diff --git a/external/v4l2_codec2/store/Android.bp \n b/external/v4l2_codec2/store/Android.bp\n index c2a6169..3e6c16b 100644\n --- a/external/v4l2_codec2/store/Android.bp\n +++ b/external/v4l2_codec2/store/Android.bp\n @@ -1,6 +1,5 @@\n  cc_library_shared {\n      name: \"libv4l2_codec2_store\",\n -    vendor: true,\n \n      defaults: [\n          \"libcodec2-impl-defaults\",\n diff --git a/external/v4l2_codec2/tests/Android.mk \n b/external/v4l2_codec2/tests/Android.mk\n index 5053e7d..3176979 100644\n --- a/external/v4l2_codec2/tests/Android.mk\n +++ b/external/v4l2_codec2/tests/Android.mk\n @@ -1 +1 @@\n -include $(call all-subdir-makefiles)\n +#include $(call all-subdir-makefiles)\n\nand\n\n export ALLOW_MISSING_DEPENDENCIES\u003dtrue\n\npermits building.\n\nThe missing deps are:\nlibvda_c2_pixelformat\nlibarc_c2componentstore",
+      "parentUuid": "d9ad855b_4e878e23",
+      "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
