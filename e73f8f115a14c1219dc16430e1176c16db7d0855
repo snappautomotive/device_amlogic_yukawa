@@ -52,6 +52,23 @@
       "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96149389_62522071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-09-28T08:41:24Z",
+      "side": 1,
+      "message": "Builds correctly v4l2_codec2 with https://android-review.googlesource.com/c/platform/external/v4l2_codec2/+/1437292 and https://android-review.googlesource.com/c/platform/frameworks/av/+/1437474",
+      "revId": "e73f8f115a14c1219dc16430e1176c16db7d0855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
