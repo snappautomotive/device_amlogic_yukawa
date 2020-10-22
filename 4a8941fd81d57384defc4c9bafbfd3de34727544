@@ -46,6 +46,30 @@
       },
       "revId": "4a8941fd81d57384defc4c9bafbfd3de34727544",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3b2eb5_ed447be7",
+        "filename": "hal/gralloc/mali_gralloc_bufferallocation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-10-22T16:01:42Z",
+      "side": 1,
+      "message": "Fixed in v2.",
+      "parentUuid": "8d9f799c_b2cb10d2",
+      "range": {
+        "startLine": 1021,
+        "startChar": 4,
+        "endLine": 1021,
+        "endChar": 11
+      },
+      "revId": "4a8941fd81d57384defc4c9bafbfd3de34727544",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

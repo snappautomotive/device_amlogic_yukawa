@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7626150_b18971ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-10-22T16:01:42Z",
+      "side": 1,
+      "message": "Changes in v2:\n- Added missing delete[] found by Dmitry\n- whitespace change for req_wh array declaration",
+      "revId": "3930ca250bf519274c16ce991f27d254aa1b749c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
