@@ -34,6 +34,24 @@
       "parentUuid": "a38b76be_2659a2fd",
       "revId": "526a7da3fd756f27aeb00be26b8a9f77f145e87f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "906a19b9_5b41480a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-10-22T12:52:28Z",
+      "side": 1,
+      "message": "Squashed in https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1469212 (v2)\n\nAbandoning this change",
+      "parentUuid": "86dbf279_95bcad04",
+      "revId": "526a7da3fd756f27aeb00be26b8a9f77f145e87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
