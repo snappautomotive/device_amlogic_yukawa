@@ -34,6 +34,24 @@
       "parentUuid": "cd21a44d_4d8872b3",
       "revId": "27511f184ea55d01a5af06ec31d22f20f65ca32d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3356bed_e860bdba",
+        "filename": "bootloader/scripts/collect-khadas_binaries-git-refboard.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-10-22T12:51:43Z",
+      "side": 1,
+      "message": "Fixed in v2.",
+      "parentUuid": "7c62a2ad_e8313be3",
+      "revId": "27511f184ea55d01a5af06ec31d22f20f65ca32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
