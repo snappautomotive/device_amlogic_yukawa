@@ -16,6 +16,24 @@
       "message": "this won\u0027t work on khadas github, so I think you should drop gxl, ghxm \u0026 axg support from this script",
       "revId": "27511f184ea55d01a5af06ec31d22f20f65ca32d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c62a2ad_e8313be3",
+        "filename": "bootloader/scripts/collect-khadas_binaries-git-refboard.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-10-22T08:02:53Z",
+      "side": 1,
+      "message": "Ack. Thank you, will send a v2",
+      "parentUuid": "cd21a44d_4d8872b3",
+      "revId": "27511f184ea55d01a5af06ec31d22f20f65ca32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
