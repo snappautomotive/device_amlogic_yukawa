@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd21a44d_4d8872b3",
+        "filename": "bootloader/scripts/collect-khadas_binaries-git-refboard.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-10-22T07:50:53Z",
+      "side": 1,
+      "message": "this won\u0027t work on khadas github, so I think you should drop gxl, ghxm \u0026 axg support from this script",
+      "revId": "27511f184ea55d01a5af06ec31d22f20f65ca32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
