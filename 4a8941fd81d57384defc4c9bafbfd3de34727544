@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775cc741_f77a2461",
+        "filename": "hal/gralloc/mali_gralloc_bufferallocation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-10-22T15:36:48Z",
+      "side": 1,
+      "message": "delete []req_wh;",
+      "range": {
+        "startLine": 1021,
+        "startChar": 4,
+        "endLine": 1021,
+        "endChar": 11
+      },
+      "revId": "4a8941fd81d57384defc4c9bafbfd3de34727544",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
