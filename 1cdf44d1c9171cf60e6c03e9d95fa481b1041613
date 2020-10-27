@@ -16,6 +16,24 @@
       "message": "sei-510 may be out of audio config now",
       "revId": "1cdf44d1c9171cf60e6c03e9d95fa481b1041613",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e63a84_190e24c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1089985
+      },
+      "writtenOn": "2020-10-27T15:15:04Z",
+      "side": 1,
+      "message": "you\u0027re right, anyway this triggers a segfault on vim3, so we need to figure out this before merging",
+      "parentUuid": "b6c4bb04_a17be372",
+      "revId": "1cdf44d1c9171cf60e6c03e9d95fa481b1041613",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
