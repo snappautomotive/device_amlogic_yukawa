@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005764401",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1477276?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "272d4abc_4407556e",
+          "description": "Change to \"sensorhal/sensorlist_argonkey.cpp\"",
+          "replacements": [
+            {
+              "path": "sensorhal/sensorlist_argonkey.cpp",
+              "range": {
+                "startLine": 85,
+                "startChar": 3,
+                "endLine": 85,
+                "endChar": 12
+              },
+              "replacement": "available"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "5cfaa459_0dd67d1c",
+        "filename": "sensorhal/sensorlist_argonkey.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-27T17:46:57Z",
+      "side": 1,
+      "message": "Common typo found: \"avaliable\" -- should it be \"available\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 12
+      },
+      "revId": "90fb0582eb34e070c94ace8f54b4b70b9bc48133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005764401",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1477276?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "f9c1f9ea_011be239",
+          "description": "Change to \"sensorhal/sensorlist_neonkey.cpp\"",
+          "replacements": [
+            {
+              "path": "sensorhal/sensorlist_neonkey.cpp",
+              "range": {
+                "startLine": 86,
+                "startChar": 3,
+                "endLine": 86,
+                "endChar": 12
+              },
+              "replacement": "available"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "dd3d2d89_c4c78460",
+        "filename": "sensorhal/sensorlist_neonkey.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-27T17:46:57Z",
+      "side": 1,
+      "message": "Common typo found: \"avaliable\" -- should it be \"available\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 86,
+        "endChar": 12
+      },
+      "revId": "90fb0582eb34e070c94ace8f54b4b70b9bc48133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
