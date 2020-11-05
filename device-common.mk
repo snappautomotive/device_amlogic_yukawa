@@ -17,6 +17,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Enable Scoped Storage related
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
+
+ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
+# Setup tablet build
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
+else
 # Setup TV Build
 USE_OEM_TV_APP := true
 $(call inherit-product, device/google/atv/products/atv_base.mk)
@@ -25,6 +32,7 @@ PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_IS_ATV := true
 DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/atv/overlay
+endif
 
 PRODUCT_PACKAGES += llkd
 
@@ -119,6 +127,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt \
 
+
+ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
+# Use Launcher3QuickStep
+PRODUCT_PACKAGES += Launcher3QuickStep
+else
 ifeq ($(TARGET_USE_SAMPLE_LAUNCHER), true)
 PRODUCT_PACKAGES += \
     TvSampleLeanbackLauncher
@@ -141,6 +154,7 @@ ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa_sei510_gms))
 PRODUCT_PACKAGES += \
     TVLauncherNoGms \
     TVRecommendationsNoGms
+endif
 endif
 
 PRODUCT_PACKAGES += \
