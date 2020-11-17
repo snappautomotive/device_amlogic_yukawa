@@ -12,6 +12,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.product.device=vim3l
 else
 PRODUCT_PROPERTY_OVERRIDES += ro.product.device=sei610
 endif
+AUDIO_DEFAULT_OUTPUT ?= speaker
 GPU_TYPE ?= dvalin_ion
 
 BOARD_KERNEL_DTB := device/amlogic/yukawa-kernel
