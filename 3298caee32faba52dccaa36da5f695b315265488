@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac58018_15dbe108",
+        "filename": "device-yukawa.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-11-17T18:40:38Z",
+      "side": 1,
+      "message": "I would suggest to move it to device-common.mk - else you will miss sei510",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "3298caee32faba52dccaa36da5f695b315265488",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
