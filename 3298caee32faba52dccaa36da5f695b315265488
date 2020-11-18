@@ -22,6 +22,30 @@
       },
       "revId": "3298caee32faba52dccaa36da5f695b315265488",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0ef543_1bfd2bb7",
+        "filename": "device-yukawa.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-11-18T08:00:50Z",
+      "side": 1,
+      "message": "Indeed. Thank you for the suggestion. done in v2.",
+      "parentUuid": "5ac58018_15dbe108",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "3298caee32faba52dccaa36da5f695b315265488",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
