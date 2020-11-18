@@ -34,6 +34,23 @@
       "parentUuid": "b6c4bb04_a17be372",
       "revId": "1cdf44d1c9171cf60e6c03e9d95fa481b1041613",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d57991_1f03f607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-11-18T22:10:51Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e (1 comment)\n\u003e \n\u003e This change is ready for review.\n\nCan VIM3L and SEI610 share same mixer paths? If yes, we can drop this change, probably, because there is a new one.",
+      "revId": "1cdf44d1c9171cf60e6c03e9d95fa481b1041613",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
