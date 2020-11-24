@@ -22,6 +22,30 @@
       },
       "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1c1dfb_a21ad1fe",
+        "filename": "device-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-11-24T17:08:11Z",
+      "side": 1,
+      "message": "Thanks for this. Yes, we can move it to line 20 to avoid duplicating it.",
+      "parentUuid": "be8c12bb_091379aa",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
