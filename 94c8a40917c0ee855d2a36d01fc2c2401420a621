@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8c12bb_091379aa",
+        "filename": "device-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-11-24T16:03:42Z",
+      "side": 1,
+      "message": "Will it be better to take this outside the \"IF\" statement?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
