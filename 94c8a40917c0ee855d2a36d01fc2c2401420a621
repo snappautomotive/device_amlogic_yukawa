@@ -80,6 +80,30 @@
       },
       "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bb1dcf9_ad751d66",
+        "filename": "device-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-11-25T09:50:48Z",
+      "side": 1,
+      "message": "done in v3",
+      "parentUuid": "0d1c1dfb_a21ad1fe",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
