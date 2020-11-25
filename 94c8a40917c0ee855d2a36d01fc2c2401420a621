@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "069b2899_6063d182",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-11-25T09:45:08Z",
+      "side": 1,
+      "message": "note to self:\n\nThis will conflict with: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1506278 so will need a rework after the above is merged.",
+      "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be8c12bb_091379aa",
