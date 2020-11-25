@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4bfdd0d_2fb91e20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2020-11-25T09:48:33Z",
+      "side": 1,
+      "message": "Re-added Dmitry as cc (I miss-clicked removing him)",
+      "revId": "94c8a40917c0ee855d2a36d01fc2c2401420a621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be8c12bb_091379aa",
