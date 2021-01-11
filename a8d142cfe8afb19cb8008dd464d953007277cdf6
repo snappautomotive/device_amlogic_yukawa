@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cc50fa_aeb21356",
+        "filename": "bootloader/scripts/generate-bins-new.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-01-11T22:26:28Z",
+      "side": 1,
+      "message": "Obsolete tab? Or 4 spaces instead to be the same as #29 ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "a8d142cfe8afb19cb8008dd464d953007277cdf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
