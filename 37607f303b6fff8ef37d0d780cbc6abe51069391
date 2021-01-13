@@ -63,6 +63,24 @@
       "message": "What are main fixes in this release?",
       "revId": "37607f303b6fff8ef37d0d780cbc6abe51069391",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727c6c2f_3dc0ec22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1471634
+      },
+      "writtenOn": "2021-01-13T17:00:57Z",
+      "side": 1,
+      "message": "update to last uboot release and fix ethernet issue on VIM3L.\nno really needed for you to update all your board with this BL except if you see ethernet issue on VIM3L in uboot.",
+      "parentUuid": "41dd8132_05626ccd",
+      "revId": "37607f303b6fff8ef37d0d780cbc6abe51069391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
