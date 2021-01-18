@@ -361,3 +361,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service \
     lights-yukawa
+
+# Virtualization APEX
+PRODUCT_PACKAGES += com.android.virt
