@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "47aed76c00cd0977bfe58d67ee23e4da60654f6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce851750_c00c66ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-19T13:29:12Z",
+      "side": 1,
+      "message": "Just saw a build error with this on another target. Will update this CL once I get to the bottom of it.",
+      "revId": "47aed76c00cd0977bfe58d67ee23e4da60654f6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
