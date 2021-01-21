@@ -22,6 +22,16 @@
 
 // HAL module implementation, not prelinked and stored in
 // hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
+package {
+    default_applicable_licenses: ["device_amlogic_yukawa_hal_hdmicec_license"],
+}
+
+license {
+    name: "device_amlogic_yukawa_hal_hdmicec_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0"],
+}
+
 cc_library_shared {
     name: "hdmi_cec.yukawa",
     proprietary: true,

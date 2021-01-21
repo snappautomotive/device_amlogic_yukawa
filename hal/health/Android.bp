@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["device_amlogic_yukawa_hal_health_license"],
+}
+
+license {
+    name: "device_amlogic_yukawa_hal_health_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["legacy_restricted"],
+}
+
 cc_binary {
     name: "android.hardware.health@2.0-service.yukawa",
     init_rc: ["android.hardware.health@2.0-service.yukawa.rc"],

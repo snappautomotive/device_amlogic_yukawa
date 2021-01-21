@@ -13,3 +13,13 @@
 // limitations under the License.
 
 soong_namespace {}
+
+package {
+    default_applicable_licenses: ["device_amlogic_yukawa_license"],
+}
+
+license {
+    name: "device_amlogic_yukawa_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0","SPDX-license-identifier-GPL-2.0"],
+}

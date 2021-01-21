@@ -12,6 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+package {
+    default_applicable_licenses: ["device_amlogic_yukawa_hal_bootctrl_license"],
+}
+
+license {
+    name: "device_amlogic_yukawa_hal_bootctrl_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0"],
+}
+
 cc_library_shared {
     name: "bootctrl.yukawa",
     vendor: true,
