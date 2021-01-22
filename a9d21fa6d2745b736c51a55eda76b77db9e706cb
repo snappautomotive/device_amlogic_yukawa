@@ -1,0 +1,7 @@
+Code-Review+2: Andrew Walbran <qwandor@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: David Brazdil <dbrazdil@google.com>
+Submitted-at: Fri, 22 Jan 2021 13:20:15 +0000
+Reviewed-on: https://android-review.googlesource.com/c/device/amlogic/yukawa/+/1553921
+Project: device/amlogic/yukawa
+Branch: refs/heads/master
