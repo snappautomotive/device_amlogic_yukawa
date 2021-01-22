@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2219b54_6e93cc28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-22T12:11:16Z",
+      "side": 1,
+      "message": "I\u0027ve added a file to our project that can be included by devices and deal with the path requirement exception in one place. Even though that\u0027s not needed for yukawa, I changed it to do the same.",
+      "revId": "a9d21fa6d2745b736c51a55eda76b77db9e706cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
