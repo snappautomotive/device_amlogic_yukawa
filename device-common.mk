@@ -14,14 +14,22 @@ PRODUCT_RUNTIMES := runtime_libart_default
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+# Enable Scoped Storage related
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
+ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
+# Setup tablet build
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+else
 # Setup TV Build
 USE_OEM_TV_APP := true
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 PRODUCT_CHARACTERISTICS := tv
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_IS_ATV := true
-DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
-DEVICE_PACKAGE_OVERLAYS += device/google/atv/overlay
+endif
 
 PRODUCT_PACKAGES += llkd
 
@@ -116,6 +124,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt \
 
+
+ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
+# Use Launcher3QuickStep
+PRODUCT_PACKAGES += Launcher3QuickStep
+else
 ifeq ($(TARGET_USE_SAMPLE_LAUNCHER), true)
 PRODUCT_PACKAGES += \
     TvSampleLeanbackLauncher
@@ -139,6 +152,7 @@ PRODUCT_PACKAGES += \
     TVLauncherNoGms \
     TVRecommendationsNoGms
 endif
+endif
 
 PRODUCT_PACKAGES += \
     libhidltransport \
@@ -161,7 +175,7 @@ PRODUCT_PACKAGES +=  vulkan.yukawa.so
 PRODUCT_PACKAGES += android.hardware.bluetooth@1.1-service.btlinux
 
 # Wifi
-PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wifilogd wpa_cli
+PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wpa_cli
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
                               wifi.supplicant_scan_interval=15
 
@@ -243,6 +257,48 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \
     android.hardware.thermal@1.0-service
 
+# Sensor HAL
+ifneq ($(TARGET_SENSOR_MEZZANINE),)
+TARGET_USES_NANOHUB_SENSORHAL := true
+NANOHUB_SENSORHAL_LID_STATE_ENABLED := true
+NANOHUB_SENSORHAL_SENSORLIST := $(LOCAL_PATH)/sensorhal/sensorlist_$(TARGET_SENSOR_MEZZANINE).cpp
+NANOHUB_SENSORHAL_DIRECT_REPORT_ENABLED := true
+NANOHUB_SENSORHAL_DYNAMIC_SENSOR_EXT_ENABLED := true
+
+PRODUCT_PACKAGES += \
+    context_hub.default \
+    sensors.yukawa \
+    android.hardware.sensors@1.0-service \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.contexthub@1.0-service \
+    android.hardware.contexthub@1.0-impl
+
+# Nanohub tools
+PRODUCT_PACKAGES += stm32_flash nanoapp_cmd nanotool
+
+PRODUCT_COPY_FILES += \
+    device/amlogic/yukawa/init.common.nanohub.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.nanohub.rc
+
+# Copy sensors config file(s)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.ambient_temperature.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.ambient_temperature.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.barometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hifi_sensors.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.relative_humidity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.relative_humidity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
+
+# Argonkey VL53L0X proximity driver is not available yet. So we are going to copy conf file for neonkey only
+ifeq ($(TARGET_SENSOR_MEZZANINE),neonkey)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml
+endif
+endif
+
 # Software Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software
@@ -272,13 +328,23 @@ PRODUCT_COPY_FILES +=  \
 USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/hal/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    device/amlogic/yukawa/hal/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml 
+
+AUDIO_DEFAULT_OUTPUT ?= speaker
+ifeq ($(AUDIO_DEFAULT_OUTPUT),hdmi)
+PRODUCT_COPY_FILES += \
+    device/amlogic/yukawa/hal/audio/audio_policy_configuration_hdmi_only.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+DEVICE_PACKAGE_OVERLAYS += \
+    device/amlogic/yukawa/hal/audio/overlay_hdmi_only
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/yukawa/hal/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+endif
 
 # Copy media codecs config file
 PRODUCT_COPY_FILES += \
@@ -295,3 +361,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service \
     lights-yukawa
+
+# Include Virtualization APEX
+$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)

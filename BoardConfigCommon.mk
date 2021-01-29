@@ -131,6 +131,9 @@ endif
 ifeq ($(TARGET_BUILTIN_EDID), true)
 BOARD_KERNEL_CMDLINE += drm.edid_firmware=edid/1920x1080.bin
 endif
+ifneq ($(TARGET_SENSOR_MEZZANINE),)
+BOARD_KERNEL_CMDLINE += overlay_mgr.overlay_dt_entry=hardware_cfg_$(TARGET_SENSOR_MEZZANINE)
+endif
 
 USE_E2FSPROGS := true
 
@@ -143,14 +146,19 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/yukawa/bluetooth
 BOARD_SEPOLICY_DIRS += \
         device/amlogic/yukawa/sepolicy
 
-DEVICE_MANIFEST_FILE := device/amlogic/yukawa/manifest.xml
+DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest.xml
 ifeq ($(TARGET_USE_AB_SLOT), true)
-DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest_ab.xml
+DEVICE_MANIFEST_FILE += device/amlogic/yukawa/hal/bootctrl/bootctrl.xml
 endif
 
-ifeq ($(TARGET_KERNEL_USE), 5.4)
+ifneq ($(TARGET_KERNEL_USE), 4.19)
 DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest_kernel5.xml
 endif
 DEVICE_MATRIX_FILE := device/amlogic/yukawa/compatibility_matrix.xml
+
+ifneq ($(TARGET_SENSOR_MEZZANINE),)
+DEVICE_MANIFEST_FILE += device/amlogic/yukawa/sensorhal/manifest.xml
+endif
+
 # Generate an APEX image for experiment b/119800099.
 DEXPREOPT_GENERATE_APEX_IMAGE := true
