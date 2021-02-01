@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a277d70_713763f0",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-01T23:44:10Z",
+      "side": 1,
+      "message": "for (int m \u003d 0",
+      "range": {
+        "startLine": 459,
+        "startChar": 9,
+        "endLine": 459,
+        "endChar": 10
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790f31fe_0fb1b03f",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-01T23:44:10Z",
+      "side": 1,
+      "message": "for (int ch \u003d 0",
+      "range": {
+        "startLine": 479,
+        "startChar": 9,
+        "endLine": 479,
+        "endChar": 11
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e228b9b_bdb1b98f",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-01T23:44:10Z",
+      "side": 1,
+      "message": "for (int m \u003d 0",
+      "range": {
+        "startLine": 483,
+        "startChar": 13,
+        "endLine": 483,
+        "endChar": 14
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ad63b2_3dabe245",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-01T23:44:10Z",
+      "side": 1,
+      "message": "Look very similar to get_mic_chars() function. Is there easy way to combine them?",
+      "range": {
+        "startLine": 488,
+        "startChar": 8,
+        "endLine": 488,
+        "endChar": 16
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
