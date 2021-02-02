@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d574fd37_6f5506ef",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T19:56:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e88fadc_8b2a1f75",
+      "range": {
+        "startLine": 610,
+        "startChar": 19,
+        "endLine": 610,
+        "endChar": 29
+      },
+      "revId": "7936fbb1be7b18eb65dc86285745462bb26df21e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e21fa11_05f44621",
@@ -82,6 +106,30 @@
         "id": 1000414
       },
       "writtenOn": "2021-02-02T19:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e21fa11_05f44621",
+      "range": {
+        "startLine": 613,
+        "startChar": 23,
+        "endLine": 613,
+        "endChar": 33
+      },
+      "revId": "7936fbb1be7b18eb65dc86285745462bb26df21e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5637e8_7158e8a9",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T19:56:08Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "3e21fa11_05f44621",
