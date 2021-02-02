@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c81657_e9a32c29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-02T17:38:09Z",
+      "side": 1,
+      "message": "Please use company-unrelated name for the folder like:\nvim/board-vim3l-info.txt",
+      "revId": "710520363231c9a01e10ed490b66dd77defc3770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
