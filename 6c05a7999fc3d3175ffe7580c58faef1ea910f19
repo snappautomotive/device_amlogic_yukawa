@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cddb510_7d6e165b",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T18:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a277d70_713763f0",
+      "range": {
+        "startLine": 459,
+        "startChar": 9,
+        "endLine": 459,
+        "endChar": 10
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "790f31fe_0fb1b03f",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-01T23:44:10Z",
       "side": 1,
       "message": "for (int ch \u003d 0",
+      "range": {
+        "startLine": 479,
+        "startChar": 9,
+        "endLine": 479,
+        "endChar": 11
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0ed080_29cd424c",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T18:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "790f31fe_0fb1b03f",
       "range": {
         "startLine": 479,
         "startChar": 9,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "454b0766_b34662f3",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T18:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e228b9b_bdb1b98f",
+      "range": {
+        "startLine": 483,
+        "startChar": 13,
+        "endLine": 483,
+        "endChar": 14
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7ad63b2_3dabe245",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-02-01T23:44:10Z",
       "side": 1,
       "message": "Look very similar to get_mic_chars() function. Is there easy way to combine them?",
+      "range": {
+        "startLine": 488,
+        "startChar": 8,
+        "endLine": 488,
+        "endChar": 16
+      },
+      "revId": "6c05a7999fc3d3175ffe7580c58faef1ea910f19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4b079f_0bf57315",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-02T18:51:35Z",
+      "side": 1,
+      "message": "Refactored into a single helper function.",
+      "parentUuid": "b7ad63b2_3dabe245",
       "range": {
         "startLine": 488,
         "startChar": 8,
