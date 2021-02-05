@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d95ec19_e8606f2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1437603
+      },
+      "writtenOn": "2021-02-05T17:22:11Z",
+      "side": 1,
+      "message": "Depends on: https://android-review.googlesource.com/c/device/amlogic/yukawa-kernel/+/1577703",
+      "revId": "ad9562cd92a3dd96c4d7090f2dbd2c17dedbddd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
