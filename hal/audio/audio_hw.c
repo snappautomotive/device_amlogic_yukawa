@@ -1121,6 +1121,7 @@ static int adev_close(hw_device_t *device)
     ALOGV("adev_close");
 
     struct alsa_audio_device *adev = (struct alsa_audio_device *)device;
+    audio_route_free(adev->audio_route);
     release_aec(adev->aec);
     free(device);
     return 0;
