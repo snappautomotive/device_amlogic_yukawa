@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e821035_b2810473",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-11T22:10:20Z",
+      "side": 1,
+      "message": "Also is freeing adev necessary?",
+      "range": {
+        "startLine": 1172,
+        "startChar": 8,
+        "endLine": 1172,
+        "endChar": 13
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c498df4_5019de0c",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-11T22:10:20Z",
+      "side": 1,
+      "message": "mixer_close() ?",
+      "range": {
+        "startLine": 1178,
+        "startChar": 8,
+        "endLine": 1178,
+        "endChar": 13
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520dc22e_5cd466fc",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-11T22:10:20Z",
+      "side": 1,
+      "message": "Don\u0027t we need it too as well?",
+      "range": {
+        "startLine": 1186,
+        "startChar": 8,
+        "endLine": 1186,
+        "endChar": 15
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
