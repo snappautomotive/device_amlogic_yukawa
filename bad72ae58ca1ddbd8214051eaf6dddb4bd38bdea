@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9b641c_78b16115",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-12T00:38:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c5ab011_1f991889",
+      "range": {
+        "startLine": 1125,
+        "startChar": 4,
+        "endLine": 1125,
+        "endChar": 15
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e821035_b2810473",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-11T22:10:20Z",
       "side": 1,
       "message": "Also is freeing adev necessary?",
+      "range": {
+        "startLine": 1172,
+        "startChar": 8,
+        "endLine": 1172,
+        "endChar": 13
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3830e591_94855fb7",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-12T00:38:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e821035_b2810473",
       "range": {
         "startLine": 1172,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87583ce_ec6181a0",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-12T00:38:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c498df4_5019de0c",
+      "range": {
+        "startLine": 1178,
+        "startChar": 8,
+        "endLine": 1178,
+        "endChar": 13
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "520dc22e_5cd466fc",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-02-11T22:10:20Z",
       "side": 1,
       "message": "Don\u0027t we need it too as well?",
+      "range": {
+        "startLine": 1186,
+        "startChar": 8,
+        "endLine": 1186,
+        "endChar": 15
+      },
+      "revId": "bad72ae58ca1ddbd8214051eaf6dddb4bd38bdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673aaa66_4c4492fb",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-02-12T00:38:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520dc22e_5cd466fc",
       "range": {
         "startLine": 1186,
         "startChar": 8,
