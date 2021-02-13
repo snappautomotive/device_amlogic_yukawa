@@ -215,9 +215,9 @@ int init_aec(int sampling_rate, int num_reference_channels,
         aec->num_reference_channels = num_reference_channels;
         /* Set defaults, will be overridden by settings in init_aec_(mic|referece_config) */
         /* Capture uses 2-ch, 32-bit frames */
-        aec->mic_sampling_rate = CAPTURE_CODEC_SAMPLING_RATE;
-        aec->mic_frame_size_bytes = CHANNEL_STEREO * sizeof(int32_t);
-        aec->mic_num_channels = CHANNEL_STEREO;
+        aec->mic_sampling_rate = sampling_rate;
+        aec->mic_frame_size_bytes = num_microphone_channels * sizeof(int32_t);
+        aec->mic_num_channels = num_microphone_channels;
 
         /* Playback uses 2-ch, 16-bit frames */
         aec->spk_sampling_rate = PLAYBACK_CODEC_SAMPLING_RATE;
@@ -371,11 +371,13 @@ int get_reference_samples(struct aec_t* aec, void* buffer, struct aec_info* info
     }
 
     size_t bytes = info->bytes;
-    const size_t frames = bytes / aec->mic_frame_size_bytes;
+    const size_t frames =
+            bytes * aec->num_reference_channels / aec->mic_num_channels / aec->mic_frame_size_bytes;
     const size_t sample_rate_ratio = aec->spk_sampling_rate / aec->mic_sampling_rate;
+    const size_t resampler_in_frames = frames * sample_rate_ratio;
 
     /* Read audio samples from FIFO */
-    const size_t req_bytes = frames * sample_rate_ratio * aec->spk_frame_size_bytes;
+    const size_t req_bytes = resampler_in_frames * aec->spk_frame_size_bytes;
     ssize_t available_bytes = 0;
     unsigned int wait_count = MAX_READ_WAIT_TIME_MSEC;
     while (true) {
@@ -402,7 +404,6 @@ int get_reference_samples(struct aec_t* aec, void* buffer, struct aec_info* info
 
     /* Get reference - could be mono, downmixed from multichannel.
      * Reference stored at spk_buf_playback_format */
-    const size_t resampler_in_frames = frames * sample_rate_ratio;
     get_reference_audio_in_place(aec, resampler_in_frames);
 
     int16_t* resampler_out_buf;
@@ -461,7 +462,7 @@ int init_aec_mic_config(struct aec_t *aec, struct alsa_stream_in *in) {
     aec->mic_frame_size_bytes = audio_stream_in_frame_size(&in->stream);
     aec->mic_num_channels = in->config.channels;
 
-    aec->mic_buf_size_bytes = in->config.period_size * audio_stream_in_frame_size(&in->stream);
+    aec->mic_buf_size_bytes = in->config.period_size * aec->mic_frame_size_bytes;
     aec->mic_buf = (int32_t *)malloc(aec->mic_buf_size_bytes);
     if (aec->mic_buf == NULL) {
         ret = -ENOMEM;
@@ -470,7 +471,8 @@ int init_aec_mic_config(struct aec_t *aec, struct alsa_stream_in *in) {
     memset(aec->mic_buf, 0, aec->mic_buf_size_bytes);
     /* Reference buffer is the same number of frames as mic,
      * only with a different number of channels in the frame. */
-    aec->spk_buf_size_bytes = in->config.period_size * aec->spk_frame_size_bytes;
+    aec->spk_buf_size_bytes = in->config.period_size * aec->spk_num_channels *
+                              aec->mic_frame_size_bytes / aec->mic_num_channels;
     aec->spk_buf = (int32_t *)malloc(aec->spk_buf_size_bytes);
     if (aec->spk_buf == NULL) {
         ret = -ENOMEM;
@@ -479,8 +481,8 @@ int init_aec_mic_config(struct aec_t *aec, struct alsa_stream_in *in) {
     memset(aec->spk_buf, 0, aec->spk_buf_size_bytes);
 
     /* Pre-resampler buffer */
-    size_t spk_frame_out_format_bytes = aec->spk_sampling_rate / aec->mic_sampling_rate *
-                                            aec->spk_buf_size_bytes;
+    size_t spk_frame_out_format_bytes =
+            aec->spk_buf_size_bytes * aec->spk_sampling_rate / aec->mic_sampling_rate;
     aec->spk_buf_playback_format = (int16_t *)malloc(spk_frame_out_format_bytes);
     if (aec->spk_buf_playback_format == NULL) {
         ret = -ENOMEM;
