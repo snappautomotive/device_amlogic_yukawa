@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8859a39d_8a10d441",
+        "filename": "hal/audio/audio_aec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-02-19T16:21:13Z",
+      "side": 1,
+      "message": "If you are making it generic, maybe it makes sense to get it from params?",
+      "range": {
+        "startLine": 223,
+        "startChar": 33,
+        "endLine": 223,
+        "endChar": 61
+      },
+      "revId": "1f1b11fa57ff6055512ce207b50f2fd8cf0ffa40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
