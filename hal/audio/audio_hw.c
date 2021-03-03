@@ -49,11 +49,57 @@
 #include "audio_aec.h"
 #include "audio_hw.h"
 
+const struct audio_microphone_characteristic_t kBuiltinMicChars = {
+        .device_id = "builtin_mic",
+        .device = AUDIO_DEVICE_IN_BUILTIN_MIC,
+        .address = "top",
+        .channel_mapping[0] = AUDIO_MICROPHONE_CHANNEL_MAPPING_UNUSED,
+        .group = 0,
+        .index_in_the_group = 0,
+        .sensitivity = -37.0f,
+        .max_spl = AUDIO_MICROPHONE_SPL_UNKNOWN,
+        .min_spl = AUDIO_MICROPHONE_SPL_UNKNOWN,
+        .orientation.x = 0.0f,
+        .orientation.y = 0.0f,
+        .orientation.z = 0.0f,
+        .geometric_location.x = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+        .geometric_location.y = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+        .geometric_location.z = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+};
+
+const struct audio_microphone_characteristic_t kEchoReferenceChars = {
+        .device_id = "echo_reference",
+        .device = AUDIO_DEVICE_IN_ECHO_REFERENCE,
+        .address = "",
+        .channel_mapping[0] = AUDIO_MICROPHONE_CHANNEL_MAPPING_DIRECT,
+        .group = 0,
+        .index_in_the_group = 0,
+        .sensitivity = AUDIO_MICROPHONE_SENSITIVITY_UNKNOWN,
+        .max_spl = AUDIO_MICROPHONE_SPL_UNKNOWN,
+        .min_spl = AUDIO_MICROPHONE_SPL_UNKNOWN,
+        .orientation.x = 0.0f,
+        .orientation.y = 0.0f,
+        .orientation.z = 0.0f,
+        .geometric_location.x = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+        .geometric_location.y = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+        .geometric_location.z = AUDIO_MICROPHONE_COORDINATE_UNKNOWN,
+};
+
 static int adev_get_mic_mute(const struct audio_hw_device* dev, bool* state);
 static int adev_get_microphones(const struct audio_hw_device* dev,
                                 struct audio_microphone_characteristic_t* mic_array,
                                 size_t* mic_count);
 static size_t out_get_buffer_size(const struct audio_stream* stream);
+
+static bool is_aec_input(const struct alsa_stream_in* in) {
+    /* If AEC is in the app, only configure based on ECHO_REFERENCE spec.
+     * If AEC is in the HAL, configure using the given mic stream. */
+    bool aec_input = true;
+#if !defined(AEC_HAL)
+    aec_input = (in->source == AUDIO_SOURCE_ECHO_REFERENCE);
+#endif
+    return aec_input;
+}
 
 static int get_audio_output_port(audio_devices_t devices) {
     /* Prefer HDMI, default to internal speaker */
@@ -449,24 +495,19 @@ static int start_input_stream(struct alsa_stream_in *in)
     return 0;
 }
 
-static void get_mic_characteristics(struct audio_microphone_characteristic_t* mic_data,
-                                    size_t* mic_count) {
+static void get_input_characteristics(const struct alsa_stream_in* in,
+                                      struct audio_microphone_characteristic_t* mic_data,
+                                      size_t* mic_count) {
+    const struct audio_microphone_characteristic_t* chars = &kBuiltinMicChars;
     *mic_count = 1;
-    memset(mic_data, 0, sizeof(struct audio_microphone_characteristic_t));
-    strlcpy(mic_data->device_id, "builtin_mic", AUDIO_MICROPHONE_ID_MAX_LEN - 1);
-    strlcpy(mic_data->address, "top", AUDIO_DEVICE_MAX_ADDRESS_LEN - 1);
-    memset(mic_data->channel_mapping, AUDIO_MICROPHONE_CHANNEL_MAPPING_UNUSED,
-           sizeof(mic_data->channel_mapping));
-    mic_data->device = AUDIO_DEVICE_IN_BUILTIN_MIC;
-    mic_data->sensitivity = -37.0;
-    mic_data->max_spl = AUDIO_MICROPHONE_SPL_UNKNOWN;
-    mic_data->min_spl = AUDIO_MICROPHONE_SPL_UNKNOWN;
-    mic_data->orientation.x = 0.0f;
-    mic_data->orientation.y = 0.0f;
-    mic_data->orientation.z = 0.0f;
-    mic_data->geometric_location.x = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
-    mic_data->geometric_location.y = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
-    mic_data->geometric_location.z = AUDIO_MICROPHONE_COORDINATE_UNKNOWN;
+    if ((in != NULL) && in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        *mic_count = in->config.channels;
+        chars = &kEchoReferenceChars;
+    }
+    for (size_t ch = 0; ch < (*mic_count); ch++) {
+        memcpy(&mic_data[ch], chars, sizeof(struct audio_microphone_characteristic_t));
+        mic_data[ch].index_in_the_group = ch;
+    }
 }
 
 static uint32_t in_get_sample_rate(const struct audio_stream *stream)
@@ -534,13 +575,12 @@ static int in_get_active_microphones(const struct audio_stream_in* stream,
     }
     struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
     struct audio_hw_device* dev = (struct audio_hw_device*)in->dev;
+    get_input_characteristics(in, mic_array, mic_count);
     bool mic_muted = false;
     adev_get_mic_mute(dev, &mic_muted);
-    if ((in->source == AUDIO_SOURCE_ECHO_REFERENCE) || mic_muted) {
+    if (mic_muted && (in->source != AUDIO_SOURCE_ECHO_REFERENCE)) {
         *mic_count = 0;
-        return 0;
     }
-    adev_get_microphones(dev, mic_array, mic_count);
     return 0;
 }
 
@@ -573,19 +613,15 @@ static int in_standby(struct audio_stream *stream)
 static int in_dump(const struct audio_stream *stream, int fd)
 {
     struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
-    if (in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
-        return 0;
-    }
-
     struct audio_microphone_characteristic_t mic_array[AUDIO_MICROPHONE_MAX_COUNT];
     size_t mic_count;
+    get_input_characteristics(in, mic_array, &mic_count);
 
-    get_mic_characteristics(mic_array, &mic_count);
-
-    dprintf(fd, "  Microphone count: %zd\n", mic_count);
+    dprintf(fd, "  %s count: %zd\n",
+            (in->source == AUDIO_SOURCE_ECHO_REFERENCE) ? "Channel" : "Microphone", mic_count);
     size_t idx;
     for (idx = 0; idx < mic_count; idx++) {
-        dprintf(fd, "  Microphone: %zd\n", idx);
+        dprintf(fd, "  Channel: %zd\n", idx);
         dprintf(fd, "    Address: %s\n", mic_array[idx].address);
         dprintf(fd, "    Device: %d\n", mic_array[idx].device);
         dprintf(fd, "    Sensitivity (dB): %.2f\n", mic_array[idx].sensitivity);
@@ -787,19 +823,17 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     ALOGV("adev_open_output_stream...");
 
     struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
-    struct alsa_stream_out *out;
-    struct pcm_params *params;
-    int ret = 0;
-
     int out_port = get_audio_output_port(devices);
-
-    params = pcm_params_get(CARD_OUT, out_port, PCM_OUT);
-    if (!params)
+    struct pcm_params* params = pcm_params_get(CARD_OUT, out_port, PCM_OUT);
+    if (!params) {
         return -ENOSYS;
+    }
 
-    out = (struct alsa_stream_out *)calloc(1, sizeof(struct alsa_stream_out));
-    if (!out)
+    struct alsa_stream_out* out =
+            (struct alsa_stream_out*)calloc(1, sizeof(struct alsa_stream_out));
+    if (!out) {
         return -ENOMEM;
+    }
 
     out->stream.common.get_sample_rate = out_get_sample_rate;
     out->stream.common.set_sample_rate = out_set_sample_rate;
@@ -832,7 +866,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
         config->sample_rate = out->config.rate;
         config->format = audio_format_from_pcm_format(out->config.format);
         config->channel_mask = audio_channel_out_mask_from_count(CHANNEL_STEREO);
-        ret = -EINVAL;
+        goto error_1;
     }
 
     ALOGI("adev_open_output_stream selects channels=%d rate=%d format=%d, devices=%d",
@@ -847,8 +881,6 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     config->channel_mask = out_get_channels(&out->stream.common);
     config->sample_rate = out_get_sample_rate(&out->stream.common);
 
-    *stream_out = &out->stream;
-
     out->speaker_eq = NULL;
     if (out_port == PORT_INTERNAL_SPEAKER) {
         out_set_eq(out);
@@ -857,18 +889,20 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
         }
     }
 
-    /* TODO The retry mechanism isn't implemented in AudioPolicyManager/AudioFlinger. */
-    ret = 0;
-
-    if (ret == 0) {
-        int aec_ret = init_aec_reference_config(ladev->aec, out);
-        if (aec_ret) {
-            ALOGE("AEC: Speaker config init failed!");
-            return -EINVAL;
-        }
+    int aec_ret = init_aec_reference_config(ladev->aec, out);
+    if (aec_ret) {
+        ALOGE("AEC: Speaker config init failed!");
+        goto error_2;
     }
 
-    return ret;
+    *stream_out = &out->stream;
+    return 0;
+
+error_2:
+    fir_release(out->speaker_eq);
+error_1:
+    free(out);
+    return -EINVAL;
 }
 
 static void adev_close_output_stream(struct audio_hw_device *dev,
@@ -902,7 +936,7 @@ static int adev_get_microphones(const struct audio_hw_device* dev,
     if ((mic_array == NULL) || (mic_count == NULL)) {
         return -EINVAL;
     }
-    get_mic_characteristics(mic_array, mic_count);
+    get_input_characteristics(NULL, mic_array, mic_count);
     return 0;
 }
 
@@ -985,17 +1019,16 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     ALOGV("adev_open_input_stream...");
 
     struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
-    struct alsa_stream_in *in;
-    struct pcm_params *params;
-    int ret = 0;
 
-    params = pcm_params_get(CARD_IN, PORT_BUILTIN_MIC, PCM_IN);
-    if (!params)
+    struct pcm_params* params = pcm_params_get(CARD_IN, PORT_BUILTIN_MIC, PCM_IN);
+    if (!params) {
         return -ENOSYS;
+    }
 
-    in = (struct alsa_stream_in *)calloc(1, sizeof(struct alsa_stream_in));
-    if (!in)
+    struct alsa_stream_in* in = (struct alsa_stream_in*)calloc(1, sizeof(struct alsa_stream_in));
+    if (!in) {
         return -ENOMEM;
+    }
 
     in->stream.common.get_sample_rate = in_get_sample_rate;
     in->stream.common.set_sample_rate = in_set_sample_rate;
@@ -1015,20 +1048,26 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     in->stream.get_capture_position = in_get_capture_position;
     in->stream.get_active_microphones = in_get_active_microphones;
 
-    in->config.channels = CHANNEL_STEREO;
     if (source == AUDIO_SOURCE_ECHO_REFERENCE) {
         in->config.rate = PLAYBACK_CODEC_SAMPLING_RATE;
+        in->config.channels = NUM_AEC_REFERENCE_CHANNELS;
+        in->config.period_size =
+                CAPTURE_PERIOD_SIZE * PLAYBACK_CODEC_SAMPLING_RATE / CAPTURE_CODEC_SAMPLING_RATE;
     } else {
         in->config.rate = CAPTURE_CODEC_SAMPLING_RATE;
+        in->config.channels = CHANNEL_STEREO;
+        in->config.period_size = CAPTURE_PERIOD_SIZE;
     }
     in->config.format = PCM_FORMAT_S32_LE;
-    in->config.period_size = CAPTURE_PERIOD_SIZE;
     in->config.period_count = CAPTURE_PERIOD_COUNT;
 
     if (in->config.rate != config->sample_rate ||
-           audio_channel_count_from_in_mask(config->channel_mask) != CHANNEL_STEREO ||
-               in->config.format !=  pcm_format_from_audio_format(config->format) ) {
-        ret = -EINVAL;
+        audio_channel_count_from_in_mask(config->channel_mask) != in->config.channels ||
+        in->config.format != pcm_format_from_audio_format(config->format)) {
+        config->format = audio_format_from_pcm_format(in->config.format);
+        config->channel_mask = audio_channel_in_mask_from_count(in->config.channels);
+        config->sample_rate = in->config.rate;
+        goto error_1;
     }
 
     ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d source=%d",
@@ -1040,29 +1079,12 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     in->source = source;
     in->devices = devices;
 
-    config->format = in_get_format(&in->stream.common);
-    config->channel_mask = in_get_channels(&in->stream.common);
-    config->sample_rate = in_get_sample_rate(&in->stream.common);
-
-    /* If AEC is in the app, only configure based on ECHO_REFERENCE spec.
-     * If AEC is in the HAL, configure using the given mic stream. */
-    bool aecInput = true;
-#if !defined(AEC_HAL)
-    aecInput = (in->source == AUDIO_SOURCE_ECHO_REFERENCE);
-#endif
-
-    if ((ret == 0) && aecInput) {
+    if (is_aec_input(in)) {
         int aec_ret = init_aec_mic_config(ladev->aec, in);
         if (aec_ret) {
             ALOGE("AEC: Mic config init failed!");
-            return -EINVAL;
+            goto error_1;
         }
-    }
-
-    if (ret) {
-        free(in);
-    } else {
-        *stream_in = &in->stream;
     }
 
 #if DEBUG_AEC
@@ -1071,15 +1093,23 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     remove("/data/local/traces/aec_ref_timestamps.txt");
     remove("/data/local/traces/aec_in_timestamps.txt");
 #endif
-    return ret;
+
+    *stream_in = &in->stream;
+    return 0;
+
+error_1:
+    free(in);
+    return -EINVAL;
 }
 
 static void adev_close_input_stream(struct audio_hw_device *dev,
         struct audio_stream_in *stream)
 {
     ALOGV("adev_close_input_stream...");
-    struct alsa_audio_device *adev = (struct alsa_audio_device *)dev;
-    destroy_aec_mic_config(adev->aec);
+    struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
+    if (is_aec_input(in)) {
+        destroy_aec_mic_config(in->dev->aec);
+    }
     free(stream);
     return;
 }
@@ -1096,6 +1126,8 @@ static int adev_close(hw_device_t *device)
 
     struct alsa_audio_device *adev = (struct alsa_audio_device *)device;
     release_aec(adev->aec);
+    audio_route_free(adev->audio_route);
+    mixer_close(adev->mixer);
     free(device);
     return 0;
 }
@@ -1103,16 +1135,16 @@ static int adev_close(hw_device_t *device)
 static int adev_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
-    struct alsa_audio_device *adev;
-
     ALOGV("adev_open: %s", name);
 
-    if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0)
+    if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0) {
         return -EINVAL;
+    }
 
-    adev = calloc(1, sizeof(struct alsa_audio_device));
-    if (!adev)
+    struct alsa_audio_device* adev = calloc(1, sizeof(struct alsa_audio_device));
+    if (!adev) {
         return -ENOMEM;
+    }
 
     adev->hw_device.common.tag = HARDWARE_DEVICE_TAG;
     adev->hw_device.common.version = AUDIO_DEVICE_API_VERSION_2_0;
@@ -1140,27 +1172,40 @@ static int adev_open(const hw_module_t* module, const char* name,
     *device = &adev->hw_device.common;
 
     adev->mixer = mixer_open(CARD_OUT);
-
     if (!adev->mixer) {
         ALOGE("Unable to open the mixer, aborting.");
-        return -EINVAL;
+        goto error_1;
     }
 
     adev->audio_route = audio_route_init(CARD_OUT, MIXER_XML_PATH);
     if (!adev->audio_route) {
         ALOGE("%s: Failed to init audio route controls, aborting.", __func__);
-        return -EINVAL;
+        goto error_2;
     }
 
+    struct aec_params params = {
+            .num_mic_channels = CHANNEL_STEREO,
+            .num_reference_channels = NUM_AEC_REFERENCE_CHANNELS,
+            .num_playback_channels = CHANNEL_STEREO,
+            .mic_sampling_rate_hz = CAPTURE_CODEC_SAMPLING_RATE,
+            .playback_sampling_rate_hz = PLAYBACK_CODEC_SAMPLING_RATE,
+    };
     pthread_mutex_lock(&adev->lock);
-    if (init_aec(CAPTURE_CODEC_SAMPLING_RATE, NUM_AEC_REFERENCE_CHANNELS,
-                    CHANNEL_STEREO, &adev->aec)) {
+    if (init_aec(&params, &adev->aec)) {
         pthread_mutex_unlock(&adev->lock);
-        return -EINVAL;
+        goto error_3;
     }
     pthread_mutex_unlock(&adev->lock);
 
     return 0;
+
+error_3:
+    audio_route_free(adev->audio_route);
+error_2:
+    mixer_close(adev->mixer);
+error_1:
+    free(adev);
+    return -EINVAL;
 }
 
 static struct hw_module_methods_t hal_module_methods = {
