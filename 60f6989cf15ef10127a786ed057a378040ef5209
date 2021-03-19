@@ -16,6 +16,23 @@
       "message": "This CL is not the culprit. You need to adjust the size of amlogic_dynamic_partitions instead.",
       "revId": "60f6989cf15ef10127a786ed057a378040ef5209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ab5a71_6e95c5b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-03-19T18:41:26Z",
+      "side": 1,
+      "message": "Which, I believe, is in device/askey/deadpool/BoardConfig.mk",
+      "revId": "60f6989cf15ef10127a786ed057a378040ef5209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
