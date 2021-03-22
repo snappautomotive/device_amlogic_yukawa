@@ -33,6 +33,24 @@
       "message": "Which, I believe, is in device/askey/deadpool/BoardConfig.mk",
       "revId": "60f6989cf15ef10127a786ed057a378040ef5209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c2c8922_55fe3161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-03-22T16:40:46Z",
+      "side": 1,
+      "message": "Hi Yifan, device/askey/deadpool/BoardConfig.mk is a different device config file.",
+      "parentUuid": "81ab5a71_6e95c5b5",
+      "revId": "60f6989cf15ef10127a786ed057a378040ef5209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
