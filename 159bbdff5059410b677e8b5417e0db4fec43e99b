@@ -93,6 +93,30 @@
       },
       "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28cdbf3_5fe48391",
+        "filename": "ueventd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-05-05T17:15:03Z",
+      "side": 1,
+      "message": "/dev/vidio0 is hardware video decoder",
+      "parentUuid": "d1708ef3_230b263e",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
