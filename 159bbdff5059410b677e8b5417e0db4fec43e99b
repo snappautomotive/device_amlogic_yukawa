@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a19033b_a9d90b89",
+        "filename": "camera/external_camera_config.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-05-05T07:17:42Z",
+      "side": 1,
+      "message": "Can you please put this file under hal/camera/ ?",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "decc8e58_07bdb61e",
+        "filename": "ueventd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-05-05T07:17:42Z",
+      "side": 1,
+      "message": "/dev/video0 should not be system camera\nI guess /dev/video1 is for camera, right?",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
