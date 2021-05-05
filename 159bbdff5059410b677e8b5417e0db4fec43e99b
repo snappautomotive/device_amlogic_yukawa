@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa896c4e_73bb5d91",
+        "filename": "camera/external_camera_config.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1128983
+      },
+      "writtenOn": "2021-05-05T17:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a19033b_a9d90b89",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "decc8e58_07bdb61e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-05T07:17:42Z",
       "side": 1,
       "message": "/dev/video0 should not be system camera\nI guess /dev/video1 is for camera, right?",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1708ef3_230b263e",
+        "filename": "ueventd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1128983
+      },
+      "writtenOn": "2021-05-05T17:14:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure what video0 is.  Do you know?  It just shows up at boot.\n\nThe * convention seems to apply to other devices: \nhttps://cs.android.com/search?q\u003dfile:ueventd%20%2Fdev%2Fvideo\u0026sq\u003d\u0026ss\u003dandroid\n\nBut I can change it to /dev/video1..3 if that\u0027s better.",
+      "parentUuid": "decc8e58_07bdb61e",
       "range": {
         "startLine": 14,
         "startChar": 5,
