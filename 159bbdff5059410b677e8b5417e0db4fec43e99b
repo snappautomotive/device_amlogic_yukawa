@@ -117,6 +117,30 @@
       },
       "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a517316_68c4f2db",
+        "filename": "ueventd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1128983
+      },
+      "writtenOn": "2021-05-05T17:23:49Z",
+      "side": 1,
+      "message": "I see, so it\u0027s a vendor thing?\n\nI\u0027ve changed the permission to apply to video1..3",
+      "parentUuid": "a28cdbf3_5fe48391",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "159bbdff5059410b677e8b5417e0db4fec43e99b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
