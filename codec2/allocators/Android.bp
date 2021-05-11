@@ -1,0 +1,39 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_shared {
+    name: "libv4l2_codec2_vendor_allocator",
+    vendor_available: true,
+
+    defaults: [
+        "libcodec2-impl-defaults",
+    ],
+
+    srcs: [
+        "C2YukawaAllocatorFactory.cpp",
+    ],
+    include_dirs: [
+        "external/libchrome",
+        "frameworks/av/media/codec2/core/include/",
+        "frameworks/av/media/codec2/vndk/include/",
+    ],
+    shared_libs: [
+        "android.hardware.graphics.allocator@2.0",
+        "android.hardware.graphics.mapper@3.0",
+        "libarcbridge",
+        "libarcbridgeservice",
+        "libchrome",
+        "libcutils",
+        "libhidlbase",
+        "libmojo",
+        "libv4l2_codec2_common",
+        "libc2plugin_store",
+    ],
+    cflags: [
+      "-Werror",
+      "-Wall",
+      "-std=c++14",
+      "-Wno-unused-parameter",
+    ],
+}
