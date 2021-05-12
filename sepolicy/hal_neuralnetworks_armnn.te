@@ -1,0 +1,12 @@
+type hal_neuralnetworks_armnn, domain;
+hal_server_domain(hal_neuralnetworks_armnn, hal_neuralnetworks)
+
+type hal_neuralnetworks_armnn_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_neuralnetworks_armnn)
+
+allow hal_neuralnetworks_armnn gpu_device:dir { open read search };
+allow hal_neuralnetworks_armnn gpu_device:chr_file { getattr ioctl map open read write };
+allow hal_neuralnetworks_armnn graphics_device:chr_file { getattr };
+
+allow hal_neuralnetworks_armnn vendor_data_file:file { open read getattr write };
+allow hal_neuralnetworks_armnn vendor_data_file:dir { open read search };
