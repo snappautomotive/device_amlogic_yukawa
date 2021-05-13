@@ -39,6 +39,30 @@
       },
       "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1416c03c_999ac37f",
+        "filename": "sei610/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-05-13T13:45:42Z",
+      "side": 1,
+      "message": "It worked for me at any time - although possibly because earlier in the process I\u0027d managed to get the device sitting in a boot loop.",
+      "parentUuid": "9928364a_07d6cc0c",
+      "range": {
+        "startLine": 42,
+        "startChar": 69,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
