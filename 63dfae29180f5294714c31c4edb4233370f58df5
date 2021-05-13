@@ -63,6 +63,30 @@
       },
       "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a631c8_64431bcd",
+        "filename": "sei610/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-13T13:48:09Z",
+      "side": 1,
+      "message": "Ok, maybe it works any time then. Never tried.",
+      "parentUuid": "1416c03c_999ac37f",
+      "range": {
+        "startLine": 42,
+        "startChar": 69,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
