@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a1dc8c5_7f71bfa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-13T13:29:36Z",
+      "side": 1,
+      "message": "LGTM but adding Dmitry",
+      "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9928364a_07d6cc0c",
+        "filename": "sei610/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-13T13:29:36Z",
+      "side": 1,
+      "message": "nit: in the first 2s?",
+      "range": {
+        "startLine": 42,
+        "startChar": 69,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "63dfae29180f5294714c31c4edb4233370f58df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
