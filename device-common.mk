@@ -244,7 +244,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.mapper@2.1-impl
 
 # PowerHAL
 PRODUCT_PACKAGES += \
@@ -255,8 +255,8 @@ PRODUCT_PACKAGES += \
 # ThermalHAL
 PRODUCT_PACKAGES += \
     thermal.default \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service
+    android.hardware.thermal@2.0-impl \
+    android.hardware.thermal@2.0-service
 
 # Sensor HAL
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
