@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f9e534_cb23258b",
+        "filename": "device-common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-05-18T20:55:37Z",
+      "side": 1,
+      "message": "Maybe this file can be removed now? I don\u0027t think it\u0027s used in audio policy anymore.",
+      "range": {
+        "startLine": 332,
+        "startChar": 27,
+        "endLine": 332,
+        "endChar": 38
+      },
+      "revId": "dc6b98d17e585c19edea4ac166aacdd95560c3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
