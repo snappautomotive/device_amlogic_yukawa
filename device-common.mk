@@ -252,12 +252,6 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
     android.hardware.power@1.0-service
 
-# ThermalHAL
-PRODUCT_PACKAGES += \
-    thermal.default \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service
-
 # Sensor HAL
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
 TARGET_USES_NANOHUB_SENSORHAL := true
