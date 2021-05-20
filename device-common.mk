@@ -138,7 +138,6 @@ endif
 PRODUCT_PACKAGES += \
     LiveTv \
     google-tv-pairing-protocol \
-    TvProvision \
     LeanbackSampleApp \
     tv_input.default \
     com.android.media.tv.remoteprovider \
@@ -147,8 +146,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LeanbackIME
 
-ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa_sei510_gms))
+ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa32_gms yukawa_sei510_gms))
 PRODUCT_PACKAGES += \
+    TvProvision \
     TVLauncherNoGms \
     TVRecommendationsNoGms
 endif
@@ -181,6 +181,7 @@ PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
 
 # Build default bluetooth a2dp and usb audio HALs
 PRODUCT_PACKAGES += \
+    android.hardware.bluetooth.audio@2.0-impl \
     audio.usb.default \
     audio.primary.yukawa \
     audio.r_submix.default \
@@ -328,7 +329,8 @@ PRODUCT_COPY_FILES +=  \
 USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/hal/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
@@ -361,6 +363,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service \
     lights-yukawa
+
+# Enable USB Camera
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service
+PRODUCT_COPY_FILES += \
+    device/amlogic/yukawa/hal/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 # Include Virtualization APEX
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)

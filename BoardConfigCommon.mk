@@ -22,6 +22,10 @@ TARGET_BOARD_PLATFORM := yukawa
 
 # Vulkan
 BOARD_INSTALL_VULKAN := true
+
+# OpenCL
+BOARD_INSTALL_OPENCL := true
+
 # BT configs
 BOARD_HAVE_BLUETOOTH := true
 
@@ -133,6 +137,9 @@ BOARD_KERNEL_CMDLINE += drm.edid_firmware=edid/1920x1080.bin
 endif
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
 BOARD_KERNEL_CMDLINE += overlay_mgr.overlay_dt_entry=hardware_cfg_$(TARGET_SENSOR_MEZZANINE)
+endif
+ifneq ($(TARGET_MEM_SIZE),)
+BOARD_KERNEL_CMDLINE += mem=$(TARGET_MEM_SIZE)
 endif
 
 USE_E2FSPROGS := true
