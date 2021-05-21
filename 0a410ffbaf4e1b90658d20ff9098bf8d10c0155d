@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fd4dc5c_a6570af8",
+        "filename": "hal/gralloc/mali_gralloc_public_interface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-05-21T05:20:33Z",
+      "side": 1,
+      "message": "I had to cut out the layer_count values as those aren\u0027t in the descriptor for the version in HiKey960, but with those commented out this patch seemed to work ok there.",
+      "revId": "0a410ffbaf4e1b90658d20ff9098bf8d10c0155d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
