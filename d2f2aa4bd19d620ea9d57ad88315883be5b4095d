@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c043b1a2_478bc9eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2021-06-09T17:49:23Z",
+      "side": 1,
+      "message": "I can confirm that this patch allows the generation of an image fit for booting the VIM3L; no other platform has been tested.",
+      "revId": "d2f2aa4bd19d620ea9d57ad88315883be5b4095d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
