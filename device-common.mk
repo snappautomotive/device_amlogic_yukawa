@@ -248,9 +248,11 @@ PRODUCT_PACKAGES += \
 
 # PowerHAL
 PRODUCT_PACKAGES += \
-    power.default \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
+    android.hardware.power-service.example
+
+# PowerStats HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power.stats-service.example
 
 # Sensor HAL
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
