@@ -158,9 +158,6 @@ BOARD_SEPOLICY_DIRS += \
         device/amlogic/yukawa/sepolicy
 
 DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest.xml
-ifeq ($(TARGET_USE_AB_SLOT), true)
-DEVICE_MANIFEST_FILE += device/amlogic/yukawa/hal/bootctrl/bootctrl.xml
-endif
 
 ifneq ($(TARGET_KERNEL_USE), 4.19)
 DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest_kernel5.xml
