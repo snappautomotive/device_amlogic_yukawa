@@ -49,6 +49,8 @@ typedef struct hdmicec_context
     void *cb_arg;
     pthread_t thread;
     int exit_fd;
+    pthread_mutex_t cec_enabled_lock;
+    bool cec_enabled;
 } hdmicec_context_t;
 
 static int hdmicec_add_logical_address(const struct hdmi_cec_device *dev, cec_logical_address_t addr)
@@ -166,6 +168,13 @@ static int hdmicec_send_message(const struct hdmi_cec_device *dev, const cec_mes
     struct cec_msg cec_msg;
     int ret;
 
+    pthread_mutex_lock(&ctx->cec_enabled_lock);
+    bool cec_enabled = ctx->cec_enabled;
+    pthread_mutex_unlock(&ctx->cec_enabled_lock);
+    if (!cec_enabled) {
+        return HDMI_RESULT_FAIL;
+    }
+
     ALOGD("%s: len=%u\n", __func__, (unsigned int)msg->length);
 
     memset(&cec_msg, 0, sizeof(cec_msg));
@@ -241,10 +250,14 @@ static void hdmicec_get_port_info(const struct hdmi_cec_device *dev,
 
 static void hdmicec_set_option(const struct hdmi_cec_device *dev, int flag, int value)
 {
-    (void)dev;
+    struct hdmicec_context* ctx = (struct hdmicec_context*)dev;
     ALOGD("%s: flag=%d, value=%d", __func__, flag, value);
     switch (flag) {
         case HDMI_OPTION_ENABLE_CEC:
+            pthread_mutex_lock(&ctx->cec_enabled_lock);
+            ctx->cec_enabled = (value == 1 ? true : false);
+            pthread_mutex_unlock(&ctx->cec_enabled_lock);
+            break;
         case HDMI_OPTION_WAKEUP:
         case HDMI_OPTION_SYSTEM_CEC_CONTROL:
             /* TOFIX */
@@ -305,6 +318,13 @@ static void *event_thread(void *arg)
             if (ret)
                 continue;
 
+            pthread_mutex_lock(&ctx->cec_enabled_lock);
+            bool cec_enabled = ctx->cec_enabled;
+            pthread_mutex_unlock(&ctx->cec_enabled_lock);
+            if (!cec_enabled) {
+                continue;
+            }
+
             if (ev.event == CEC_EVENT_STATE_CHANGE) {
                 event.type = HDMI_EVENT_HOT_PLUG;
                 event.dev = &ctx->device;
@@ -334,6 +354,13 @@ static void *event_thread(void *arg)
 
             if (msg.rx_status != CEC_RX_STATUS_OK) {
                 ALOGD("%s: rx_status=%d\n", __func__, msg.rx_status);
+                continue;
+            }
+
+            pthread_mutex_lock(&ctx->cec_enabled_lock);
+            bool cec_enabled = ctx->cec_enabled;
+            pthread_mutex_unlock(&ctx->cec_enabled_lock);
+            if (!cec_enabled) {
                 continue;
             }
 
@@ -382,6 +409,7 @@ static int hdmicec_close(struct hdmi_cec_device *dev)
         close(ctx->exit_fd);
     free(ctx);
 
+    ctx->cec_enabled = false;
     return 0;
 }
 
@@ -432,6 +460,8 @@ static int cec_init(struct hdmicec_context *ctx)
     ret = ioctl(ctx->cec_fd, CEC_ADAP_S_LOG_ADDRS, &laddrs);
     if (ret)
         return ret;
+
+    pthread_mutex_init(&ctx->cec_enabled_lock, NULL);
 
     ALOGD("%s: initialized CEC controller\n", __func__);
 
@@ -494,6 +524,8 @@ static int open_hdmi_cec(const struct hw_module_t *module, const char *id,
         ALOGE("Can't create event thread: %s\n", strerror(errno));
         goto fail;
     }
+
+    ctx->cec_enabled = true;
     return 0;
 
 fail:
