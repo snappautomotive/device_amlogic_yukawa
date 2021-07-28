@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "096caeb3_5f30ada2",
+        "filename": "hal/hdmicec/hdmi_cec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-07-28T04:43:12Z",
+      "side": 1,
+      "message": "1) Does it makes sense to check before ioctl()? In line #306?\n2) This is global value that can change outside the thread - it will be probably better to have some synchronization primitive around it.",
+      "range": {
+        "startLine": 315,
+        "startChar": 17,
+        "endLine": 315,
+        "endChar": 20
+      },
+      "revId": "f122ed5b2563879bc5d7e9b606c62387bd11d06c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a96ca3_b5cf298d",
+        "filename": "hal/hdmicec/hdmi_cec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-07-28T04:43:12Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 351,
+        "startChar": 17,
+        "endLine": 351,
+        "endChar": 20
+      },
+      "revId": "f122ed5b2563879bc5d7e9b606c62387bd11d06c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
