@@ -1,5 +1,5 @@
 ifndef TARGET_KERNEL_USE
-TARGET_KERNEL_USE=4.19
+TARGET_KERNEL_USE=5.4
 endif
 
 $(call inherit-product, device/amlogic/yukawa/device-common.mk)
