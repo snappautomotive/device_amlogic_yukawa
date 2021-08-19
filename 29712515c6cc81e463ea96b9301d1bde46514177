@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2485df_59221ad0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128983
+      },
+      "writtenOn": "2021-08-19T20:02:38Z",
+      "side": 1,
+      "message": "GD is the new BT stack. I think we\u0027d want to enable it.  Maybe wait for the BT team to address the bug?",
+      "revId": "29712515c6cc81e463ea96b9301d1bde46514177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
