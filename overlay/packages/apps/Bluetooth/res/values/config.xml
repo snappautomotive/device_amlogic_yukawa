@@ -16,4 +16,6 @@
     <bool name="profile_supported_avrcp_target">true</bool>
     <bool name="profile_supported_avrcp_controller">true</bool>
     <bool name="profile_supported_a2dp_sink">true</bool>
+
+    <bool name="enable_gd_up_to_scanning_layer">false</bool>
 </resources>
