@@ -7,9 +7,7 @@
 /dev/i2c-0             u:object_r:led_device:s0
 /dev/nanohub           u:object_r:sensors_device:s0
 /dev/nanohub_comms     u:object_r:sensors_device:s0
-
-/sys/devices/virtual/thermal(/.*)?      u:object_r:sysfs_thermal:s0
-/sys/class/thermal(/.*)?                u:object_r:sysfs_thermal:s0
+/dev/dma_heap/linux,cma u:object_r:dmabuf_cma_heap_device:s0
 
 /sys/devices/platform/soc/ffe03000.sd/mmc_host(/.*)?             u:object_r:sysfs_suspend_stats:s0
 /sys/devices/platform/soc/ff800000.bus/ff8000a8.rtc/wakeup(/.*)? u:object_r:sysfs_suspend_stats:s0
@@ -20,7 +18,7 @@
 
 # files in /vendor
 /(vendor|system/vendor)/lib(64)?/hw/gralloc\.yukawa\.so u:object_r:same_process_hal_file:s0
-/vendor/bin/hw/android\.hardware\.health@2\.0-service\.yukawa u:object_r:hal_health_default_exec:s0
+/vendor/lib(64)?/hw/android\.hardware\.health@2\.0-impl-2\.1-cuttlefish\.so u:object_r:same_process_hal_file:s0
 /vendor/bin/hw/lights-yukawa u:object_r:hal_light_default_exec:s0
 
 #Block devices
