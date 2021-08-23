@@ -22,6 +22,30 @@
       },
       "revId": "7409ef0ef58b138d1a8685eba860c924b20dcde3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec01fc2_9338d873",
+        "filename": "hal/hdmicec/hdmi_cec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-08-23T20:03:10Z",
+      "side": 1,
+      "message": "It is already there.",
+      "parentUuid": "b572f1ea_fd879929",
+      "range": {
+        "startLine": 464,
+        "startChar": 4,
+        "endLine": 464,
+        "endChar": 22
+      },
+      "revId": "7409ef0ef58b138d1a8685eba860c924b20dcde3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
