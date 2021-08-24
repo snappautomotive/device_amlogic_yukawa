@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "271f5130_33ec1060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-08-24T17:38:04Z",
+      "side": 1,
+      "message": "Would it be better to refactor this out into device-common.mk? Or would that cause issues for the VIM3L boards?",
+      "revId": "84426c4b4c5aad29dd0e008ad86f8dbcfdfdc987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
