@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c41bc91_7d21f9c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684060
+      },
+      "writtenOn": "2021-10-16T19:05:23Z",
+      "side": 1,
+      "message": "Hello Dmitry,\n\nThank you for your great work. I will be happy to test it on rpi4 and sunxi platforms.\nCould you please assign the same topic for all dependent changes?",
+      "revId": "1e3f2b4f1722e65fbe2df94d20d69a951e2fa3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
