@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0d8f87_c258f8ae",
+        "filename": "device-common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-11-02T18:15:43Z",
+      "side": 1,
+      "message": "Just FYI: I suspect this will run the service in 32-bit mode.\nFor 64-bit mode you need to do: android.hardware.media.c2@1.0-service-v4l2:64",
+      "range": {
+        "startLine": 218,
+        "startChar": 42,
+        "endLine": 218,
+        "endChar": 46
+      },
+      "revId": "ae8f9400f940d3b00148937c4a227adca9243a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
