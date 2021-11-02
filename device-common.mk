@@ -206,6 +206,30 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/video_firmware/sm1_vp9_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_vp9_mmu.bin
 
 PRODUCT_PACKAGES += \
+    v4l2_decode
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.v4l2_codec2.drm_device_name=vgem \
+    ro.vendor.v4l2_codec2.drm_device_path=/dev/dri/renderD128 \
+    ro.vendor.v4l2_codec2.decode_concurrent_instances=1 \
+    ro.vendor.v4l2_codec2.encode_concurrent_instances=1
+
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.0-service-v4l2 \
+    libc2plugin_store
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.stagefright.c2-poolmask=0xf50000
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy \
+    $(LOCAL_PATH)/media_xml/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml
+
+PRODUCT_SOONG_NAMESPACES += \
+    external/v4l2_codec2
+
+# Audio
+PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.audio@7.0-impl \
     android.hardware.audio.effect@7.0-impl \
