@@ -577,6 +577,7 @@ int mali_gralloc_ion_allocate(mali_gralloc_module *m, const gralloc_buffer_descr
 		{
 			buffer_descriptor_t *bufDescriptor = (buffer_descriptor_t *)(descriptors[i]);
 			usage = bufDescriptor->consumer_usage | bufDescriptor->producer_usage;
+			int second_plane_fd = -1;
 
 			heap_mask = pick_ion_heap(usage);
 
@@ -601,6 +602,21 @@ int mali_gralloc_ion_allocate(mali_gralloc_module *m, const gralloc_buffer_descr
 				return -1;
 			}
 
+			// Allocate a second plane for NV12 format
+			if (bufDescriptor->internal_format == 0x100) {
+				second_plane_fd = alloc_from_ion_heap(m->ion_client, bufDescriptor->size, heap_mask, ion_flags, &min_pgsz);
+
+				if (second_plane_fd < 0)
+				{
+					AERR("ion_alloc failed from client ( %d )", m->ion_client);
+
+					/* need to free already allocated memory. not just this one */
+					mali_gralloc_ion_free_internal(pHandle, numDescriptors);
+
+					return -1;
+				}
+			}
+
 			private_handle_t *hnd = new private_handle_t(
 			    private_handle_t::PRIV_FLAGS_USES_ION | priv_heap_flag, bufDescriptor->size, min_pgsz,
 			    bufDescriptor->consumer_usage, bufDescriptor->producer_usage, shared_fd, bufDescriptor->hal_format,
@@ -612,6 +628,10 @@ int mali_gralloc_ion_allocate(mali_gralloc_module *m, const gralloc_buffer_descr
 			{
 				mali_gralloc_ion_free_internal(pHandle, numDescriptors);
 				return -1;
+			}
+
+			if (second_plane_fd >= 0) {
+				hnd->share_attr_fd = second_plane_fd;
 			}
 
 			pHandle[i] = hnd;

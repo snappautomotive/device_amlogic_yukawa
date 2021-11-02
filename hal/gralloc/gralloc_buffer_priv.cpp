@@ -48,7 +48,9 @@ int gralloc_buffer_attr_allocate(private_handle_t *hnd)
 
 	if (hnd->share_attr_fd >= 0)
 	{
-		ALOGW("Warning share attribute fd already exists during create. Closing.");
+		if (hnd->internal_format == 0x100)
+			return 0;
+		ALOGW("Warning share attribute fd already exists during create. Aborting.");
 		close(hnd->share_attr_fd);
 	}
 
