@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b32d0a_6f4cf278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-11-17T22:09:50Z",
+      "side": 1,
+      "message": "Original license code:\nhttps://android-review.googlesource.com/c/device/amlogic/yukawa/+/1682208",
+      "revId": "06a28c3602c6426ef558c3ba74c6db0e2c5effca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
