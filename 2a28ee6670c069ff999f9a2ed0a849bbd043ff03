@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74199a28_e60dda0c",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-11-24T23:43:11Z",
+      "side": 1,
+      "message": "Do we need to replace it in dtimages.mk too?",
+      "range": {
+        "startLine": 121,
+        "startChar": 64,
+        "endLine": 121,
+        "endChar": 75
+      },
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
