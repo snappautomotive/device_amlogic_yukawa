@@ -22,6 +22,30 @@
       },
       "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85a2f3f_11cc8ba9",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-24T23:49:33Z",
+      "side": 1,
+      "message": "Not for this usecase at least (converting board configuration to starlark), with this change we are able to use starlark to generate ninja files identical to the old ninja files.\n\nHow is dtimages.mk used though? I don\u0027t see it getting included by anything.",
+      "parentUuid": "74199a28_e60dda0c",
+      "range": {
+        "startLine": 121,
+        "startChar": 64,
+        "endLine": 121,
+        "endChar": 75
+      },
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
