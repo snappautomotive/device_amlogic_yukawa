@@ -46,6 +46,30 @@
       },
       "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b0ae1f_07072ed2",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-11-24T23:55:25Z",
+      "side": 1,
+      "message": "It is in build/tasks/dtimages.mk. It has droidcore: dtbimage dtboimage\nAnd it is building DTBOIMAGE :\u003d $(PRODUCT_OUT)/$(DTBO_UNSIGNED)",
+      "parentUuid": "a85a2f3f_11cc8ba9",
+      "range": {
+        "startLine": 121,
+        "startChar": 64,
+        "endLine": 121,
+        "endChar": 75
+      },
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
