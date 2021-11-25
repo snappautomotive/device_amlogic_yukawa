@@ -70,6 +70,30 @@
       },
       "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8ec559_dbdc0c56",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-25T01:05:31Z",
+      "side": 1,
+      "message": "Ah I guess it\u0027s included here: https://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d6073;drc\u003d351cd2e48901d31fe2b070cf847608bd70ffe39a\n\nI believe this is for custom build steps outside of product/board configuration, so I think it\u0027s fine to keep using PRODUCT_OUT there.\n\nActually, it uses $(PRODUCT_OUT) with :\u003d instead of deferred expansion, so it\u0027s definitely fine to keep there. It\u0027s not the PRODUCT_OUT that\u0027s the issue, it was the deferred expansion.",
+      "parentUuid": "d9b0ae1f_07072ed2",
+      "range": {
+        "startLine": 121,
+        "startChar": 64,
+        "endLine": 121,
+        "endChar": 75
+      },
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
