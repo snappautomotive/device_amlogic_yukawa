@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa0fb54f_5303b3f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-30T19:28:25Z",
+      "side": 1,
+      "message": "Done, aosp/1906551. Though I didn\u0027t do it in the converter because it\u0027s dependant on TARGET_PRODUCT which comes from the product config.",
+      "parentUuid": "c04f525f_5c5f36e6",
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74199a28_e60dda0c",
