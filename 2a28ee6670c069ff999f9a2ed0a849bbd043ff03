@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c04f525f_5c5f36e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-30T18:49:41Z",
+      "side": 1,
+      "message": "If there are multiple places where PRODUCT_OUT is to be replaced, perhaps it would be better to handle this in the converter by adding another predefined variable?",
+      "revId": "2a28ee6670c069ff999f9a2ed0a849bbd043ff03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74199a28_e60dda0c",
         "filename": "BoardConfigCommon.mk",
         "patchSetId": 1
