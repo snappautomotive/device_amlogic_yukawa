@@ -334,6 +334,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/hal/audio/audio_policy_configuration_hdmi_only.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
 DEVICE_PACKAGE_OVERLAYS += \
     device/amlogic/yukawa/hal/audio/overlay_hdmi_only
+TARGET_USE_HDMI_AUDIO ?= true
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/hal/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
