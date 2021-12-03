@@ -16,6 +16,24 @@
       "message": "Nit: Extra space.",
       "revId": "cdbbf19e4d912de19c4eff0a370eb24eec012868",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a01b73_96c4334c",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2021-12-03T16:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace1118c_fb8dbf44",
+      "revId": "cdbbf19e4d912de19c4eff0a370eb24eec012868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
