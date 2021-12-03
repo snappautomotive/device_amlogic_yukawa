@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace1118c_fb8dbf44",
+        "filename": "hal/audio/audio_hw.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1550692
+      },
+      "writtenOn": "2021-12-03T16:14:52Z",
+      "side": 1,
+      "message": "Nit: Extra space.",
+      "revId": "cdbbf19e4d912de19c4eff0a370eb24eec012868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
