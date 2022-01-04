@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abdaa98_f686775f",
+        "filename": "media_xml/media_profiles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2022-01-04T10:37:36Z",
+      "side": 1,
+      "message": "This file seems to be copied from somewhere else. \n\nMaybe we can document (in the commit message) where it comes from ?",
+      "revId": "c4933b491f1a7e93c220dd56d70d3c11d1bf3202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
