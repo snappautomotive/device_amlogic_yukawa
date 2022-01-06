@@ -33,7 +33,7 @@ import android.util.Log;
 
 public class HotwordMicToggleProvider extends ContentProvider {
     private static final String TAG = "HotwordMicToggleProvider";
-
+    private static final boolean DEBUG = false;
     private static final String HOTWORDMIC_AUTH = "atv.hotwordmic";
     private static final String TOGGLE_STATE = "togglestate";
     public static final Uri HOTWORDMIC_URI = new Uri.Builder()
@@ -64,7 +64,7 @@ public class HotwordMicToggleProvider extends ContentProvider {
         if (HOTWORDMIC_URI.equals(uri) && isAllowedPackage()) {
             MatrixCursor cursor = new MatrixCursor(new String[] {"result"});
             boolean micMuted = isMicMuted();
-            Log.d(TAG, "micMuted: " + micMuted);
+            if (DEBUG) Log.v(TAG, "micMuted: " + micMuted);
             // URI values expected: MUTED (0), UNMUTED (1)
             cursor.addRow(new Integer[] {micMuted ? 0 : 1});
             return cursor;
