@@ -1,5 +1,5 @@
 ifndef TARGET_KERNEL_USE
-TARGET_KERNEL_USE := 5.4
+TARGET_KERNEL_USE := 5.10
 endif
 
 ifeq ($(TARGET_VIM3), true)
