@@ -186,8 +186,6 @@ PRODUCT_PACKAGES += \
     audio.primary.yukawa \
     audio.r_submix.default \
     audio.bluetooth.default \
-    audio.hearing_aid.default \
-    audio.a2dp.default \
     tinyplay \
     tinycap \
     tinymix \
