@@ -190,8 +190,12 @@ static int hdmicec_send_message(const struct hdmi_cec_device *dev, const cec_mes
         return HDMI_RESULT_FAIL;
     }
 
-    if (cec_msg.tx_status != CEC_TX_STATUS_OK)
+    if (cec_msg.tx_status != CEC_TX_STATUS_OK) {
         ALOGD("%s: tx_status=%d\n", __func__, cec_msg.tx_status);
+    } else if (msg->length == 0) {
+        ALOGD("%s: Override tx_status to NACK\n", __func__);
+        return HDMI_RESULT_NACK;
+    }
 
     switch (cec_msg.tx_status) {
         case CEC_TX_STATUS_OK:
