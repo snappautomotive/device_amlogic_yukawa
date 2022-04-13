@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d7a771_a13646e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851100
+      },
+      "writtenOn": "2022-04-13T09:58:10Z",
+      "side": 1,
+      "message": "We shouldn\u0027t always return NACK for polling messages - see b/223627827 comment#14",
+      "revId": "b5de5b45ebe372bce157fea04af271cc0d8bcf88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
