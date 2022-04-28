@@ -201,6 +201,8 @@ static int hdmicec_send_message(const struct hdmi_cec_device *dev, const cec_mes
         case CEC_TX_STATUS_NACK:
             return HDMI_RESULT_NACK;
         default:
+            if (cec_msg.tx_status & CEC_TX_STATUS_NACK)
+                return HDMI_RESULT_NACK;
             return HDMI_RESULT_FAIL;
     }
 }
