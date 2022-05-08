@@ -7,16 +7,17 @@ on early-init
 on init
     write /proc/sys/vm/page-cluster 0
 
+    # boot time fs tuning
+    write /sys/block/mmcblk1/queue/iostats 0
+    write /sys/block/mmcblk1/queue/scheduler bfq
+    write /sys/block/mmcblk1/queue/iosched/slice_idle 0
+    write /sys/block/mmcblk1/queue/nr_requests 256
+
 on fs
     mount_all /vendor/etc/fstab.yukawa
     swapon_all /vendor/etc/fstab.yukawa
 
 on post-fs
-# fake some battery state
-    setprop status.battery.state Slow
-    setprop status.battery.level 5
-    setprop status.battery.level_raw  50
-    setprop status.battery.level_scale 9
     setprop ro.hardware.hwcomposer drm_meson
 
 on zygote-start
