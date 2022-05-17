@@ -122,10 +122,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
 # BT and Wifi FW
+ifeq ($(TARGET_ADT3), true)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/BCM4356A2.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4356A2.hcd \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4356a2_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4356a2_ag.bin \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram_ap6356.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
+else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/BCM.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4359C0.hcd \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram_ap6359.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
+endif
 
 ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Use Launcher3QuickStep
@@ -175,6 +182,25 @@ PRODUCT_PACKAGES +=  vulkan.yukawa.so
 
 # Bluetooth
 PRODUCT_PACKAGES += android.hardware.bluetooth@1.1-service.btlinux
+PRODUCT_PROPERTY_OVERRIDES += \
+    bluetooth.core.gap.le.privacy.enabled=false \
+    bluetooth.profile.asha.central.enabled=true \
+    bluetooth.profile.a2dp.source.enabled=true \
+    bluetooth.profile.avrcp.target.enabled=true \
+    bluetooth.profile.bap.broadcast.assist.enabled=true \
+    bluetooth.profile.bap.unicast.client.enabled=true \
+    bluetooth.profile.bas.client.enabled=true \
+    bluetooth.profile.ccp.server.enabled=true \
+    bluetooth.profile.csip.set_coordinator.enabled=true \
+    bluetooth.profile.gatt.enabled=true \
+    bluetooth.profile.hap.client.enabled=true \
+    bluetooth.profile.hfp.ag.enabled=true \
+    bluetooth.profile.hid.host.enabled=true \
+    bluetooth.profile.mcp.server.enabled=true \
+    bluetooth.profile.opp.enabled=true \
+    bluetooth.profile.pan.nap.enabled=true \
+    bluetooth.profile.pan.panu.enabled=true \
+    bluetooth.profile.vcp.controller.enabled=true
 
 # Wifi
 PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wpa_cli
