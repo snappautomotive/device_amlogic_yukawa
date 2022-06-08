@@ -48,6 +48,18 @@
 
 #include "audio_aec.h"
 #include "audio_hw.h"
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+/* pcm_config structure for recording */
+struct pcm_config pcm_config_record = {
+    .channels = CAPTURE_NUM_CHANNELS,
+    .rate = CAPTURE_SAMPLE_RATE,
+    .period_size = CAPTURE_PERIOD_SIZE,
+    .period_count = CAPTURE_PERIOD_COUNT,
+    .format = PCM_FORMAT_S16_LE,
+    .start_threshold = 0,
+    .avail_min = 0,
+};
+#endif
 
 const struct audio_microphone_characteristic_t kBuiltinMicChars = {
         .device_id = "builtin_mic",
@@ -103,14 +115,10 @@ static bool is_aec_input(const struct alsa_stream_in* in) {
 
 static int get_audio_output_port(audio_devices_t devices) {
     /* Prefer HDMI, default to internal speaker */
-#ifndef USE_HDMI_AUDIO
     int port = PORT_INTERNAL_SPEAKER;
     if (devices & AUDIO_DEVICE_OUT_HDMI) {
         port = PORT_HDMI;
     }
-#else
-    int port = PORT_HDMI;
-#endif
 
     return port;
 }
@@ -471,13 +479,23 @@ static int out_get_next_write_timestamp(const struct audio_stream_out *stream,
 /** audio_stream_in implementation **/
 
 /* must be called with hw device and input stream mutexes locked */
+static bool bSetupRoute = false;
 static int start_input_stream(struct alsa_stream_in *in)
 {
     struct alsa_audio_device *adev = in->dev;
+    int ret = 0;
+   // unsigned int pcm_retry_count = PCM_OPEN_RETRIES;
     in->unavailable = true;
-    unsigned int pcm_retry_count = PCM_OPEN_RETRIES;
 
-    while (1) {
+   if(bSetupRoute == false)
+   {
+        startKInputRoute(&in->dev->kdev);
+        bSetupRoute = true;
+   }
+
+    ret = openKMicStream(&in->kin, &in->dev->kdev);
+
+   /* while (1) {
         in->pcm = pcm_open(CARD_IN, PORT_BUILTIN_MIC, PCM_IN | PCM_MONOTONIC, &in->config);
         if ((in->pcm != NULL) && pcm_is_ready(in->pcm)) {
             break;
@@ -493,7 +511,7 @@ static int start_input_stream(struct alsa_stream_in *in)
             }
             usleep(PCM_OPEN_WAIT_TIME_MS * 1000);
         }
-    }
+    }*/
     in->unavailable = false;
     adev->active_input = in;
     return 0;
@@ -593,8 +611,11 @@ static int do_input_standby(struct alsa_stream_in *in)
     struct alsa_audio_device *adev = in->dev;
 
     if (!in->standby) {
-        pcm_close(in->pcm);
-        in->pcm = NULL;
+	    if (in->pcm) {
+		    pcm_close(in->pcm);
+		    in->pcm = NULL;
+	    }
+	closeKMicStream(&in->kin, &in->dev->kdev);
         adev->active_input = NULL;
         in->standby = true;
     }
@@ -605,6 +626,12 @@ static int in_standby(struct audio_stream *stream)
 {
     struct alsa_stream_in *in = (struct alsa_stream_in *)stream;
     int status;
+
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    if (AUDIO_SOURCE_HOTWORD == in->kin.source) {
+        return 0;
+    }
+#endif
 
     pthread_mutex_lock(&in->lock);
     pthread_mutex_lock(&in->dev->lock);
@@ -617,6 +644,10 @@ static int in_standby(struct audio_stream *stream)
 static int in_dump(const struct audio_stream *stream, int fd)
 {
     struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
+    if (in->source == AUDIO_SOURCE_ECHO_REFERENCE) {
+        return 0;
+    }
+
     struct audio_microphone_characteristic_t mic_array[AUDIO_MICROPHONE_MAX_COUNT];
     size_t mic_count;
     get_input_characteristics(in, mic_array, &mic_count);
@@ -660,6 +691,13 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     size_t in_frames = bytes / frame_size;
 
     ALOGV("in_read: stream: %d, bytes %zu", in->source, bytes);
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    if(NOT_KNOWLES_INPUT_USECASE != readKInputStream(&adev->kdev, &in->kin, buffer, &bytes)) {
+            return bytes;
+    }
+#endif
+//__KIA_END__
 
     /* Special handling for Echo Reference: simply get the reference from FIFO.
      * The format and sample rate should be specified by arguments to adev_open_input_stream. */
@@ -732,21 +770,30 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 
     pthread_mutex_unlock(&adev->lock);
 
-    ret = pcm_read(in->pcm, buffer, in_frames * frame_size);
+    if(NOT_KNOWLES_INPUT_USECASE != readKMicStream(&adev->kdev, &in->kin, buffer, &bytes)) {
+        //ALOGD("Tunneling mic data %d bytes\n", bytes);
+        pthread_mutex_unlock(&in->lock);
+        return bytes;
+    }
+
+    /*ret = pcm_read(in->pcm, buffer, in_frames * frame_size);
     struct aec_info info;
-    get_pcm_timestamp(in->pcm, in->config.rate, &info, false /*isOutput*/);
+    get_pcm_timestamp(in->pcm, in->config.rate, &info, false / *isOutput* /);
     if (ret == 0) {
         in->frames_read += in_frames;
         in->timestamp_nsec = audio_utils_ns_from_timespec(&info.timestamp);
     }
     else {
         ALOGE("pcm_read failed with code %d", ret);
-    }
+    } */
 
 exit:
     pthread_mutex_unlock(&in->lock);
+    usleep(1000* AUDIO_CAPTURE_PERIOD_DURATION_MSEC);
+    memset(buffer, 0, bytes);
+    return bytes;
 
-    bool mic_muted = false;
+    /*bool mic_muted = false;
     adev_get_mic_mute((struct audio_hw_device*)adev, &mic_muted);
     if (mic_muted) {
         memset(buffer, 0, bytes);
@@ -756,8 +803,8 @@ exit:
         usleep((int64_t)bytes * 1000000 / audio_stream_in_frame_size(stream) /
                 in_get_sample_rate(&stream->common));
     } else {
-        /* Process AEC if available */
-        /* TODO move to a separate thread */
+        / * Process AEC if available * /
+        / * TODO move to a separate thread * /
         if (!mic_muted) {
             info.bytes = bytes;
             int aec_ret = process_aec(adev->aec, buffer, &info);
@@ -765,9 +812,9 @@ exit:
                 ALOGE("process_aec returned error code %d", aec_ret);
             }
         }
-    }
+    } * /
 
-#if DEBUG_AEC && !defined(AEC_HAL)
+/*#if DEBUG_AEC && !defined(AEC_HAL)
     FILE* fp_in = fopen("/data/local/traces/aec_in.pcm", "a+");
     if (fp_in) {
         fwrite((char*)buffer, 1, bytes, fp_in);
@@ -784,7 +831,7 @@ exit:
     }
 #endif
 
-    return bytes;
+    return bytes; */
 }
 
 static int in_get_capture_position(const struct audio_stream_in* stream, int64_t* frames,
@@ -922,15 +969,63 @@ static void adev_close_output_stream(struct audio_hw_device *dev,
 
 static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 {
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    struct str_parms *parms;
+    int status = 0;
+    struct alsa_audio_device *adev = (struct alsa_audio_device *)dev;
+    ALOGE("%s kvpairs(%s)_", __func__, kvpairs);
+    parms = str_parms_create_str(kvpairs);
+
+    if (!parms)
+        goto error;
+
+    setKnowlesPrams(&adev->kdev, parms);
+  error:
+    return status;
+#else
     ALOGV("adev_set_parameters");
     return -ENOSYS;
+#endif
+//__KIA_END__
 }
 
 static char * adev_get_parameters(const struct audio_hw_device *dev,
         const char *keys)
 {
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    char *str;
+    struct str_parms *reply = str_parms_create();
+    struct str_parms *query = str_parms_create_str(keys);
+
+    struct alsa_audio_device *adev = (struct alsa_audio_device *)dev;
+    if (!query || !reply) {
+        if (reply) {
+            str_parms_destroy(reply);
+        }
+        if (query) {
+            str_parms_destroy(query);
+        }
+        ALOGE("adev_get_parameters: failed to create query or reply");
+        return NULL;
+    }
+
+    if (getKnowlesPrams(&adev->kdev, query, reply) >= 0) {
+        ALOGD("getKnowlesPrams knows the param");
+        goto exit;
+    }
+
+exit:
+    str = str_parms_to_str(reply);
+    str_parms_destroy(query);
+    str_parms_destroy(reply);
+    return str;
+#else
     ALOGV("adev_get_parameters");
     return strdup("");
+#endif
+//__KIA_END__
 }
 
 static int adev_get_microphones(const struct audio_hw_device* dev,
@@ -1023,6 +1118,7 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     ALOGV("adev_open_input_stream...");
 
     struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
+    int ret = 0;
 
     struct pcm_params* params = pcm_params_get(CARD_IN, PORT_BUILTIN_MIC, PCM_IN);
     if (!params) {
@@ -1052,6 +1148,7 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     in->stream.get_capture_position = in_get_capture_position;
     in->stream.get_active_microphones = in_get_active_microphones;
 
+    in->config.channels = CHANNEL_MONO;
     if (source == AUDIO_SOURCE_ECHO_REFERENCE) {
         in->config.rate = PLAYBACK_CODEC_SAMPLING_RATE;
         in->config.channels = NUM_AEC_REFERENCE_CHANNELS;
@@ -1060,11 +1157,14 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     } else {
         in->config.rate = CAPTURE_CODEC_SAMPLING_RATE;
         in->config.channels = CHANNEL_STEREO;
+    	//in->config.channels = CHANNEL_MONO;
         in->config.period_size = CAPTURE_PERIOD_SIZE;
     }
-    in->config.format = PCM_FORMAT_S32_LE;
+    //in->config.format = PCM_FORMAT_S32_LE;
+    in->config.format = PCM_FORMAT_S16_LE;
     in->config.period_count = CAPTURE_PERIOD_COUNT;
 
+/*
     if (in->config.rate != config->sample_rate ||
         audio_channel_count_from_in_mask(config->channel_mask) != in->config.channels ||
         in->config.format != pcm_format_from_audio_format(config->format)) {
@@ -1074,6 +1174,7 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
         goto error_1;
     }
 
+*/
     ALOGI("adev_open_input_stream selects channels=%d rate=%d format=%d source=%d",
           in->config.channels, in->config.rate, in->config.format, source);
 
@@ -1082,14 +1183,59 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     in->unavailable = false;
     in->source = source;
     in->devices = devices;
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    in->kin.is_strm_opened = false;
+#endif
+    config->format = in_get_format(&in->stream.common);
+    config->channel_mask = in_get_channels(&in->stream.common);
+    config->sample_rate = in_get_sample_rate(&in->stream.common);
 
-    if (is_aec_input(in)) {
+    /*if (is_aec_input(in)) {
         int aec_ret = init_aec_mic_config(ladev->aec, in);
         if (aec_ret) {
             ALOGE("AEC: Mic config init failed!");
             goto error_1;
         }
-    }
+    }  */
+
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    ALOGE("config->channel_mask %d", config->channel_mask);
+
+    in->config = pcm_config_record;
+
+    in->dev = ladev;
+    in->kin.device= devices;
+    in->kin.source = source;
+    in->standby = 1;
+    in->kin.is_strm_opened = false;
+
+    //in->kin.channel_mask = AUDIO_CHANNEL_IN_MONO; //audio_channel_in_mask_from_count(CHANNEL_STEREO);;
+    in->kin.channel_mask = audio_channel_in_mask_from_count(CHANNEL_STEREO);;
+    in->kin.format = audio_format_from_pcm_format(PCM_FORMAT_S16_LE);;
+    in->kin.sample_rate = CAPTURE_SAMPLE_RATE;
+    in->kin.buffer_size = CAPTURE_BUFFER_SIZE;
+
+    if((ret = openKInputStream(&in->kin, &ladev->kdev)))
+        goto error;
+
+    config->channel_mask = in->kin.channel_mask;
+    config->sample_rate = in->kin.sample_rate;
+    config->format = in->kin.format;
+    ALOGE("config->channel_mask %d", config->channel_mask);
+
+    *stream_in = &in->stream;
+    return ret;
+
+error:
+    free(in);
+    *stream_in = NULL;
+    return ret;
+#else
+    *stream_in = &in->stream;
+    return 0;
+
+#endif
 
 #if DEBUG_AEC
     remove("/data/local/traces/aec_ref.pcm");
@@ -1109,11 +1255,21 @@ error_1:
 static void adev_close_input_stream(struct audio_hw_device *dev,
         struct audio_stream_in *stream)
 {
+    struct alsa_audio_device *adev = (struct alsa_audio_device *)dev;
     ALOGV("adev_close_input_stream...");
     struct alsa_stream_in* in = (struct alsa_stream_in*)stream;
     if (is_aec_input(in)) {
         destroy_aec_mic_config(in->dev->aec);
     }
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    struct alsa_stream_in *ss_in = (struct alsa_stream_in *)stream;
+
+    if(is_kin_standby(&ss_in->kin, &adev->kdev)) {
+        ALOGD("Its knowles streaming usecase");
+    }
+#endif
+//__KIA_END__
     free(stream);
     return;
 }
@@ -1201,6 +1357,19 @@ static int adev_open(const hw_module_t* module, const char* name,
     }
     pthread_mutex_unlock(&adev->lock);
 
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+//This is needed to give enough time to create device nodes
+    if (-1 == (adev->snd_card = find_sound_card())) {
+        ALOGE("%s: Failed to find the sound card", __func__);
+        free (adev);
+        return -EINVAL;
+    }
+
+    initKnowlesDevice(&adev->kdev);
+    initRoute(&adev->kdev, adev->snd_card);
+#endif
+//__KIA_END__
     return 0;
 
 error_3:

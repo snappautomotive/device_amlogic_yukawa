@@ -21,6 +21,14 @@
 #include <tinyalsa/asoundlib.h>
 
 #include "fir_filter.h"
+//__KIA_START__
+#define USE_KNOWLES_SOUND_TRIGGER
+
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+#include "knowles_util.h"
+#endif
+//__KIA_END__
+
 
 #define CARD_OUT 0
 #define PORT_HDMI 0
@@ -33,6 +41,7 @@
 #define CODEC_BASE_FRAME_COUNT 32
 
 #define CHANNEL_STEREO 2
+#define CHANNEL_MONO 1
 
 #ifdef AEC_HAL
 #define NUM_AEC_REFERENCE_CHANNELS 1
@@ -51,8 +60,8 @@
  * CAPTURE_PERIOD = PERIOD_SIZE / SAMPLE_RATE, so (32e-3) = PERIOD_SIZE / (16e3)
  * => PERIOD_SIZE = 512 frames, where each "frame" consists of 1 sample of every channel (here, 2ch) */
 #define CAPTURE_PERIOD_MULTIPLIER 16
-#define CAPTURE_PERIOD_SIZE (CODEC_BASE_FRAME_COUNT * CAPTURE_PERIOD_MULTIPLIER)
-#define CAPTURE_PERIOD_COUNT 4
+//#define CAPTURE_PERIOD_SIZE (CODEC_BASE_FRAME_COUNT * CAPTURE_PERIOD_MULTIPLIER)
+//#define CAPTURE_PERIOD_COUNT 4
 #define CAPTURE_PERIOD_START_THRESHOLD 0
 #define CAPTURE_CODEC_SAMPLING_RATE 16000
 
@@ -64,12 +73,32 @@
 /* number of pseudo periods for low latency playback */
 #define PLAYBACK_PERIOD_COUNT 4
 #define PLAYBACK_PERIOD_START_THRESHOLD 2
+
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+#define PLAYBACK_CODEC_SAMPLING_RATE 16000
+#else
 #define PLAYBACK_CODEC_SAMPLING_RATE 48000
+#endif
+
 #define MIN_WRITE_SLEEP_US      5000
 
 #define SPEAKER_EQ_FILE "/vendor/etc/speaker_eq_sei610.fir"
 #define SPEAKER_MAX_EQ_LENGTH 512
 
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+#define CAPTURE_SAMPLE_RATE 16000
+#define CAPTURE_NUM_CHANNELS 2
+#define AUDIO_BYTES_PER_SAMPLE 2
+#define CAPTURE_FRAME_SIZE AUDIO_BYTES_PER_SAMPLE
+#define AUDIO_CAPTURE_PERIOD_DURATION_MSEC 20
+#define CAPTURE_BUFFER_SIZE (((CAPTURE_SAMPLE_RATE*AUDIO_CAPTURE_PERIOD_DURATION_MSEC)/1000)*CAPTURE_NUM_CHANNELS*AUDIO_BYTES_PER_SAMPLE)
+#define CAPTURE_PERIOD_SIZE  (CAPTURE_BUFFER_SIZE / CAPTURE_FRAME_SIZE)
+/* number of periods for capture */
+#define CAPTURE_PERIOD_COUNT 4
+#define PCM_RECORD_DEVICE_ID 1
+#define CHANNEL_MONO 1
+
+#endif
 struct alsa_audio_device {
     struct audio_hw_device hw_device;
 
@@ -80,6 +109,12 @@ struct alsa_audio_device {
     struct mixer *mixer;
     bool mic_mute;
     struct aec_t *aec;
+//__KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    struct kn_device kdev;
+    int snd_card;
+#endif
+//__KIA_END__
 };
 
 struct alsa_stream_in {
@@ -96,6 +131,11 @@ struct alsa_stream_in {
     unsigned int frames_read;
     uint64_t timestamp_nsec;
     audio_source_t source;
+// __KIA_START__
+#ifdef USE_KNOWLES_SOUND_TRIGGER
+    struct kn_stream_in kin;
+#endif
+//__KIA_END__
 };
 
 struct alsa_stream_out {
