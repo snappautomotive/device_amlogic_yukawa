@@ -394,3 +394,6 @@ PRODUCT_COPY_FILES += \
 
 # Include Virtualization APEX
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+
+# Knowles DSP
+$(call inherit-product, device/amlogic/yukawa/adnc.mk)

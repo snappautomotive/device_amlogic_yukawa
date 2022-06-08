@@ -20,3 +20,6 @@ subsystem usbmisc
 
 /sys/class/leds/sei610\:red\:power	brightness	0666 system system
 /sys/class/leds/sei610\:blue\:bt	brightness	0666 system system
+
+/dev/iaxxx-odsp-celldrv   0660   system     audio
+/dev/tunnel0              0660   system     audio
