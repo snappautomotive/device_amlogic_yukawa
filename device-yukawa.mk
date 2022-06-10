@@ -14,7 +14,7 @@ ifneq ($(filter $(TARGET_DEV_BOARD),vim3),)
 AUDIO_DEFAULT_OUTPUT := hdmi
 GPU_TYPE := gondul_ion
 else ifneq ($(filter $(TARGET_DEV_BOARD),vim3l),)
-AUDIO_DEFAULT_OUTPUT := hdmi
+# AUDIO_DEFAULT_OUTPUT := hdmi
 endif
 
 $(call inherit-product, device/amlogic/yukawa/device-common.mk)

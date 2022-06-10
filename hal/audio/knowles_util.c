@@ -35,7 +35,7 @@
 #define MAX_SND_CARD    (8)
 #define RETRY_US        (500000)
 
-#define CARD_NAME               "SM1-SEI610"
+#define CARD_NAME               "audio-iaxxx"
 #define MIXER_PATH              "/vendor/etc/mixer_paths_ia8x01.xml"
 
 
