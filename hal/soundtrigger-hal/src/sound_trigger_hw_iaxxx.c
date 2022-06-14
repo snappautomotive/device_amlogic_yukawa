@@ -50,23 +50,30 @@
 #define FW_RECOVERY                 60
 #define TERMINATE_CMD               61
 
-
-static const struct sound_trigger_properties hw_properties = {
-    "Knowles Electronics",      // implementor
-    "Continous VoiceQ",         // description
-    1,                          // version
-    // Version UUID
-    { 0x80f7dcd5, 0xbb62, 0x4816, 0xa931, {0x9c, 0xaa, 0x52, 0x5d, 0xf5, 0xc7}},
-    MAX_MODELS,                 // max_sound_models
-    MAX_KEY_PHRASES,            // max_key_phrases
-    MAX_USERS,                  // max_users
-    RECOGNITION_MODE_VOICE_TRIGGER | // recognition_mode
-    RECOGNITION_MODE_GENERIC_TRIGGER,
-    true,                       // capture_transition
-    MAX_BUFFER_MS,              // max_capture_ms
-    true,                      // concurrent_capture
-    false,                      // trigger_in_event
-    POWER_CONSUMPTION           // power_consumption_mw
+static struct sound_trigger_properties_extended_1_3 hw_properties = {
+    {
+        SOUND_TRIGGER_DEVICE_API_VERSION_1_3, //ST version
+        sizeof(struct sound_trigger_properties_extended_1_3)
+    },
+    {
+        "Knowles Electronics",      // implementor
+        "Continuous VoiceQ",        // description
+        1,                          // library version
+        // Version UUID
+        { 0x80f7dcd5, 0xbb62, 0x4816, 0xa931, {0x9c, 0xaa, 0x52, 0x5d, 0xf5, 0xc7}},
+        MAX_MODELS,                 // max_sound_models
+        MAX_KEY_PHRASES,            // max_key_phrases
+        MAX_USERS,                  // max_users
+        RECOGNITION_MODE_VOICE_TRIGGER | // recognition_mode
+        RECOGNITION_MODE_GENERIC_TRIGGER,
+        true,                       // capture_transition
+        MAX_BUFFER_MS,              // max_capture_ms
+        true,                       // concurrent_capture
+        false,                      // trigger_in_event
+        POWER_CONSUMPTION           // power_consumption_mw
+    },
+    "", //supported arch
+    0,                              // audio capability
 };
 
 struct model_info {
@@ -195,9 +202,37 @@ static int stdev_get_properties(
     ALOGV("+%s+", __func__);
     if (properties == NULL)
         return -EINVAL;
-    memcpy(properties, &hw_properties, sizeof(struct sound_trigger_properties));
+    memcpy(properties, &hw_properties.base, sizeof(*properties));
     ALOGV("-%s-", __func__);
     return 0;
+}
+
+static const struct sound_trigger_properties_header* stdev_get_properties_extended(
+                                const struct sound_trigger_hw_device *dev)
+{
+    struct knowles_sound_trigger_device *stdev =
+        (struct knowles_sound_trigger_device *)dev;
+
+    ALOGV("+%s+", __func__);
+    pthread_mutex_lock(&stdev->lock);
+    if (hw_properties.header.version >= SOUND_TRIGGER_DEVICE_API_VERSION_1_3) {
+        hw_properties.base.version = 0;
+
+        /* Per GMS requirement new to Android R, the supported_model_arch field
+           must be the Google hotword firmware version comma separated with the
+           supported_model_arch platform identifier.
+         */
+        //int_prefix_str(hw_properties.supported_model_arch, SOUND_TRIGGER_MAX_STRING_LEN, hw_properties.base.version, "%u,");
+        ALOGW("SoundTrigger supported model arch identifier");
+    } else {
+        ALOGE("STHAL Version is %u", hw_properties.header.version);
+        pthread_mutex_unlock(&stdev->lock);
+        return NULL;
+    }
+
+    pthread_mutex_unlock(&stdev->lock);
+    ALOGV("-%s-", __func__);
+    return &hw_properties.header;
 }
 
 bool isRouteSetup = false;
@@ -1079,6 +1114,7 @@ static int stdev_open(const hw_module_t *module, const char *name,
     stdev->device.start_recognition = stdev_start_recognition;
     stdev->device.stop_recognition = stdev_stop_recognition;
     //stdev->device.get_model_state = stdev_get_model_state;
+    stdev->device.get_properties_extended = stdev_get_properties_extended;
 
     stdev->opened = true;
     /* Initialize all member variable */
