@@ -1120,10 +1120,10 @@ static int adev_open_input_stream(struct audio_hw_device* dev, audio_io_handle_t
     struct alsa_audio_device *ladev = (struct alsa_audio_device *)dev;
     int ret = 0;
 
-    struct pcm_params* params = pcm_params_get(CARD_IN, PORT_BUILTIN_MIC, PCM_IN);
-    if (!params) {
-        return -ENOSYS;
-    }
+    // struct pcm_params* params = pcm_params_get(CARD_IN, PORT_BUILTIN_MIC, PCM_IN);
+    // if (!params) {
+    //     return -ENOSYS;
+    // }
 
     struct alsa_stream_in* in = (struct alsa_stream_in*)calloc(1, sizeof(struct alsa_stream_in));
     if (!in) {
