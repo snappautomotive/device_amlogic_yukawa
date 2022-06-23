@@ -489,6 +489,36 @@ exit:
     return status;
 }
 
+static int stdev_start_recognition_extended(
+                        const struct sound_trigger_hw_device *dev,
+                        sound_model_handle_t sound_model_handle,
+                        const struct sound_trigger_recognition_config_header *header,
+                        recognition_callback_t callback,
+                        void *cookie)
+{
+    struct sound_trigger_recognition_config_extended_1_3 *config_1_3 =
+                 (struct sound_trigger_recognition_config_extended_1_3 *)header;
+    int status = 0;
+
+    if (header->version >= SOUND_TRIGGER_DEVICE_API_VERSION_1_3) {
+        /* Use old version before we have real usecase */
+        ALOGD("%s: Running 2_3", __func__);
+        status = stdev_start_recognition(dev, sound_model_handle,
+                                        &config_1_3->base,
+                                        callback,
+                                        cookie);
+    } else {
+        /* Rollback into old start recognition */
+        ALOGD("%s: Running 2_1", __func__);
+        status = stdev_start_recognition(dev, sound_model_handle,
+                                        &config_1_3->base,
+                                        callback,
+                                        cookie);
+    }
+
+    return status;
+}
+
 static int stdev_stop_recognition(
                         const struct sound_trigger_hw_device *dev,
                         sound_model_handle_t handle)
@@ -1112,6 +1142,7 @@ static int stdev_open(const hw_module_t *module, const char *name,
     stdev->device.load_sound_model = stdev_load_sound_model;
     stdev->device.unload_sound_model = stdev_unload_sound_model;
     stdev->device.start_recognition = stdev_start_recognition;
+    stdev->device.start_recognition_extended = stdev_start_recognition_extended;
     stdev->device.stop_recognition = stdev_stop_recognition;
     //stdev->device.get_model_state = stdev_get_model_state;
     stdev->device.get_properties_extended = stdev_get_properties_extended;
