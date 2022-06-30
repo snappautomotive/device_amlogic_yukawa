@@ -119,11 +119,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
+
+# BT and Wifi FW
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/BCM.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4359C0.hcd \
     $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
-    $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt \
-
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram_ap6359.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
 
 ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Use Launcher3QuickStep
@@ -173,6 +175,25 @@ PRODUCT_PACKAGES +=  vulkan.yukawa.so
 
 # Bluetooth
 PRODUCT_PACKAGES += android.hardware.bluetooth@1.1-service.btlinux
+PRODUCT_PROPERTY_OVERRIDES += \
+    bluetooth.core.gap.le.privacy.enabled=false \
+    bluetooth.profile.asha.central.enabled=true \
+    bluetooth.profile.a2dp.source.enabled=true \
+    bluetooth.profile.avrcp.target.enabled=true \
+    bluetooth.profile.bap.broadcast.assist.enabled=true \
+    bluetooth.profile.bap.unicast.client.enabled=true \
+    bluetooth.profile.bas.client.enabled=true \
+    bluetooth.profile.ccp.server.enabled=true \
+    bluetooth.profile.csip.set_coordinator.enabled=true \
+    bluetooth.profile.gatt.enabled=true \
+    bluetooth.profile.hap.client.enabled=true \
+    bluetooth.profile.hfp.ag.enabled=true \
+    bluetooth.profile.hid.host.enabled=true \
+    bluetooth.profile.mcp.server.enabled=true \
+    bluetooth.profile.opp.enabled=true \
+    bluetooth.profile.pan.nap.enabled=true \
+    bluetooth.profile.pan.panu.enabled=true \
+    bluetooth.profile.vcp.controller.enabled=true
 
 # Wifi
 PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wpa_cli
@@ -186,8 +207,6 @@ PRODUCT_PACKAGES += \
     audio.primary.yukawa \
     audio.r_submix.default \
     audio.bluetooth.default \
-    audio.hearing_aid.default \
-    audio.a2dp.default \
     tinyplay \
     tinycap \
     tinymix \
@@ -215,10 +234,8 @@ PRODUCT_PACKAGES += \
 #
 PRODUCT_PACKAGES += \
     hwcomposer.drm_meson \
-    android.hardware.drm@1.3-impl \
-    android.hardware.drm@1.3-service \
-    android.hardware.drm@1.4-service.widevine \
-    android.hardware.drm@1.4-service.clearkey
+    android.hardware.drm-service.widevine \
+    android.hardware.drm-service.clearkey
 
 # CEC
 PRODUCT_PACKAGES += \
