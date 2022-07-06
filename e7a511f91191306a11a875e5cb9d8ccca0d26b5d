@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac957b5_b3a4b6ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1725686
+      },
+      "writtenOn": "2022-07-06T15:25:28Z",
+      "side": 1,
+      "message": "Which other devices could and should we set this property on? If we don\u0027t set it, CTS will start failing as soon as this topic gets merged.",
+      "revId": "e7a511f91191306a11a875e5cb9d8ccca0d26b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
