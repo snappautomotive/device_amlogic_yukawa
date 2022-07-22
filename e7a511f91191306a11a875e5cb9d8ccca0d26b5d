@@ -16,6 +16,24 @@
       "message": "Which other devices could and should we set this property on? If we don\u0027t set it, CTS will start failing as soon as this topic gets merged.",
       "revId": "e7a511f91191306a11a875e5cb9d8ccca0d26b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2d4cb8_0f31846e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1068291
+      },
+      "writtenOn": "2022-07-22T06:51:16Z",
+      "side": 1,
+      "message": "The CTS tests check for enums first and fallback to int property if enum is not found. So, the tests should not fail as long as one of the properties is set.",
+      "parentUuid": "eac957b5_b3a4b6ef",
+      "revId": "e7a511f91191306a11a875e5cb9d8ccca0d26b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
