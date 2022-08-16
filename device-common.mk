@@ -214,8 +214,6 @@ PRODUCT_PACKAGES += \
     audio.primary.yukawa \
     audio.r_submix.default \
     audio.bluetooth.default \
-    audio.hearing_aid.default \
-    audio.a2dp.default \
     tinyplay \
     tinycap \
     tinymix \
@@ -243,10 +241,8 @@ PRODUCT_PACKAGES += \
 #
 PRODUCT_PACKAGES += \
     hwcomposer.drm_meson \
-    android.hardware.drm@1.3-impl \
-    android.hardware.drm@1.3-service \
-    android.hardware.drm@1.4-service.widevine \
-    android.hardware.drm@1.4-service.clearkey
+    android.hardware.drm-service.widevine \
+    android.hardware.drm-service.clearkey
 
 # CEC
 PRODUCT_PACKAGES += \
