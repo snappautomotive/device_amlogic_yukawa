@@ -251,6 +251,7 @@ PRODUCT_PACKAGES += \
     hdmi_cec.yukawa
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4 \
+    ro.hdmi.cec_device_types=playback_device \
     persist.sys.hdmi.keep_awake=false
 
 PRODUCT_COPY_FILES += \
