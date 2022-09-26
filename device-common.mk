@@ -73,6 +73,9 @@ PRODUCT_PACKAGES += \
     bootctrl.yukawa
 endif
 
+# System RO FS Type
+TARGET_RO_FILE_SYSTEM_TYPE ?= ext4
+
 # Dynamic partitions
 PRODUCT_BUILD_SUPER_PARTITION := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
