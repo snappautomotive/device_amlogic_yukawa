@@ -15,6 +15,7 @@
 -->
 
 <permissions>
-    <feature name="com.google.android.feature.HOTWORD"/>
-    <feature name="com.google.android.feature.ECHO_REFERENCE" />
+
+
+  <feature name="com.google.android.feature.ECHO_REFERENCE" />
 </permissions>
