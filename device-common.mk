@@ -22,8 +22,6 @@ ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Setup tablet build
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-# Packages to invoke RC pairing
-PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
 else
 # Setup TV Build
 USE_OEM_TV_APP := true
@@ -378,9 +376,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml
 
 # Enable BT Pairing with button BTN_0 (key 256)
-
+PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/input/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl
+
 
 # Light HAL
 PRODUCT_PACKAGES += \
