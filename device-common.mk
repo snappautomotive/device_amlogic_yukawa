@@ -22,6 +22,8 @@ ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Setup tablet build
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+# Packages to invoke RC pairing
+PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
 else
 # Setup TV Build
 USE_OEM_TV_APP := true
@@ -72,6 +74,9 @@ PRODUCT_PACKAGES += \
     bootctrl.yukawa.recovery \
     bootctrl.yukawa
 endif
+
+# System RO FS Type
+TARGET_RO_FILE_SYSTEM_TYPE ?= ext4
 
 # Dynamic partitions
 PRODUCT_BUILD_SUPER_PARTITION := true
@@ -214,8 +219,6 @@ PRODUCT_PACKAGES += \
     audio.primary.yukawa \
     audio.r_submix.default \
     audio.bluetooth.default \
-    audio.hearing_aid.default \
-    audio.a2dp.default \
     tinyplay \
     tinycap \
     tinymix \
@@ -243,10 +246,8 @@ PRODUCT_PACKAGES += \
 #
 PRODUCT_PACKAGES += \
     hwcomposer.drm_meson \
-    android.hardware.drm@1.3-impl \
-    android.hardware.drm@1.3-service \
-    android.hardware.drm@1.4-service.widevine \
-    android.hardware.drm@1.4-service.clearkey
+    android.hardware.drm-service.widevine \
+    android.hardware.drm-service.clearkey
 
 # CEC
 PRODUCT_PACKAGES += \
@@ -255,6 +256,7 @@ PRODUCT_PACKAGES += \
     hdmi_cec.yukawa
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4 \
+    ro.hdmi.cec_device_types=playback_device \
     persist.sys.hdmi.keep_awake=false
 
 PRODUCT_COPY_FILES += \
@@ -376,10 +378,9 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml
 
 # Enable BT Pairing with button BTN_0 (key 256)
-PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
+
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/input/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl
-
 
 # Light HAL
 PRODUCT_PACKAGES += \
