@@ -16,6 +16,23 @@
       "message": "repo download -c device/amlogic/yukawa 2132731",
       "revId": "1aacfdb09d010cc34d10cae37572735752c6e359",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3853346_64e51028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2004223
+      },
+      "writtenOn": "2023-07-27T22:36:56Z",
+      "side": 1,
+      "message": "lated/0/Android/data/ru.zdevs.zarchiver/files/vixRubyCWrapper.c       \u003c\nsh: /storage/emulated/0/emulated/0/Android/data/ru.zdevs.zarchiver/files/vixRubyCWrapper.c: inaccessible or not found\n127|:/data/data/com.termux/files/home/downloads $",
+      "revId": "1aacfdb09d010cc34d10cae37572735752c6e359",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
