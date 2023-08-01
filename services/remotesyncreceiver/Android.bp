@@ -27,7 +27,6 @@ android_app {
     manifest:  "AndroidManifest.xml",
     srcs: ["src/**/*.java"],
     optimize: {
-        proguard_flags_files: ["proguard.cfg"],
         enabled: false,
     },
 }
