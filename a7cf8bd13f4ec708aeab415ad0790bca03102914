@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0791f5_bb38731f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2023-09-14T17:01:51Z",
+      "side": 1,
+      "message": "Bypassing presubmit to fix failing yukawa-trunk_staging-userdebug build. Tested locally with `mma` in `device/amlogic/yukawa/hal/gralloc`.",
+      "revId": "a7cf8bd13f4ec708aeab415ad0790bca03102914",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
