@@ -35,19 +35,17 @@ LOCAL_SHARED_LIBRARIES := android.hardware.graphics.common@1.0 libz libnativewin
 LOCAL_STRIP_MODULE := false
 
 ifeq ($(BOARD_INSTALL_VULKAN),true)
-LOCAL_POST_INSTALL_CMD = $(hide) \
-    pushd $(dir $(LOCAL_INSTALLED_MODULE))../hw && \
-        ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) vulkan.$(TARGET_DEVICE).so && \
-        popd;
+LOCAL_REQUIRED_MODULES += yukawa_libGLES_mali_vulkan_symlink32 yukawa_libGLES_mali_vulkan_symlink64
 endif
 
 ifeq ($(BOARD_INSTALL_OPENCL),true)
-LOCAL_POST_INSTALL_CMD += \
-    pushd $(dir $(LOCAL_INSTALLED_MODULE)).. && \
-        ln -sf egl/$(notdir $(LOCAL_INSTALLED_MODULE)) libOpenCL.so.1.1 && \
-        ln -sf libOpenCL.so.1.1 libOpenCL.so.1 && \
-        ln -sf libOpenCL.so.1.1 libOpenCL.so && \
-        popd;
+LOCAL_REQUIRED_MODULES += \
+    yukawa_libGLES_mali_libOpenCL_symlink32 \
+    yukawa_libGLES_mali_libOpenCL.1_symlink32 \
+    yukawa_libGLES_mali_libOpenCL.1.1_symlink32 \
+    yukawa_libGLES_mali_libOpenCL_symlink64 \
+    yukawa_libGLES_mali_libOpenCL.1_symlink64 \
+    yukawa_libGLES_mali_libOpenCL.1.1_symlink64
 endif
 
 include $(BUILD_PREBUILT)
