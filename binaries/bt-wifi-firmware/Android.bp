@@ -1,0 +1,15 @@
+prebuilt_firmware {
+    name: "yukawa_brcmfmac4359_vim3l_bin",
+    src: "brcmfmac4359-sdio.bin",
+    sub_dir: "brcm",
+    filename: "brcmfmac4359-sdio.khadas-vim3l.bin",
+    proprietary: true,
+}
+
+prebuilt_firmware {
+    name: "yukawa_brcmfmac4359_vim3l_txt",
+    src: "brcmfmac4359-sdio.txt",
+    sub_dir: "brcm",
+    filename: "brcmfmac4359-sdio.khadas-vim3l.txt",
+    proprietary: true,
+}
