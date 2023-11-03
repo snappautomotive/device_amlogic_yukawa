@@ -3,38 +3,32 @@ Build Mainline u-boot - bl33:
 
 Main Wiki Page : https://gitlab.baylibre.com/baylibre/amlogic/atv/u-boot/wikis/home
 
-Download the toolchain : gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf
-        http://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/aarch64-elf/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf.tar.xz
+Download the toolchain : arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu
+        https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu.tar.xz?rev=8d05006a68d24d929d602804ec9abfb4&hash=E8A66D3B9FF0EFC60A5C041AC3C5EE476349817B
 
 Download U-Boot Source Code From :
         https://gitlab.baylibre.com/baylibre/amlogic/atv/u-boot.git
 
-actual tag :  u-boot/v2021.07/integ-20210712
-dev branch :  u-boot/v2021.07/integ
+actual tag :  u-boot/v2024.01-rc1/integ-20231103
+dev branch :  u-boot/v2024.01-rc1/integ
 
 link to U-Boot aosp release wiki page :
 https://gitlab.baylibre.com/baylibre/amlogic/atv/u-boot/wikis/U-Boot-for-Yukawa-Release
 
 Compile:
 
-        export PATH=<path-to-toolchain>/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf/bin:$PATH
-        export CROSS_COMPILE=aarch64-elf-
+        export PATH=<path-to-toolchain>/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu/bin:$PATH
+        export CROSS_COMPILE=aarch64-none-linux-gnu-
         git clone https://gitlab.baylibre.com/baylibre/amlogic/atv/u-boot.git
         cd u-boot
-        git checkout u-boot/v2021.07/integ-20210712
-        make [sei510|sei610|sei610_ab|khadas-vim3_android|khadas-vim3_android_ab|khadas-vim3l_android|khadas-vim3l_android_ab]_defconfig
+        git checkout u-boot/v2024.01-rc1/integ-20231103
+        make [khadas-vim3_android_ab|khadas-vim3l_android_ab]_defconfig
         make
 
 Generate fip binary
 ===================
 
 use tarball in fip_packages folder and untar it
-
-- For sei510 (yukawa_sei510):
-        tar -xaf fip-collect-g12a-g12a_u200_v1-amlogic-dev_9.2.1811_21-20191203-113239.tar.gz
-
-- For sei610 (yukawa):
-        tar -xaf fip-collect-g12a-sm1_ac214_v1-amlogic-dev_9.2.1811_21-20191204-161855.tar.gz
 
 - For VIM3L (yukawa):
         tar -xaf fip-collect-g12a-kvim3l-khadas-vims-pie-20210111-211224.tar.gz
