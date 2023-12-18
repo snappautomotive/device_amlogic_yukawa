@@ -16,6 +16,23 @@
       "message": "www.google.com/",
       "revId": "6b5c8c3fffba7bc94718c1e19122fcba460bc1bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e83abef8_68064c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3221160
+      },
+      "writtenOn": "2023-12-18T17:34:48Z",
+      "side": 1,
+      "message": "Code-Review",
+      "revId": "6b5c8c3fffba7bc94718c1e19122fcba460bc1bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
