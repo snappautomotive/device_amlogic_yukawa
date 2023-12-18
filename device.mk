@@ -107,6 +107,19 @@ ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
 else
+# CEC
+PRODUCT_PACKAGES += \
+    android.hardware.tv.cec@1.0-impl \
+    android.hardware.tv.cec@1.0-service \
+    hdmi_cec.yukawa
+
+PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4 \
+    ro.hdmi.cec_device_types=playback_device \
+    persist.sys.hdmi.keep_awake=false
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+
 # TV Specific Packages
 PRODUCT_PACKAGES += \
     LiveTv \
@@ -217,19 +230,8 @@ PRODUCT_PACKAGES += \
     android.hardware.drm-service.widevine \
     android.hardware.drm@latest-service.clearkey
 
-# CEC
-PRODUCT_PACKAGES += \
-    android.hardware.tv.cec@1.0-impl \
-    android.hardware.tv.cec@1.0-service \
-    hdmi_cec.yukawa
-
-PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4 \
-    ro.hdmi.cec_device_types=playback_device \
-    persist.sys.hdmi.keep_awake=false
-
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/input/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl \
-    frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+    $(LOCAL_PATH)/input/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 
 PRODUCT_PACKAGES += \
     gralloc.yukawa \
