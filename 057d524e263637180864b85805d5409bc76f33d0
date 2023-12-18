@@ -67,6 +67,23 @@
       "message": "git clone device/amlogic/yukawa \u0026\u0026 (cd yukawa \u0026\u0026 f\u003d`git rev-parse --git-dir`/hooks/commit-msg ; mkdir -p $(dirname $f) ; curl -Lo $f https://gerrit-review.googlesource.com/tools/hooks/commit-msg ; chmod +x $f)",
       "revId": "057d524e263637180864b85805d5409bc76f33d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c375f277_25061916",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3221160
+      },
+      "writtenOn": "2023-12-18T17:59:27Z",
+      "side": 1,
+      "message": "lunch yukawa-userdebug",
+      "revId": "057d524e263637180864b85805d5409bc76f33d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
