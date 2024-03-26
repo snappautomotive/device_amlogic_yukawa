@@ -170,7 +170,7 @@ endif
 
 PRODUCT_PACKAGES += \
     libhidltransport \
-    libhwbinder 
+    libhwbinder
 
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 
@@ -186,7 +186,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES +=  vulkan.yukawa.so
 
 # Bluetooth
-PRODUCT_PACKAGES += android.hardware.bluetooth@1.1-service.btlinux
+PRODUCT_PACKAGES += android.hardware.bluetooth-service.default
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.core.gap.le.privacy.enabled=false \
     bluetooth.profile.asha.central.enabled=true \
@@ -355,7 +355,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml 
+    frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
 AUDIO_DEFAULT_OUTPUT ?= speaker
 ifeq ($(AUDIO_DEFAULT_OUTPUT),hdmi)
