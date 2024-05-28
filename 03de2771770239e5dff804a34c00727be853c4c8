@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebf4e50_bd97d866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-05-28T16:31:13Z",
+      "side": 1,
+      "message": "Authors who are previously working on this dir have left google. So requesting reviews within the team.",
+      "revId": "03de2771770239e5dff804a34c00727be853c4c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
