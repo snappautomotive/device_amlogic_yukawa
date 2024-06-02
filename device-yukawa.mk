@@ -43,3 +43,7 @@ ifneq ($(filter $(TARGET_DEV_BOARD),sei610),)
 PRODUCT_PACKAGES += \
     YukawaHotwordMicToggleProvider
 endif
+
+# Include namespaces for non-AB updater
+PRODUCT_SOONG_NAMESPACES += bootable/deprecated-ota
+
