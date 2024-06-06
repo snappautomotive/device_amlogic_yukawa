@@ -22,6 +22,7 @@
 
 ifneq ($(filter yukawa%, $(TARGET_DEVICE)),)
 
+
 LOCAL_PATH := $(call my-dir)
 
 $(eval $(call declare-1p-copy-files,device/amlogic/yukawa/binaries/bt-wifi-firmware,))
