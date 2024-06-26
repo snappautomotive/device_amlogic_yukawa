@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af767a8_32e04e3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-06-26T17:33:57Z",
+      "side": 1,
+      "message": "will we run into OTA failure if we  miss setting this for a non-A/B device?",
+      "revId": "2318974a95c2c43d85fb7cbfbf7450a633c235b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
