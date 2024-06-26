@@ -16,6 +16,24 @@
       "message": "will we run into OTA failure if we  miss setting this for a non-A/B device?",
       "revId": "2318974a95c2c43d85fb7cbfbf7450a633c235b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df38e1ba_cdf79ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-06-26T17:35:37Z",
+      "side": 1,
+      "message": "We will likely run into build failures.",
+      "parentUuid": "9af767a8_32e04e3c",
+      "revId": "2318974a95c2c43d85fb7cbfbf7450a633c235b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
