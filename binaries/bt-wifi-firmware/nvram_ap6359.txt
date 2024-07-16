@@ -1,20 +1,12 @@
 #AP6398S_NVRAM_V1.1_20170926
 # BCM4359 WLBGA iPA, iLNA board for bringup -AP6359SA_V1.0NVRAM
-NVRAMRev=$Rev: 528206 $
-cckdigfilttype=5
-#cckdigfilttype=4 (default)
-#valid ofdm filter types are 0 and 1
-ofdmfilttype_2gbe=127
-ofdmfilttype_5gbe=127
-sromrev=11
-boardrev=0x1301
 boardtype=0x0812
 # JIRA:SW4349-945 MANDATORY! Update makefile in case you touch bfl
 #boardflags=0x10081201
 boardflags=0x00480201
 boardflags2=0x40801000
 boardflags3=0x48700106
-#boardnum=57410 
+#boardnum=57410
 macaddr=00:90:4c:27:80:01
 ccode=0
 regrev=0
