@@ -34,6 +34,23 @@
       "parentUuid": "9af767a8_32e04e3c",
       "revId": "2318974a95c2c43d85fb7cbfbf7450a633c235b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b3abe94_17bae1ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3626068
+      },
+      "writtenOn": "2024-09-11T20:18:25Z",
+      "side": 1,
+      "message": "git clone https://android.googlesource.com/device/amlogic/yukawa",
+      "revId": "2318974a95c2c43d85fb7cbfbf7450a633c235b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
