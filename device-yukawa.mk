@@ -46,6 +46,4 @@ endif
 
 # Include namespaces for non-AB updater
 PRODUCT_SOONG_NAMESPACES += bootable/deprecated-ota
-AB_OTA_UPDATER := false
-
 
