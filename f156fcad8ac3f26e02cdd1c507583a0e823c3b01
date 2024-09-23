@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7c17d0_6f73c124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1464496
+      },
+      "writtenOn": "2024-09-23T04:17:17Z",
+      "side": 1,
+      "message": "@mylesgw@google.com\n@glaroque@baylibre.com\n\nThanks a lot for your review. Please help to submit the patch, I don\u0027t have such permissions.",
+      "revId": "f156fcad8ac3f26e02cdd1c507583a0e823c3b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
