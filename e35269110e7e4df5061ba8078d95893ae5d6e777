@@ -33,6 +33,23 @@
       "message": "Hi John, could you help with reviewing/approving this?",
       "revId": "e35269110e7e4df5061ba8078d95893ae5d6e777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d379d6_e9a0fdc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1464496
+      },
+      "writtenOn": "2024-09-26T18:12:28Z",
+      "side": 1,
+      "message": "Thank you all for your review.",
+      "revId": "e35269110e7e4df5061ba8078d95893ae5d6e777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
