@@ -16,6 +16,23 @@
       "message": "@mylesgw@google.com\n@glaroque@baylibre.com\n\nThanks a lot for your review. Please help to submit the patch, I don\u0027t have such permissions.",
       "revId": "f156fcad8ac3f26e02cdd1c507583a0e823c3b01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2fe5be3_0f592940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-09-26T09:33:34Z",
+      "side": 1,
+      "message": "Hi John, could you help with reviewing/approving this?",
+      "revId": "f156fcad8ac3f26e02cdd1c507583a0e823c3b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
