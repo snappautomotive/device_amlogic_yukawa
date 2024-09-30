@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a81a80_c2d6c1d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-09-30T11:56:38Z",
+      "side": 1,
+      "message": "Hi John, could you have a look at this one? It fixes a build breakage in yukawa caused by: \n\nhttps://android-review.googlesource.com/c/platform/bootable/recovery/+/2962986\n\nNote that we plan to migrate yukawa to A/B at some point, but we want to keep the build green hence this patch.",
+      "revId": "b781a0806b2c8a84450c31003cecd1b8662d1112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
