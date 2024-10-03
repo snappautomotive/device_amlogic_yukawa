@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81e57b0_72d93951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-03T13:30:05Z",
+      "side": 1,
+      "message": "Hi John, Kelvin,\n\nAnother small fix to specify the ramdisk location in the boot.img. This was detected using upstream U-Boot. See the commit message for details.\n\nKelvin, if you are not the right reviewer, then sorry that I included you. In that case, could you pull in someone else ?",
+      "revId": "879c99c46fca7fe6a02a9eebe2aea480a687e4b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
