@@ -102,6 +102,7 @@ TARGET_RECOVERY_FSTAB := device/amlogic/yukawa/fstab.recovery.yukawa
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 endif
 endif
+BOARD_INCLUDE_RECOVERY_DTBO := true
 
 
 BOARD_KERNEL_OFFSET      := 0x1080000
