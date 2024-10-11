@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8ddfa8c_3295bd83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T17:25:57Z",
+      "side": 1,
+      "message": "Yeah, the vendor package switch is probably the first thing to do. Sorry, I know it\u0027s a pain to go through.",
+      "parentUuid": "eb1639aa_53f3147f",
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f8c1743_48d2fb2a",
         "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
         "patchSetId": 3
