@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf66d75_bfe67251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3681059
+      },
+      "writtenOn": "2024-10-11T04:11:10Z",
+      "side": 1,
+      "message": "2559830: Remove 64-bit binder ABI setting. | https://android-review.googlesource.com/c/device/amlogic/yukawa/+/2559830",
+      "revId": "d06617d6d331446e5d609eca48158a0b66b43ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
