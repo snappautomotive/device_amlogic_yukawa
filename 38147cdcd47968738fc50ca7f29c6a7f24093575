@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e1144c_868749ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-11T07:06:51Z",
+      "side": 1,
+      "message": "Hi John,\n\nHere is another (bigger) series that puts back Yukawa in a better shape (we can boot to home screen with this series)\n\nWe took a one big-patch approach here because historically that\u0027s what the previous maintainer wanted. (Dmitry Schmidt)\nIf you prefer this to be split up, let us know.\n\nThanks again for your time.\nMattijs",
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
