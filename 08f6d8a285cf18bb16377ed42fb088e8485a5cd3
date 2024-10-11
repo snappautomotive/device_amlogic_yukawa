@@ -16,6 +16,24 @@
       "message": "Hrm. So, my sense here was pre-built binaries needed to be included in the vendor package, not included in the devices directory (which should be source only).",
       "revId": "08f6d8a285cf18bb16377ed42fb088e8485a5cd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e783e5b7_95564a54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:20:20Z",
+      "side": 1,
+      "message": "Just marking as unresolved.",
+      "parentUuid": "fde5c82d_6e41e67c",
+      "revId": "08f6d8a285cf18bb16377ed42fb088e8485a5cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
