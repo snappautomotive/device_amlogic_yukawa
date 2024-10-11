@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb1639aa_53f3147f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-11T09:20:14Z",
+      "side": 1,
+      "message": "Hi John,\n\nThanks a bunch for the quick review and for letting us keep this as \"one big patch\".\n\nWe already (on our gitlab) have a series to convert yukawa to use vendor packages.\n\nShould the vendor package conversion be a first step (submitted and merged first) and then this series be done on top ?",
+      "parentUuid": "d9e04ef5_ceddd841",
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f8c1743_48d2fb2a",
         "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
         "patchSetId": 3
