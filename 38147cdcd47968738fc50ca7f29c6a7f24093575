@@ -16,6 +16,231 @@
       "message": "Hi John,\n\nHere is another (bigger) series that puts back Yukawa in a better shape (we can boot to home screen with this series)\n\nWe took a one big-patch approach here because historically that\u0027s what the previous maintainer wanted. (Dmitry Schmidt)\nIf you prefer this to be split up, let us know.\n\nThanks again for your time.\nMattijs",
       "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e04ef5_ceddd841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "I\u0027d probably usually prefer smaller chunks to review, but no worries here.\n\nI think the bigger issue here is the need to utilize a vendor package for pre-built binaries, which shouldn\u0027t be in the devices directory.\n\nTake a look at how db845c and hikey handle this. You will likely need to find some location to host the vendor package.",
+      "parentUuid": "c9e1144c_868749ff",
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f8c1743_48d2fb2a",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e14d24f_4c0ca950",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 172,
+        "startChar": 61,
+        "endLine": 172,
+        "endChar": 69
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c68a4f_6e342151",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 172,
+        "startChar": 61,
+        "endLine": 172,
+        "endChar": 69
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9943524a_542f4897",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 174,
+        "startChar": 61,
+        "endLine": 174,
+        "endChar": 69
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2cc109_7360d7af",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.khadas,vim3l.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 178,
+        "startChar": 60,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c3d7eb_b52bd548",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1fbf3f3_912b6e9c",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 172,
+        "startChar": 61,
+        "endLine": 172,
+        "endChar": 69
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "388b3009_0818750a",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 174,
+        "startChar": 61,
+        "endLine": 174,
+        "endChar": 69
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692187ab_7d0566e1",
+        "filename": "binaries/bt-wifi-firmware/brcmfmac4359-sdio.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-11T08:27:44Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 178,
+        "startChar": 60,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "38147cdcd47968738fc50ca7f29c6a7f24093575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
