@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9395fb5_89e802f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3262277
+      },
+      "writtenOn": "2024-10-31T23:49:48Z",
+      "side": 1,
+      "message": "git clone https://android.googlesource.com/cts_drno_filter",
+      "revId": "7c77eb010195f6412927670f0009f5113d69464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
