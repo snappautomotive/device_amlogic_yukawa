@@ -1,27 +1,5 @@
 PRODUCT_SOONG_NAMESPACES += device/amlogic/yukawa
 
-# Check vendor package version
-include device/amlogic/yukawa/vendor-package-ver.mk
-ifneq (,$(wildcard $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware))
-  ifneq (,$(wildcard $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/version.mk))
-    # Unfortunately inherit-product doesn't export build variables from the
-    # called make file to the caller, so we have to include it directly here.
-    include $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/version.mk
-    ifneq ($(TARGET_YUKAWA_VENDOR_VERSION), $(EXPECTED_YUKAWA_VENDOR_VERSION))
-      $(warning TARGET_YUKAWA_VENDOR_VERSION ($(TARGET_YUKAWA_VENDOR_VERSION)) does not match. Exiting the build.)
-      $(warning Please download and extract the new binaries by running the following script:)
-      $(warning    ./device/amlogic/yukawa/fetch-vendor-package.sh )
-    endif
-  else
-      $(warning TARGET_YUKAWA_VENDOR_VERSION undefined.)
-      $(warning The vendor package version is incorrect. Please update the yukawa source tree.)
-  endif
-else
-  $(warning Missing yukawa vendor package!)
-  $(warning Please download and extract the vendor binaries by running the following script:)
-  $(warning    ./device/amlogic/yukawa/fetch-vendor-package.sh )
-endif
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/amlogic/yukawa-kernel/$(TARGET_KERNEL_USE)/Image.lz4
 else
@@ -40,12 +18,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/amlogic/yukawa/overlay
-
 ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Setup tablet build
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-
 # Packages to invoke RC pairing
 PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
 else
@@ -56,10 +32,6 @@ PRODUCT_CHARACTERISTICS := tv
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_IS_ATV := true
 endif
-
-# inherit binaries from the vendor package
-$(call inherit-product, $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
-$(call inherit-product, $(YUKAWA_VENDOR_PATH)/video_firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 
 PRODUCT_PACKAGES += llkd
 
@@ -154,6 +126,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
+# BT and Wifi FW
+ifeq ($(TARGET_ADT3), true)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/BCM4356A2.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4356A2.hcd \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4356a2_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4356a2_ag.bin \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram_ap6356.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/BCM.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4359C0.hcd \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/fw_bcm4359c0_ag.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/fw_bcm4359c0_ag.bin \
+    $(LOCAL_PATH)/binaries/bt-wifi-firmware/nvram_ap6359.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/nvram.txt
+endif
+
 ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
@@ -239,6 +224,17 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinypcminfo \
     cplay
+
+# Video
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/binaries/video_firmware/g12a_h264.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_h264.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/g12a_hevc_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_hevc_mmu.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/g12a_vp9.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/g12a_vp9.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/gxl_mpeg4_5.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mpeg4_5.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/gxl_mpeg12.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mpeg12.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/gxl_mjpeg.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/gxl_mjpeg.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/sm1_hevc_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_hevc_mmu.bin \
+    $(LOCAL_PATH)/binaries/video_firmware/sm1_vp9_mmu.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/meson/vdec/sm1_vp9_mmu.bin
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
