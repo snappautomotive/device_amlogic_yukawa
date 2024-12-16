@@ -15,11 +15,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/yukawa_sei510.mk \
-    $(LOCAL_DIR)/yukawa32_sei510.mk \
     $(LOCAL_DIR)/yukawa.mk \
-    $(LOCAL_DIR)/yukawa32.mk
 
 COMMON_LUNCH_CHOICES := \
-    yukawa_sei510-trunk_staging-userdebug \
     yukawa-trunk_staging-userdebug
