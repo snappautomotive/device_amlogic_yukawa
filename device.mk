@@ -45,13 +45,12 @@ ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # Packages to invoke RC pairing
-PRODUCT_PACKAGES += YukawaService YukawaAndroidOverlay
+PRODUCT_CHARACTERISTICS := tablet
 else
 # Setup TV Build
 USE_OEM_TV_APP := true
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 PRODUCT_CHARACTERISTICS := tv
-PRODUCT_AAPT_PREF_CONFIG := tvdpi
 PRODUCT_IS_ATV := true
 endif
 
@@ -60,47 +59,33 @@ $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware/$(EXPEC
 $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/video_firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/gpu/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 
-PRODUCT_PACKAGES += llkd
-
-ifeq ($(TARGET_USE_AB_SLOT), true)
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
     update_engine \
-    update_verifier
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALm=true \
-    POSTINSTALL_PATH=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE=ext4 \
-    POSTINSTALL_OPTIONAL=true
-
-PRODUCT_PACKAGES += \
     update_engine_sideload \
+    update_verifier \
     sg_write_buffer \
-    f2fs_io
+    f2fs_io \
+    check_f2fs
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
     bootctl \
-    update_engine_client
+    update_engine_client \
+    SystemUpdaterSample
 
-# Write flags to the vendor space in /misc partition.
+# Userdata Checkpointing OTA GC
 PRODUCT_PACKAGES += \
-    misc_writer
-
-PRODUCT_PACKAGES += \
-    fs_config_dirs \
-    fs_config_files
+	checkpoint_gc
 
 # Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl \
     android.hardware.boot@1.2-impl.recovery \
     android.hardware.boot@1.2-service \
-    bootctrl.yukawa.recovery \
-    bootctrl.yukawa
-endif
+    bootctrl.default
 
 # System RO FS Type
 TARGET_RO_FILE_SYSTEM_TYPE ?= ext4
@@ -115,39 +100,23 @@ PRODUCT_PACKAGES += \
 	android.hardware.fastboot@1.0-impl-mock \
 	fastbootd
 
-# All VNDK libraries (HAL interfaces, VNDK, VNDK-SP, LL-NDK)
-PRODUCT_PACKAGES += vndk_package
 
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl-cuttlefish \
-    android.hardware.health@2.1-service
-
-ifeq ($(TARGET_USE_AB_SLOT), true)
 ifeq ($(TARGET_AVB_ENABLE), true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.yukawa.avb.ab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.yukawa \
-    $(LOCAL_PATH)/fstab.yukawa.avb.ab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa
+    $(LOCAL_PATH)/fstab.yukawa.avb.ab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa \
+    $(LOCAL_PATH)/fstab.yukawa.avb.ab:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/etc/fstab.yukawa
 else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.yukawa.ab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.yukawa \
-    $(LOCAL_PATH)/fstab.yukawa.ab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa
-endif
-else
-ifeq ($(TARGET_AVB_ENABLE), true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.ramdisk.common.avb:$(TARGET_COPY_OUT_RAMDISK)/fstab.yukawa \
-    $(LOCAL_PATH)/fstab.yukawa:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa
-else
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.ramdisk.common:$(TARGET_COPY_OUT_RAMDISK)/fstab.yukawa \
-    $(LOCAL_PATH)/fstab.yukawa:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa
-endif
+    $(LOCAL_PATH)/fstab.yukawa.ab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.yukawa \
+    $(LOCAL_PATH)/fstab.yukawa.ab:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/etc/fstab.yukawa
 endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.yukawa.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.yukawa.rc \
     $(LOCAL_PATH)/init.yukawa.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.yukawa.usb.rc \
-    $(LOCAL_PATH)/init.recovery.hardware.rc:recovery/root/init.recovery.yukawa.rc \
+    $(LOCAL_PATH)/init.recovery.hardware.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.yukawa.rc \
     $(LOCAL_PATH)/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
@@ -157,11 +126,6 @@ ifeq ($(TARGET_USE_TABLET_LAUNCHER), true)
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
 else
-ifeq ($(TARGET_USE_SAMPLE_LAUNCHER), true)
-PRODUCT_PACKAGES += \
-    TvSampleLeanbackLauncher
-endif
-
 # TV Specific Packages
 PRODUCT_PACKAGES += \
     LiveTv \
@@ -171,20 +135,18 @@ PRODUCT_PACKAGES += \
     com.android.media.tv.remoteprovider \
     InputDevices
 
+# Fallback IME and Home apps
 PRODUCT_PACKAGES += \
-    LeanbackIME
+    LeanbackIME \
+    TvSampleLeanbackLauncher
 
-ifeq (,$(filter $(TARGET_PRODUCT),yukawa_gms yukawa32_gms yukawa_sei510_gms))
+ifeq ($(TARGET_PRODUCT), yukawa_gms)
 PRODUCT_PACKAGES += \
     TvProvision \
     TVLauncherNoGms \
     TVRecommendationsNoGms
 endif
 endif
-
-PRODUCT_PACKAGES += \
-    libhidltransport \
-    libhwbinder
 
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 
@@ -193,8 +155,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:vendor/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:vendor/etc/permissions/android.hardware.vulkan.level.xml
-
-PRODUCT_PACKAGES +=  vulkan.yukawa.so
 
 # Bluetooth
 PRODUCT_PACKAGES += android.hardware.bluetooth-service.default
@@ -245,9 +205,20 @@ PRODUCT_PACKAGES += \
 # Hardware Composer HAL
 #
 PRODUCT_PACKAGES += \
-    hwcomposer.drm_meson \
+    hwcomposer.drm_meson
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.hwcomposer=drm_meson \
+    ro.hardware.egl=mali \
+    ro.hardware.vulkan=yukawa
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=yukawa
+
+# DRM Service
+PRODUCT_PACKAGES += \
     android.hardware.drm-service.widevine \
-    android.hardware.drm-service.clearkey
+    android.hardware.drm@latest-service.clearkey
 
 # CEC on ATV only
 ifeq ($(PRODUCT_IS_ATV), true)
@@ -285,6 +256,11 @@ PRODUCT_PACKAGES += \
 # PowerStats HAL
 PRODUCT_PACKAGES += \
     android.hardware.power.stats-service.example
+
+# Health: Install default binderized implementation to vendor.
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl-cuttlefish \
+    android.hardware.health@2.1-service
 
 # Sensor HAL
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
@@ -364,35 +340,19 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
-AUDIO_DEFAULT_OUTPUT ?= speaker
-ifeq ($(AUDIO_DEFAULT_OUTPUT),hdmi)
 PRODUCT_COPY_FILES += \
     device/amlogic/yukawa/hal/audio/mixer_paths_hdmi_only.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
     device/amlogic/yukawa/hal/audio/audio_policy_configuration_hdmi_only.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
 DEVICE_PACKAGE_OVERLAYS += \
     device/amlogic/yukawa/hal/audio/overlay_hdmi_only
 TARGET_USE_HDMI_AUDIO ?= true
-else
-PRODUCT_COPY_FILES += \
-    device/amlogic/yukawa/hal/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    device/amlogic/yukawa/hal/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-endif
 
 # Copy media codecs config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/yukawa/media_xml/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/amlogic/yukawa/media_xml/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml
-
-# Enable BT Pairing with button BTN_0 (key 256)
-
-PRODUCT_COPY_FILES += \
-    device/amlogic/yukawa/input/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl
-
-# Light HAL
-PRODUCT_PACKAGES += \
-    android.hardware.light-service \
-    lights-yukawa
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
+    device/amlogic/yukawa/media_xml/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
 # Enable USB Camera
 PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
@@ -402,3 +362,6 @@ PRODUCT_COPY_FILES += \
 
 # Include Virtualization APEX
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+
+# ro.frp.pst points to a partition that contains factory reset protection information.
+PRODUCT_VENDOR_PROPERTIES += ro.frp.pst=/dev/block/by-name/frp
