@@ -36,6 +36,7 @@ cc_library_shared {
     proprietary: true,
     srcs: ["hdmi_cec.c"],
     cflags: ["-Werror"],
+    vintf_fragments: ["android.hardware.tv.cec@1.0.xml"],
 
     relative_install_path: "hw",
 
