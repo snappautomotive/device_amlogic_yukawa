@@ -2,6 +2,9 @@
 /dev/ttyAML0           u:object_r:console_device:s0
 /dev/mali0             u:object_r:gpu_device:s0
 /dev/dri/card0         u:object_r:gpu_device:s0
+/dev/dri/card1         u:object_r:gpu_device:s0
+/dev/dri/renderD128    u:object_r:gpu_device:s0
+/dev/dri               u:object_r:gpu_device:s0
 /dev/block/zram0       u:object_r:swap_block_device:s0
 /dev/cec0              u:object_r:cec_device:s0
 /dev/i2c-0             u:object_r:led_device:s0
@@ -29,8 +32,10 @@
 /dev/block/platform/soc/ffe07000\.mmc/by-name/boot(_[ab])?             u:object_r:boot_block_device:s0
 /dev/block/platform/soc/ffe07000\.mmc/by-name/dtbo(_[ab])?             u:object_r:dtbo_block_device:s0
 /dev/block/platform/soc/ffe07000\.mmc/by-name/vbmeta(_[ab])?           u:object_r:vbmeta_block_device:s0
+/dev/block/platform/soc/ffe07000\.mmc/by-name/metadata                 u:object_r:metadata_block_device:s0
 
-/vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software	u:object_r:hal_gatekeeper_default_exec:s0
+/vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software    u:object_r:hal_gatekeeper_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal@2\.0-service.mock            u:object_r:hal_thermal_default_exec:s0
 
 /vendor/bin/hw/android\.hardware\.drm(@[0-9]+\.[0-9]+)?-service\.widevine    u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@[0-9]+\.[0-9]+-service\.clearkey     u:object_r:hal_drm_clearkey_exec:s0
