@@ -64,6 +64,7 @@ endif
 $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/bt-wifi-firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/video_firmware/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 $(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/gpu/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
+$(call inherit-product-if-exists, $(YUKAWA_VENDOR_PATH)/bootloader/$(EXPECTED_YUKAWA_VENDOR_VERSION)/vendor.mk)
 
 # A/B support
 PRODUCT_PACKAGES += \
