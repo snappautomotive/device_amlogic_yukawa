@@ -459,7 +459,8 @@ static int hdmicec_close(struct hdmi_cec_device *dev)
 
     if (ctx->exit_fd > 0) {
         write(ctx->exit_fd, &tmp, sizeof(tmp));
-        pthread_join(ctx->thread, NULL);
+        if (ctx->thread)
+            pthread_join(ctx->thread, NULL);
     }
 
     if (ctx->cec_fd > 0)
@@ -467,9 +468,6 @@ static int hdmicec_close(struct hdmi_cec_device *dev)
     if (ctx->exit_fd > 0)
         close(ctx->exit_fd);
     free(ctx);
-
-    ctx->cec_enabled = false;
-    ctx->cec_control_enabled = false;
     return 0;
 }
 
