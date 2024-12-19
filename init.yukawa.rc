@@ -1,4 +1,4 @@
-import /vendor/etc/init/hw/init.yukawa.usb.rc
+import init.yukawa.usb.rc
 
 on early-init
     # mount debugfs
@@ -13,26 +13,22 @@ on init
     write /sys/block/mmcblk1/queue/iosched/slice_idle 0
     write /sys/block/mmcblk1/queue/nr_requests 256
 
-on fs
-    mount_all /vendor/etc/fstab.yukawa
-    swapon_all /vendor/etc/fstab.yukawa
+on early-fs
+    start vold
 
-on post-fs
-    setprop ro.hardware.hwcomposer drm_meson
+on fs
+    mount_all --early
+
+on late-fs
+    exec_start wait_for_keymaster
+    mount_all --late
+    swapon_all
+
 
 on zygote-start
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-
-service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
-    -g@android:wpa_wlan0
-    interface aidl android.hardware.wifi.supplicant.ISupplicant/default
-    socket wpa_wlan0 dgram 660 wifi wifi
-    class main
-    user root
-    disabled
-    oneshot
 
 service bugreport /system/bin/dumpstate -d -p -z
     class main
