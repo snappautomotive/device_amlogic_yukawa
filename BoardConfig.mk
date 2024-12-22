@@ -15,9 +15,16 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
-TARGET_SUPPORTS_64_BIT_APPS := true
+# 64 bit mediadrmserver
+TARGET_ENABLE_MEDIADRM_64 := true
+
+# Puts odex files on system_other, as well as causing dex files not to get
+# stripped from APKs.
+BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 TARGET_BOARD_PLATFORM := yukawa
+TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_DEV_BOARD)
+TARGET_BOARD_INFO_FILE := device/amlogic/yukawa/board-info/board-info-$(TARGET_DEV_BOARD).txt
 
 # Vulkan
 BOARD_INSTALL_VULKAN := true
@@ -32,6 +39,11 @@ BOARD_HAVE_BLUETOOTH := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
+WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
+
+# Treble
+PRODUCT_FULL_TREBLE := true
+BOARD_VNDK_VERSION := current
 
 # AVB
 ifeq ($(TARGET_AVB_ENABLE), true)
@@ -43,27 +55,22 @@ endif
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
 
-ifeq ($(TARGET_USE_AB_SLOT), true)
 BOARD_USES_RECOVERY_AS_BOOT := true
 AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
     boot \
+    dtbo \
     system \
-    vendor \
-    vbmeta
-endif
+    vendor
 
-BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
-BOARD_DTBOIMG_PARTITION_SIZE := 8388608 # 8 MiB
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := $(TARGET_RO_FILE_SYSTEM_TYPE)
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := $(TARGET_RO_FILE_SYSTEM_TYPE)
-TARGET_USERIMAGES_SPARSE_EROFS_DISABLED ?= true
-ifneq ($(TARGET_USE_AB_SLOT), true)
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+ifeq ($(TARGET_AVB_ENABLE), true)
+AB_OTA_PARTITIONS += vbmeta
 endif
-TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell echo $$(( 64 * 1024 * 1024 )))
+BOARD_DTBOIMG_PARTITION_SIZE := $(shell echo $$(( 8 * 1024 * 1024 ))) # 8 MiB
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Super partition
@@ -71,36 +78,30 @@ TARGET_USE_DYNAMIC_PARTITIONS := true
 BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
 BOARD_SUPER_PARTITION_GROUPS := db_dynamic_partitions
 BOARD_DB_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
-ifeq ($(TARGET_USE_AB_SLOT), true)
-BOARD_SUPER_PARTITION_SIZE := 4831838208
-else
-BOARD_SUPER_PARTITION_SIZE := 2415919104
-endif
-BOARD_DB_DYNAMIC_PARTITIONS_SIZE := 2411724800  # Reserve 4M for DAP metadata
-BOARD_SUPER_PARTITION_METADATA_DEVICE := super
-# BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
+BOARD_SUPER_PARTITION_SIZE := $(shell echo $$(( 4608 * 1024 * 1024 )))
+BOARD_DB_DYNAMIC_PARTITIONS_SIZE := $(shell echo $$(( $(BOARD_SUPER_PARTITION_SIZE)/2 - (10 * 1024 * 1024) )))  # Reserve 10M for DAP metadata
 
+# Creates metadata partition mount point under root for
+# the devices with metadata partition
+BOARD_USES_METADATA_PARTITION := true
+
+# Userdata partition
+TARGET_COPY_OUT_DATA := data
+TARGET_USERIMAGES_USE_F2FS := true
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_USERDATAIMAGE_PARTITION_SIZE :=  $(shell echo $$(( 2000 * 1024 * 1024 )))
+TARGET_USERIMAGES_SPARSE_F2FS_DISABLED ?= false
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 ifeq ($(TARGET_AVB_ENABLE), true)
-ifeq ($(TARGET_USE_AB_SLOT), true)
 TARGET_RECOVERY_FSTAB := device/amlogic/yukawa/fstab.yukawa.avb.ab
-else
-TARGET_RECOVERY_FSTAB := device/amlogic/yukawa/fstab.recovery.yukawa.avb
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
-endif
 BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 2
 else
-ifeq ($(TARGET_USE_AB_SLOT), true)
 TARGET_RECOVERY_FSTAB := device/amlogic/yukawa/fstab.yukawa
-else
-TARGET_RECOVERY_FSTAB := device/amlogic/yukawa/fstab.recovery.yukawa
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
-endif
 endif
 BOARD_INCLUDE_RECOVERY_DTBO := true
 
@@ -124,7 +125,7 @@ BOARD_PREBUILT_DTBOIMAGE = $(PRODUCT_OUT)/$(DTBO_UNSIGNED)
 
 BOARD_KERNEL_CMDLINE += no_console_suspend console=ttyAML0,115200 earlycon
 BOARD_KERNEL_CMDLINE += printk.devkmsg=on
-BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/ffe07000.mmc 
+BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/ffe07000.mmc
 BOARD_KERNEL_CMDLINE += init=/init
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += androidboot.hardware=yukawa
@@ -145,23 +146,20 @@ ifneq ($(TARGET_KERNEL_CFG),)
 BOARD_KERNEL_CMDLINE += $(TARGET_KERNEL_CFG)
 endif
 
-USE_E2FSPROGS := true
-
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
-TARGET_USES_MKE2FS := true
-TARGET_USES_HWC2 := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/yukawa/bluetooth
 
-BOARD_SEPOLICY_DIRS += \
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := build/make/target/board/mainline_arm64/bluetooth
+
+BOARD_VENDOR_SEPOLICY_DIRS += \
         device/amlogic/yukawa/sepolicy
 
 DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest.xml
 
-ifneq ($(TARGET_KERNEL_USE), 4.19)
-DEVICE_MANIFEST_FILE += device/amlogic/yukawa/manifest_kernel5.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/amlogic/yukawa/framework_compatibility_matrix.xml
+ifneq ($(TARGET_USE_TABLET_LAUNCHER), true)
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/amlogic/yukawa/tv_framework_compatibility_matrix.xml
 endif
-DEVICE_MATRIX_FILE := device/amlogic/yukawa/compatibility_matrix.xml
 
 ifneq ($(TARGET_SENSOR_MEZZANINE),)
 DEVICE_MANIFEST_FILE += device/amlogic/yukawa/sensorhal/manifest.xml
@@ -169,3 +167,12 @@ endif
 
 # Generate an APEX image for experiment b/119800099.
 DEXPREOPT_GENERATE_APEX_IMAGE := true
+
+# Disable Jack build system due deprecated status (https://source.android.com/source/jack)
+ANDROID_COMPILE_WITH_JACK ?= false
+
+# Enable system property split for Treble
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+# Include stats logging code in LMKD
+TARGET_LMKD_STATS_LOG := true
