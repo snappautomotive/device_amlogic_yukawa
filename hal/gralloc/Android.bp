@@ -8,11 +8,26 @@ package {
     default_applicable_licenses: ["device_amlogic_yukawa_license"],
 }
 
-cc_library_shared {
-    name: "hwcomposer.drm_meson",
-    defaults: ["hwcomposer.drm_defaults"],
-    srcs: [
-        ":drm_hwcomposer_common",
-        ":drm_hwcomposer_platformmeson",
+cc_binary {
+    name: "android.hardware.composer.hwc3-service.drm.meson",
+    defaults: [
+        "android.hardware.composer.hwc3-service.drm.defaults",
     ],
+    srcs: [":drm_hwcomposer_platformmeson"],
+
+    relative_install_path: "hw",
+    vendor: true,
+
+    vintf_fragments: [":drm_hwcomposer_vintf_manifest"],
+    init_rc: [":gen-drm_hwcomposer_hwc3_init_rc_meson"],
+}
+
+genrule {
+    name: "gen-drm_hwcomposer_hwc3_init_rc_meson",
+    srcs: [":drm_hwcomposer_init_rc"],
+    out: ["hwc3-drm.meson.rc"],
+    cmd: "sed " +
+        // Append .meson to the executable name:
+        "-e 's%hwc3-service.drm%hwc3-service.drm.meson%' " +
+        "$(in) > $(out)",
 }
