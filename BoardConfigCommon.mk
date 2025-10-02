@@ -72,11 +72,13 @@ BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
 BOARD_SUPER_PARTITION_GROUPS := db_dynamic_partitions
 BOARD_DB_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
 ifeq ($(TARGET_USE_AB_SLOT), true)
-BOARD_SUPER_PARTITION_SIZE := 4831838208
+# Sizes have been increased to comfortably fit Android 15+ images plus any modifications. However,
+# this requires the special build of u-boot from Snapp.
+BOARD_SUPER_PARTITION_SIZE := 5251268608
 else
-BOARD_SUPER_PARTITION_SIZE := 2415919104
+BOARD_SUPER_PARTITION_SIZE := 2625634304
 endif
-BOARD_DB_DYNAMIC_PARTITIONS_SIZE := 2411724800  # Reserve 4M for DAP metadata
+BOARD_DB_DYNAMIC_PARTITIONS_SIZE := 2621440000  # Reserve 4M for DAP metadata
 BOARD_SUPER_PARTITION_METADATA_DEVICE := super
 # BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
 
